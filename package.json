@@ -1,0 +1,98 @@
+{
+  "name": "pt-booking-react-admin",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": " vite build",
+    "preview": "vite preview",
+    "lint:eslint": "eslint . --fix",
+    "lint:prettier": "prettier --write .",
+    "lint:pretty": "pretty-quick --staged",
+    "lint:staged": "lint-staged",
+    "log": "conventional-changelog -p cmyr-config -i CHANGELOG.md -s -r 0",
+    "tsc": "tsc --noEmit --skipLibCheck",
+    "cz": "czg",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@ant-design/charts": "^1.4.2",
+    "@ant-design/colors": "^7.0.0",
+    "@ant-design/icons": "^5.0.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@reduxjs/toolkit": "^1.9.2",
+    "ahooks": "^3.7.4",
+    "antd": "^5.1.7",
+    "axios": "^1.3.2",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.7",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "match-sorter": "^6.3.1",
+    "mockjs": "^1.1.0",
+    "rc-virtual-list": "^3.4.13",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.20.0",
+    "react-intl": "^6.2.7",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.8.0",
+    "redux-persist": "^6.0.0",
+    "sort-by": "^1.2.0",
+    "tailwindcss": "^3.3.1"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.10.5",
+    "@jsxiaosi/commitlint-config": "^0.0.14",
+    "@jsxiaosi/eslint-config-prettier": "^0.0.14",
+    "@jsxiaosi/eslint-config-react": "^0.0.14",
+    "@types/crypto-js": "^4.1.1",
+    "@types/lodash-es": "^4.17.6",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.1.0",
+    "@vitejs/plugin-react-swc": "^3.1.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "crypto-js": "^4.1.1",
+    "czg": "^1.4.1",
+    "eslint": "^8.33.0",
+    "husky": "^8.0.3",
+    "less": "^4.1.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.3",
+    "pretty-quick": "^3.1.3",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.1",
+    "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-pwa": "^0.14.1",
+    "vite-plugin-svg-icons": "^2.0.1"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "rollup",
+        "@babel/core"
+      ]
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "lint-staged": {
+    "{src,mock,build}/**/*.{ts,js,tsx,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+      "prettier --write--parser json"
+    ],
+    "package.json": [
+      "prettier --write"
+    ]
+  }
+}
