@@ -9,7 +9,7 @@ interface AuthorityType {
 const Authority = ({ children }: AuthorityType) => {
   const userInfo = getStorage<UseInfoType>('userInfo');
 
-  if (!userInfo) return <Navigate to="/customer" />;
+  if (!userInfo) return <Navigate to="/customer/home" />;
 
   return <>{children}</>;
 };
