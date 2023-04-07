@@ -12,7 +12,7 @@ const Main = memo(() => {
   const isKeepAlive = false;
   const maxLen = 10;
   return (
-    <Content>
+    <div>
       {/*<TabsPage maxLen={maxLen} />*/}
       <div className="main-content">
         {isKeepAlive ? (
@@ -23,7 +23,7 @@ const Main = memo(() => {
           </Suspense>
         )}
       </div>
-    </Content>
+    </div>
   );
 });
 

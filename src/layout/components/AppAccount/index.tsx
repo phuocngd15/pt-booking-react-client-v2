@@ -19,7 +19,7 @@ const AppAccount = () => {
 
   const memuChange: MenuProps['onClick'] = (_e) => {
     removeStorage('userInfo');
-    navigate('/customer');
+    navigate('/customer/home');
   };
 
   return (
