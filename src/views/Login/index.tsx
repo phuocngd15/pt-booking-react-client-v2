@@ -66,8 +66,8 @@ const Login = memo(() => {
         </div>
         <div className="login-box">
           <div className="login-form">
-            <h2 className="enter-x p-4">pt-booking-react-admin</h2>
-            <div className="enter-x">user：admin, pass：admin123</div>
+            <h2 className="enter-x p-4">Online Personal Trainer</h2>
+            {/*<div className="enter-x">user：admin, pass：admin123</div>*/}
             <div className="input-group user enter-x">
               <UserOutlined className="icon" />
               <div>

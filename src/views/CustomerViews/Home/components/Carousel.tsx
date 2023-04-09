@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Card } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import yogaImage from '../../../../assets/Frame_455-min.png';
 import nutritionImage from '../../../../assets/Frame_nutri-min.png';
 import dancingImage from '../../../../assets/Frame_dance-min.png';
@@ -13,6 +14,8 @@ import pilateImage from '../../../../assets/Frame_456-min.jpg';
 
 const { Meta } = Card;
 const CustomCarousel: React.FC = () => {
+  const navigate = useNavigate();
+
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -48,26 +51,59 @@ const CustomCarousel: React.FC = () => {
       },
     ],
   };
+  const onClick = (path: string, groupName: string) => {
+    console.log('path ', path);
+    navigate(path, { state: { groupName: groupName } });
+  };
+
   return (
     <Slider {...settings}>
-      <Card cover={<img alt="example" src={strengImage} />}>
+      <Card
+        cover={<img alt="example" src={strengImage} />}
+        actions={[
+          <div onClick={() => onClick('/customer/trainers', 'Strength')}>Show trainers</div>,
+        ]}
+      >
         <Meta title="Strength Training" description="" />
       </Card>
-      <Card cover={<img alt="example" src={funcImage} />}>
+      <Card
+        cover={<img alt="example" src={funcImage} />}
+        actions={[
+          <div onClick={() => onClick('/customer/trainers', 'Functional')}>Show trainers</div>,
+        ]}
+      >
         <Meta title="Functional Training" description="" />
       </Card>
 
-      <Card cover={<img alt="example" src={yogaImage} />}>
+      <Card
+        cover={<img alt="example" src={yogaImage} />}
+        actions={[<div onClick={() => onClick('/customer/trainers', 'Yoga')}>Show trainers</div>]}
+      >
         <Meta title="Yoga" description="" />
       </Card>
 
-      <Card cover={<img alt="example" src={nutritionImage} />}>
+      <Card
+        cover={<img alt="example" src={nutritionImage} />}
+        actions={[
+          <div onClick={() => onClick('/customer/trainers', 'Nutrition')}>Show trainers</div>,
+        ]}
+      >
         <Meta title="Nutrition" description="" />
       </Card>
-      <Card cover={<img alt="example" src={dancingImage} />}>
+      <Card
+        cover={<img alt="example" src={dancingImage} />}
+        actions={[
+          <div onClick={() => onClick('/customer/trainers', 'Dancing')}>Show trainers</div>,
+        ]}
+      >
         <Meta title="Dancing Workouts" description="" />
       </Card>
-      <Card cover={<img alt="example" src={pilateImage} />}>
+      <Card
+        cover={<img alt="example" src={pilateImage} />}
+        actions={[
+          <div onClick={() => onClick('/customer/trainers', 'Pilates')}>Show trainers</div>,
+        ]}
+      >
         <Meta title="Pilates" description="" />
       </Card>
     </Slider>

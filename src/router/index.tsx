@@ -11,7 +11,6 @@ const Home = lazy(() => import('@/views/CustomerViews/Home'));
 const ServicesView = lazy(() => import('@/views/CustomerViews/Services'));
 const TrainersView = lazy(() => import('@/views/CustomerViews/Trainers'));
 const BookingsView = lazy(() => import('@/views/CustomerViews/Bookings'));
-
 const Login = lazy(() => import('@/views/Login'));
 
 export const errorPage = [
@@ -20,6 +19,14 @@ export const errorPage = [
     element: <ErrorPage403 />,
   },
 ];
+
+export interface serviceType {
+  key: string;
+  name: string;
+  description?: string;
+}
+
+
 
 export const baseRouter: RouteObject[] = [
   {
@@ -51,6 +58,13 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/trainers',
         element: <TrainersView />,
+        // children: [
+        //   {
+        //     path: 'trainers/:groupName',
+        //     element: <GroupTrainers />,
+        //     loader: loadTrainersByGroup,
+        //   },
+        // ],
       },
       {
         path: '/customer/booking',
@@ -66,3 +80,5 @@ export const baseRouter: RouteObject[] = [
 ];
 
 export default createBrowserRouter(baseRouter);
+
+

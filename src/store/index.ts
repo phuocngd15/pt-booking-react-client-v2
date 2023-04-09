@@ -15,12 +15,14 @@ import appReducer from './modules/app';
 import routeReducer from './modules/route';
 import customerReducer from './modules/customer';
 import servicesReducer from './modules/services';
+import trainersSlice from './modules/trainers';
 
 const reducers = combineReducers({
   app: appReducer,
   route: routeReducer,
   customer: customerReducer,
-  services: servicesReducer,
+  //services: servicesReducer,
+  trainers: trainersSlice,
 });
 
 const persistConfig = {

@@ -4,6 +4,10 @@ import image2 from '../../../assets/wellness-health.jpg';
 import CustomCarousel from '@/views/CustomerViews/Home/components/Carousel';
 
 const View = () => {
+
+
+
+
   return (
     <>
       <div className="tracking-[-0.05em]">
@@ -20,14 +24,14 @@ const View = () => {
             </p>
             <div className="col-start-1 row-start-4 mt-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <a
-                  className="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-4 bg-amber-600 text-white hover:bg-amber-400"
-                  href="/customer/booking"
+                className="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-4 bg-amber-600 text-white hover:bg-amber-400"
+                href="/customer/booking"
               >
                 <span>Try for Free</span>
               </a>
             </div>
           </div>
-          <div className='basis-1/2'>
+          <div className="basis-1/2">
             <img src={image2} alt="" />
           </div>
         </div>
