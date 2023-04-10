@@ -4,10 +4,6 @@ import image2 from '../../../assets/wellness-health.jpg';
 import CustomCarousel from '@/views/CustomerViews/Home/components/Carousel';
 
 const View = () => {
-
-
-
-
   return (
     <>
       <div className="tracking-[-0.05em]">

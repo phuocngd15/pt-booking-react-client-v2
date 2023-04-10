@@ -45,3 +45,15 @@ export const getTrainerDetail = (groupName: string) => {
     { errorMessageMode: 'modal', withToken: false },
   );
 };
+
+export const getTrainerByServiceId = (serviceId: string) => {
+  console.log('getTrainerDetailgroupName', serviceId);
+  return deffHttp.post<Trainer[]>(
+    {
+      // url: '/mock_api/getTrainers/',
+      url: 'http://localhost:3000/api/trainers/serviceId',
+      data: { serviceId: serviceId},
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
+};

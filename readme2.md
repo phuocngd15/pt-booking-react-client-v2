@@ -37,7 +37,7 @@
 services: {
     duration,
     name,
-    staffs: [],
+    staffs?: [],
     canBookBefore?:
     default 7 ngày,
     serviceType: string,
