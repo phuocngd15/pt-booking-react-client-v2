@@ -1,81 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cloneDeep } from 'lodash-es';
 import type { ServicesSelectionProps } from '@/views/CustomerViews/Bookings/components/ServicesSelection';
 import ServicesSelection from '@/views/CustomerViews/Bookings/components/ServicesSelection';
 import './index.less';
 import TrainersSelection from '@/views/CustomerViews/Bookings/components/TrainerSelection';
 import TimeSelection from '@/views/CustomerViews/Bookings/components/TimeSelection';
-import { useAppDispatch } from '@/store/hooks';
-import { fetchTrainersByServiceId } from '@/store/modules/booking';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import {fetchAvailableSession, fetchPrograms, fetchTrainersByServiceId} from '@/store/modules/booking';
+import type { ServicePrototype } from '@/server/programAPI';
+import type { ITrainer } from '@/server/InterfaceMappingDataServer';
+// import {fetchTrainersAsync} from "@/store/modules/trainers";
 
 const View = () => {
   const dispatch = useAppDispatch();
+  const programs = useAppSelector<ServicePrototype[]>((state) => state.bookingPageSlice.programs);
+  const trainers = useAppSelector<ITrainer[]>((state) => state.bookingPageSlice.trainers);
+  useEffect(() => {
+    dispatch(fetchPrograms());
+  }, [dispatch]);
+  const [selectedService, setSelectedService] = useState<ServicePrototype>();
   const onCheckCallBack = (e: any) => {
     console.log('e', e);
-    const newState = cloneDeep(services);
-    newState.forEach((i) => (i.isSelected = false));
-    newState.forEach((i) => {
-      if (i.uuid === e.uuid) {
-        i.isSelected = e.isSelected;
-      }
-    });
     if (e.isSelected) {
       //step1: call get trainers
-      dispatch(fetchTrainersByServiceId(e.serviceUUID));
+      dispatch(fetchTrainersByServiceId(e.uuid));
       setSelectedService(e);
     } else {
       setSelectedService(undefined);
     }
-    setServices(newState);
   };
-  const [selectedService, setSelectedService] = useState<ServicesSelectionProps>();
-  const [services, setServices] = useState<ServicesSelectionProps[]>([
-    {
-      uuid: '1',
-      isSelected: false,
-      onCheckCallBack: onCheckCallBack,
-      title: 'Class 1',
-      serviceUUID: 'serviceUUID',
-      serviceType: 'Strength',
-      description: 'Growing muscle mass, level beginner',
-    },
-    {
-      uuid: '2',
-      isSelected: false,
-      onCheckCallBack: onCheckCallBack,
-      serviceUUID: 'serviceUUID',
-      title: 'Class 2',
-      serviceType: 'Strength',
-      description: 'Growing muscle mass, level Intermediate',
-    },
-    {
-      uuid: '3',
-      isSelected: false,
-      onCheckCallBack: onCheckCallBack,
-      serviceUUID: 'serviceUUID',
-      title: 'Class 2',
-      serviceType: 'Strength',
-      description: 'Growing muscle mass, level Intermediate',
-    },
-    {
-      uuid: '4',
-      isSelected: false,
-      onCheckCallBack: onCheckCallBack,
-      serviceUUID: 'serviceUUID',
-      title: 'Class 2',
-      serviceType: 'Strength',
-      description: 'Growing muscle mass, level Intermediate',
-    },
-    {
-      uuid: '5',
-      isSelected: false,
-      onCheckCallBack: onCheckCallBack,
-      serviceUUID: 'serviceUUID',
-      title: 'Class 2',
-      serviceType: 'Strength',
-      description: 'Growing muscle mass, level Intermediate',
-    },
-  ]);
+
+  const onSelectTrainerCallBack = (e: any) => {
+    console.log('onSelectTrainerCallBack', e);
+    dispatch(fetchAvailableSession(e.uuid));
+  };
 
   return (
     <div className="tracking-[-0.05em ]  mx-auto mt-16 flex-col max-w-container w-full px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-24">
@@ -89,22 +47,21 @@ const View = () => {
       <div className="mt-16">
         <div className="md:text-3xl">Select one service:</div>
         <div className="mt-2 grid grid-cols-4 gap-4">
-          {services.map((e) => {
-            return <ServicesSelection {...e} />;
-          })}
+          {programs &&
+            programs.map((e) => {
+              return (
+                <ServicesSelection
+                  {...e}
+                  onCheckCallBack={onCheckCallBack}
+                  key={e.uuid}
+                  isSelected={e.uuid === selectedService?.uuid}
+                />
+              );
+            })}
         </div>
-      </div>
-
-      <div className="mt-16">
-        {/*<div className="md:text-3xl">Select one trainer(option):</div>*/}
-        {/*<div className="mt-2 grid grid-cols-4 gap-4">*/}
-        {/*  {services.map((e) => {*/}
-        {/*    return <ServicesSelection {...e} />;*/}
-        {/*  })}*/}
-        {/*</div>*/}
         {selectedService && (
           <>
-            <TrainersSelection />
+            <TrainersSelection availableTrainers={trainers} onSelect={onSelectTrainerCallBack} />
             <TimeSelection />
           </>
         )}

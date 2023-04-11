@@ -1,35 +1,61 @@
 import React from 'react';
 
 export interface ServicesSelectionProps {
-  uuid?: string | number;
-  serviceUUID: string | number;
-  title?: string;
-  serviceType: string;
-  description?: string;
+  serviceName: string;
+  avatar?: string;
+  duration?: string;
+  description: string;
+  price: string;
+
+  uuid: string;
+
+  createdAt: Date;
+  canBookBefore?: number;
+  serviceType: string[];
+  state?: string;
+  responsibleEmployees?: string[];
   isSelected?: boolean;
   onCheckCallBack?: Function;
 }
 export interface serviceInfo {
-  uuid?: string | number;
-  serviceUUID: string | number;
-  title?: string;
-  serviceType?: string;
-  description?: string;
+  serviceName: string;
+  avatar?: string;
+  duration?: string;
+  description: string;
+  price?: string;
+
+  uuid: string;
+
+  createdAt?: Date;
+  canBookBefore?: number;
+  serviceType?: string[];
+  state?: string;
+  responsibleEmployees?: string[];
   isSelected?: boolean;
   onCheckCallBack?: Function;
 }
 const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
-  const { title, description, onCheckCallBack, isSelected, uuid, serviceUUID, serviceType } = props;
+  const {
+    serviceName,
+    description,
+    onCheckCallBack,
+    isSelected,
+    uuid,
+    serviceType,
+    canBookBefore,
+    responsibleEmployees,
+  } = props;
   let newState = isSelected;
   const onCheck = () => {
     newState = !newState;
     if (onCheckCallBack) {
       const selectInfo: serviceInfo = {
         uuid,
-        title,
+        serviceName,
         description,
         isSelected: newState,
-        serviceUUID,
+        canBookBefore,
+        responsibleEmployees,
       };
       onCheckCallBack(selectInfo);
     }
@@ -39,7 +65,7 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
     <div className="hover:drop-shadow-xl cursor-pointer" onClick={() => onCheck()}>
       <div className=" p-2 bg-white border rounded-lg">
         <div className="flex md:justify-between">
-          <div className="font-bold lg:text-xl">{title || 'Title Service'}</div>
+          <div className="font-bold lg:text-xl">{serviceName || 'Title Service'}</div>
           <input type="radio" checked={newState} onChange={onChangeInput} />
         </div>
         <div>Program: {serviceType}</div>
