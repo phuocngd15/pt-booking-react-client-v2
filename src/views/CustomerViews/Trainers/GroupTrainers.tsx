@@ -28,9 +28,9 @@ const GroupTrainers = () => {
   console.log('GroupTrainers', trainers);
   if (!trainers) return null;
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 gap-x-10">
       {trainers.map((trainer) => (
-        <div id="contact">
+        <div id="contact" key={trainer.key}>
           {/*<div>*/}
           {/*  <img key={trainer.avatar} src={trainer.avatar || null} />*/}
           {/*</div>*/}

@@ -1,7 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { ServicePrototype } from '@/server/programAPI';
-import {getAllPrograms, getAllSessionAvailableOfTrainerByDate, getTrainerByServiceId} from '@/server/programAPI';
+import {
+  getAllPrograms,
+  getAllSessionAvailableOfTrainerByDate,
+  getTrainerByServiceId,
+} from '@/server/programAPI';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 
 const initialState: {
@@ -66,7 +70,23 @@ export const fetchAvailableSession = createAsyncThunk(
     return undefined;
   },
 );
-
+export const createBookingTicket = createAsyncThunk(
+  'booking/createBookingTicket',
+  async (params: any) => {
+    console.log('params', params);
+    // const res = await getAllSessionAvailableOfTrainerByDate(params.day, params.uuid);
+    // // if (res.code === 1) {
+    // //   //setData(res.data);
+    // //   return response.data;
+    // // }
+    //
+    // if (res.code === 1) {
+    //   //setData(res.data);
+    //   return res.data;
+    // }
+    // return undefined;
+  },
+);
 export const BookingSlice = createSlice({
   name: 'bookingPageSlice',
   initialState,
@@ -112,10 +132,24 @@ export const BookingSlice = createSlice({
       })
       .addCase(fetchAvailableSession.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded';
-          console.log("action.payload",action.payload)
+        console.log('action.payload', action.payload);
         state.availableSession = action.payload;
       })
       .addCase(fetchAvailableSession.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? 'Unknown error';
+      })
+
+      .addCase(createBookingTicket.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(createBookingTicket.fulfilled, (state, action: PayloadAction<any>) => {
+        state.status = 'succeeded';
+        console.log('action.payload', action.payload);
+        state.availableSession = action.payload;
+      })
+      .addCase(createBookingTicket.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Unknown error';
       });

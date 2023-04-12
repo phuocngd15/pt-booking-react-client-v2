@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import type { ServicePrototype } from '@/server/programAPI';
+import { baseRouter } from "@/router";
 
 export interface serviceInfo {
   serviceName: string;
@@ -18,27 +19,31 @@ export interface serviceInfo {
 }
 
 export interface ServicesSelectionProps {
-  programs: ServicePrototype[];
-  onCheckCallBack?: Function;
-  isSelected?: boolean;
+  data: ServicePrototype[];
+  onSelect?: Function;
 }
 const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
   const [selectedService, setSelectedService] = useState<string>();
 
   const onCheck = (value: string) => {
-    const selectedTrainer = props.programs.find((program) => program.uuid === value);
+    const clickedItemInfo = props.data.find((program) => program.uuid === value);
 
     setSelectedService(value);
-    if (props.onCheckCallBack) {
-      props.onCheckCallBack(selectedTrainer);
+    if (props.onSelect) {
+      props.onSelect(clickedItemInfo);
     }
   };
+
   const onChangeInput = () => {};
   return (
     <div className="h-80 overflow-y-auto">
-      {props?.programs?.map((e) => {
+      {props?.data?.map((e) => {
         return (
-          <div className="hover:drop-shadow-xl cursor-pointer" onClick={() => onCheck(e.uuid)}>
+          <div
+            key={e.uuid}
+            className="hover:drop-shadow-xl cursor-pointer"
+            onClick={() => onCheck(e.uuid)}
+          >
             <div className=" p-2 bg-white border rounded-lg">
               <div className="flex md:justify-between">
                 <div className="font-bold lg:text-xl">{e.serviceName || 'Title Service'}</div>

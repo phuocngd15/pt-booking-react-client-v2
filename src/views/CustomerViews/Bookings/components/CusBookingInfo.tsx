@@ -1,21 +1,28 @@
-const CusBookingInfo = () => {
+import React from 'react';
+
+interface CusBookingInfoProps {
+  onChangeCallBack?: Function;
+  fullNameRef: any;
+  emailRef: any;
+  phoneRef: any;
+}
+const CusBookingInfo: React.FC<CusBookingInfoProps> = (props) => {
+  // const fullNameRef = useRef(null);
+  // const emailRef = useRef(null);
+  // const phoneRef = useRef(null);
+
+  // const handleChange = () => {
+  //
+  //   if(props.onChangeCallBack){
+  //     props.onChangeCallBack({
+  //       fullName: fullNameRef?.current?.value,
+  //       email: emailRef?.current?.value,
+  //       phone: phoneRef?.current?.value,
+  //     })
+  //   }
+  //
+  // };
   return (
-    // <div className="w-52">
-    //     <div>Your infomation</div>
-    //   <div className="flex flex-col">
-    //     <label>Name</label>
-    //     <input type="text" className="bg-gray-100" />
-    //     <label>Email</label>
-    //
-    //     <input className="bg-gray-100" />
-    //     <label>Address</label>
-    //     <input className="bg-gray-100" />
-    //     <label>Phone</label>
-    //     <input className="bg-gray-100" />
-    //   </div>
-    // </div>
-    // <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    //   <div className="w-full max-w-md space-y-8 shadow-lg p-10 rounded border">
     <form className="mt-8 space-y-6" action="#" method="POST">
       <div className="space-y-3 ">
         <div>
@@ -23,6 +30,7 @@ const CusBookingInfo = () => {
             FullName
             <span className="sr-only">FullName</span>
             <input
+              ref={props.fullNameRef}
               id="email-address"
               name="email"
               type="email"
@@ -38,6 +46,7 @@ const CusBookingInfo = () => {
             Email
             <span className="sr-only">Email address</span>
             <input
+              ref={props.emailRef}
               id="email-address"
               name="email"
               type="email"
@@ -53,6 +62,7 @@ const CusBookingInfo = () => {
             Phone
             <span className="sr-only">Phone address</span>
             <input
+              ref={props.phoneRef}
               id="email-address"
               name="email"
               type="email"

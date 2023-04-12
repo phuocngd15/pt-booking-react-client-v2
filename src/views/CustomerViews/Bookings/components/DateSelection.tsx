@@ -6,21 +6,24 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import type { RangePickerProps } from 'antd/es/date-picker';
 import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
-export interface TimeSelectionProps {}
+export interface TimeSelectionProps {
+  onSelectCallback?: Function;
+}
 
 const DateSelection: React.FC<TimeSelectionProps> = (props) => {
   const { token } = theme.useToken();
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-
+  const { onSelectCallback } = props;
+  
   const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     const maxDaysToSelect = 7;
     const today = dayjs().endOf('day');
     return current < today || current > today.add(maxDaysToSelect, 'day');
   };
-  const onPanelChange = (value: Dayjs, mode: CalendarMode) => {
-    console.log(value.format('YYYY-MM-DD'), mode);
+  const onChange = (value: Dayjs) => {
+    console.log(value.format('YYYY-MM-DD'));
+    if (onSelectCallback) {
+      onSelectCallback(value);
+    }
   };
   const wrapperStyle: React.CSSProperties = {
     width: 300,
@@ -30,7 +33,12 @@ const DateSelection: React.FC<TimeSelectionProps> = (props) => {
   return (
     <Space wrap>
       <div style={wrapperStyle}>
-        <Calendar fullscreen={false} onPanelChange={onPanelChange} disabledDate={disabledDate} />
+        <Calendar
+          locale={locale}
+          fullscreen={false}
+          onChange={onChange}
+          disabledDate={disabledDate}
+        />
       </div>
     </Space>
   );

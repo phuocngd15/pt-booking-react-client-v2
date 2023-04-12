@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import timezone from 'dayjs/plugin/timezone';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
@@ -9,6 +9,7 @@ import TrainersSelection from '@/views/CustomerViews/Bookings/components/Trainer
 import DateSelection from '@/views/CustomerViews/Bookings/components/DateSelection';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
+  createBookingTicket,
   fetchAvailableSession,
   fetchPrograms,
   fetchTrainersByServiceId,
@@ -28,25 +29,53 @@ const View = () => {
   const availableSession = useAppSelector<Dayjs[]>(
     (state) => state.bookingPageSlice.availableSession,
   );
+  const [selectedProgram, setSelectedProgram] = useState<ServicePrototype>();
+  const [selectedTrainer, setSelectedTrainer] = useState<ITrainer>();
+  const [selectedDate, setSelectedDate] = useState<Dayjs>();
+  const [selectedTime, setSelectedTime] = useState<Dayjs>();
+  const fullNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
   useEffect(() => {
     dispatch(fetchPrograms());
   }, [dispatch]);
 
-  const onCheckCallBack = (e: any) => {
-    console.log('e', e);
-
+  const onSelectProgram = (e: ServicePrototype) => {
+    console.log('onSelectService', e);
+    setSelectedProgram(e);
     //step1: call get trainers
+    if (!e) return;
     dispatch(fetchTrainersByServiceId(e.uuid));
   };
 
-  const onSelectTrainerCallBack = (e: any) => {
-    console.log('onSelectTrainerCallBack', e);
-    const currentTime = dayjs().tz('Asia/Bangkok');
-    console.log('onSelectTrainerCallBack date', currentTime.toString());
+  const onSelectTrainer = (e: any) => {
+    console.log('onSelectTrainer', e);
+    setSelectedTrainer(e);
     if (!e) return;
-    dispatch(fetchAvailableSession({ day: currentTime.toJSON(), uuid: e.uuid }));
+    dispatch(fetchAvailableSession({ day: dayjs().tz('Asia/Ho_Chi_Minh').toJSON(), uuid: e.uuid }));
   };
 
+  const onSelectDate = (e: any) => {
+    setSelectedDate(e);
+    console.log('onSelectDate', e);
+  };
+  const onSelectTime = (e: any) => {
+    setSelectedTime(e);
+    console.log('onSelectTime', e);
+  };
+
+  const onSubmit = () => {
+    const params = {
+      programsUUID: selectedProgram?.uuid,
+      trainerUUID: selectedTrainer?.uuid,
+      date: dayjs(selectedDate).tz('Asia/Ho_Chi_Minh').toJSON(),
+      time: selectedTime,
+      cusName: fullNameRef?.current.value,
+      cusPhone: phoneRef?.current.value,
+      cusEmail: emailRef?.current.value,
+    };
+    dispatch(createBookingTicket(params));
+  };
   return (
     <div className="tracking-[-0.05em ]  mx-auto mt-16 flex-col max-w-container w-full px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-12 space-y-8 ">
       <div className="flex flex-col-reverse justify-center md:flex-row">
@@ -56,26 +85,28 @@ const View = () => {
       </div>
       {/*<div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">*/}
       <div className="w-full space-y-8 shadow-lg p-10 rounded border">
-        <CusBookingInfo />
+        <CusBookingInfo phoneRef={phoneRef} emailRef={emailRef} fullNameRef={fullNameRef}/>
         <div className="grid xl:grid-cols-4 grid-cols-1">
           <div>
             <div>Select one service:</div>
-            <ServicesSelection programs={programs} onCheckCallBack={onCheckCallBack} />
+            <ServicesSelection data={programs} onSelect={onSelectProgram} />
           </div>
           <div>
             <div>Select trainer (optional) </div>{' '}
-            <TrainersSelection availableTrainers={trainers} onSelect={onSelectTrainerCallBack} />
+            <TrainersSelection data={trainers} onSelect={onSelectTrainer} />
           </div>
           <div>
-            <div>Date</div> <DateSelection />
+            <div>Date</div> <DateSelection onSelectCallback={onSelectDate} />
           </div>
           <div>
-            <div>Time</div> <TimeSelection availableSession={availableSession} />
+            <div>Time</div>{' '}
+            <TimeSelection availableSession={availableSession} onCheckCallBack={onSelectTime} />
           </div>
         </div>
 
         <button
           type="submit"
+          onClick={onSubmit}
           className="group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Booking
