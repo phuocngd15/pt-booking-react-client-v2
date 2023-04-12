@@ -13,13 +13,21 @@ const TrainersSelection: React.FC<TrainersSelectionProps> = ({ availableTrainers
     onSelect(selectedTrainer);
   };
 
+
+  if(!availableTrainers) return null
   const options = availableTrainers.map((trainer) => ({
     value: trainer.uuid,
     label: trainer.fullName,
     ...trainer,
   }));
-
-  return <Select className="w-full" onChange={handleSelect} options={options} />;
+  return (
+    <Select
+      className="w-full"
+      onChange={handleSelect}
+      defaultValue={{ value: 'anyone', label: 'Anyone', uuid: '' }}
+      options={[{ value: '', label: 'Anyone', uuid: '' }, ...options]}
+    />
+  );
 };
 
 export default TrainersSelection;

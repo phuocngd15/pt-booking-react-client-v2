@@ -1,22 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import type { ServicePrototype } from '@/server/programAPI';
 
-export interface ServicesSelectionProps {
-  serviceName: string;
-  avatar?: string;
-  duration?: string;
-  description: string;
-  price: string;
-
-  uuid: string;
-
-  createdAt: Date;
-  canBookBefore?: number;
-  serviceType: string[];
-  state?: string;
-  responsibleEmployees?: string[];
-  isSelected?: boolean;
-  onCheckCallBack?: Function;
-}
 export interface serviceInfo {
   serviceName: string;
   avatar?: string;
@@ -31,46 +15,41 @@ export interface serviceInfo {
   serviceType?: string[];
   state?: string;
   responsibleEmployees?: string[];
-  isSelected?: boolean;
+}
+
+export interface ServicesSelectionProps {
+  programs: ServicePrototype[];
   onCheckCallBack?: Function;
+  isSelected?: boolean;
 }
 const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
-  const {
-    serviceName,
-    description,
-    onCheckCallBack,
-    isSelected,
-    uuid,
-    serviceType,
-    canBookBefore,
-    responsibleEmployees,
-  } = props;
-  let newState = isSelected;
-  const onCheck = () => {
-    newState = !newState;
-    if (onCheckCallBack) {
-      const selectInfo: serviceInfo = {
-        uuid,
-        serviceName,
-        description,
-        isSelected: newState,
-        canBookBefore,
-        responsibleEmployees,
-      };
-      onCheckCallBack(selectInfo);
+  const [selectedService, setSelectedService] = useState<string>();
+
+  const onCheck = (value: string) => {
+    const selectedTrainer = props.programs.find((program) => program.uuid === value);
+
+    setSelectedService(value);
+    if (props.onCheckCallBack) {
+      props.onCheckCallBack(selectedTrainer);
     }
   };
   const onChangeInput = () => {};
   return (
-    <div className="hover:drop-shadow-xl cursor-pointer" onClick={() => onCheck()}>
-      <div className=" p-2 bg-white border rounded-lg">
-        <div className="flex md:justify-between">
-          <div className="font-bold lg:text-xl">{serviceName || 'Title Service'}</div>
-          <input type="radio" checked={newState} onChange={onChangeInput} />
-        </div>
-        <div>Program: {serviceType}</div>
-        <div>{description}</div>
-      </div>
+    <div className="h-80 overflow-y-auto">
+      {props?.programs?.map((e) => {
+        return (
+          <div className="hover:drop-shadow-xl cursor-pointer" onClick={() => onCheck(e.uuid)}>
+            <div className=" p-2 bg-white border rounded-lg">
+              <div className="flex md:justify-between">
+                <div className="font-bold lg:text-xl">{e.serviceName || 'Title Service'}</div>
+                <input type="radio" checked={e.uuid === selectedService} onChange={onChangeInput} />
+              </div>
+              <div>Program: {e.serviceType}</div>
+              <div>{e.description}</div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

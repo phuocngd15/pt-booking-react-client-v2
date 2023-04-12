@@ -31,7 +31,6 @@ export const getTrainerByServiceId = (uuid: string) => {
   console.log('getTrainerByServiceId', uuid);
   return deffHttp.post<ITrainer[]>(
     {
-      // url: '/mock_api/getTrainers/',
       url: 'http://localhost:3000/api/services/serviceId',
       data: { uuid: uuid },
     },
@@ -43,7 +42,6 @@ export const getAllPrograms = () => {
   console.log('getAllPrograms');
   return deffHttp.get<ServicePrototype[]>(
     {
-      // url: '/mock_api/getTrainers/',
       url: 'http://localhost:3000/api/services/',
       data: {},
     },
@@ -52,24 +50,13 @@ export const getAllPrograms = () => {
 };
 
 // uncategorized
-export const getAllSessionAvailableOfTrainerByDate = (day: any, uuid:any) => {
-  console.log('getAllPrograms');
-  const trainerId = 'trainer_64354f32311bbe50dc9340c7';
-  const date = '2022-12-01T08:00:00.000+00:00';
-  axios
-    .get(`http://localhost:3000/api/sessions/trainers/${trainerId}/availability/${date}`)
-    .then((response) => {
-      console.log('response.data', response.data);
-    })
-    .catch((error) => {
-      console.log('error', error);
-    });
-  // return deffHttp.get<any[]>(
-  //     {
-  //       // url: '/mock_api/getTrainers/',
-  //       url: 'http://localhost:3000/api/services/',
-  //       data: {},
-  //     },
-  //     { errorMessageMode: 'modal', withToken: false },
-  // );
+export const getAllSessionAvailableOfTrainerByDate = (day: any, uuid: any) => {
+  console.log('getAllSessionAvailableOfTrainerByDate');
+  return deffHttp.post<any[]>(
+    {
+      url: 'http://localhost:3000/api/sessions/available',
+      data: { trainerId: uuid, date: day },
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
 };

@@ -7,7 +7,7 @@ import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 const initialState: {
   programs: ServicePrototype[] | any;
   trainers: ITrainer | any;
-  availableSession: ITrainer | any;
+  availableSession: Date[] | any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 } = {
@@ -59,11 +59,11 @@ export const fetchAvailableSession = createAsyncThunk(
     //   return response.data;
     // }
 
-    // if (res.code === 1) {
-    //   //setData(res.data);
-    //   return res.data;
-    // }
-    // return undefined;
+    if (res.code === 1) {
+      //setData(res.data);
+      return res.data;
+    }
+    return undefined;
   },
 );
 
@@ -110,13 +110,11 @@ export const BookingSlice = createSlice({
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(
-        fetchAvailableSession.fulfilled,
-        (state, action: PayloadAction<ServicePrototype[] | any>) => {
-          state.status = 'succeeded';
-          state.availableSession = action.payload;
-        },
-      )
+      .addCase(fetchAvailableSession.fulfilled, (state, action: PayloadAction<any>) => {
+        state.status = 'succeeded';
+          console.log("action.payload",action.payload)
+        state.availableSession = action.payload;
+      })
       .addCase(fetchAvailableSession.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Unknown error';
