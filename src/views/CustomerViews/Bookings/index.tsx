@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 import timezone from 'dayjs/plugin/timezone';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+
 import ServicesSelection from '@/views/CustomerViews/Bookings/components/ServicesSelection';
 import './index.less';
 import TrainersSelection from '@/views/CustomerViews/Bookings/components/TrainerSelection';
@@ -29,9 +30,10 @@ const View = () => {
   const availableSession = useAppSelector<Dayjs[]>(
     (state) => state.bookingPageSlice.availableSession,
   );
+
   const [selectedProgram, setSelectedProgram] = useState<ServicePrototype>();
   const [selectedTrainer, setSelectedTrainer] = useState<ITrainer>();
-  const [selectedDate, setSelectedDate] = useState<Dayjs>();
+  const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs().add(1, 'day'));
   const [selectedTime, setSelectedTime] = useState<Dayjs>();
   const fullNameRef = useRef(null);
   const emailRef = useRef(null);
@@ -52,12 +54,23 @@ const View = () => {
     console.log('onSelectTrainer', e);
     setSelectedTrainer(e);
     if (!e) return;
-    dispatch(fetchAvailableSession({ day: dayjs().tz('Asia/Ho_Chi_Minh').toJSON(), uuid: e.uuid }));
+    dispatch(
+      fetchAvailableSession({
+        day: selectedDate?.utc() || dayjs().day(),
+        uuid: e?.uuid,
+      }),
+    );
   };
 
   const onSelectDate = (e: any) => {
     setSelectedDate(e);
     console.log('onSelectDate', e);
+    dispatch(
+      fetchAvailableSession({
+        day: e.utc(),
+        uuid: selectedTrainer?.uuid,
+      }),
+    );
   };
   const onSelectTime = (e: any) => {
     setSelectedTime(e);
@@ -68,7 +81,7 @@ const View = () => {
     const params = {
       programsUUID: selectedProgram?.uuid,
       trainerUUID: selectedTrainer?.uuid,
-      date: dayjs(selectedDate).tz('Asia/Ho_Chi_Minh').toJSON(),
+      date: selectedDate,
       time: selectedTime,
       cusName: fullNameRef?.current.value,
       cusPhone: phoneRef?.current.value,
@@ -85,23 +98,32 @@ const View = () => {
       </div>
       {/*<div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">*/}
       <div className="w-full space-y-8 shadow-lg p-10 rounded border">
-        <CusBookingInfo phoneRef={phoneRef} emailRef={emailRef} fullNameRef={fullNameRef}/>
+        <CusBookingInfo phoneRef={phoneRef} emailRef={emailRef} fullNameRef={fullNameRef} />
         <div className="grid xl:grid-cols-4 grid-cols-1">
           <div>
-            <div>Select one service:</div>
+            <div className="text-amber-600 font-bold">SELECT SERVICE</div>
             <ServicesSelection data={programs} onSelect={onSelectProgram} />
           </div>
-          <div>
-            <div>Select trainer (optional) </div>{' '}
-            <TrainersSelection data={trainers} onSelect={onSelectTrainer} />
-          </div>
-          <div>
-            <div>Date</div> <DateSelection onSelectCallback={onSelectDate} />
-          </div>
-          <div>
-            <div>Time</div>{' '}
-            <TimeSelection availableSession={availableSession} onCheckCallBack={onSelectTime} />
-          </div>
+
+          {selectedProgram && (
+            <>
+              <div>
+                <div className="text-amber-600 font-bold">SELECT TRAINER (optional)</div>
+                <TrainersSelection data={trainers} onSelect={onSelectTrainer} />
+              </div>
+              <div>
+                <div className="text-amber-600 font-bold">DATE</div>
+                <DateSelection onSelectCallback={onSelectDate} />
+              </div>
+            </>
+          )}
+
+          {selectedDate && selectedTrainer && (
+            <div>
+              <div className="text-amber-600 font-bold">TIME</div>
+              <TimeSelection availableSession={availableSession} onCheckCallBack={onSelectTime} />
+            </div>
+          )}
         </div>
 
         <button
@@ -113,6 +135,7 @@ const View = () => {
         </button>
       </div>
     </div>
+
     // </div>
   );
 };

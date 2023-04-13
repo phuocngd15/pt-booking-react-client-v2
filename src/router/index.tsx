@@ -11,6 +11,7 @@ const Home = lazy(() => import('@/views/CustomerViews/Home'));
 const ServicesView = lazy(() => import('@/views/CustomerViews/Services'));
 const TrainersView = lazy(() => import('@/views/CustomerViews/Trainers'));
 const BookingsView = lazy(() => import('@/views/CustomerViews/Bookings'));
+const TicketSearching = lazy(() => import('@/views/CustomerViews/Bookings/TicketSearching'));
 const Login = lazy(() => import('@/views/Login'));
 
 export const errorPage = [
@@ -58,17 +59,14 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/trainers',
         element: <TrainersView />,
-        // children: [
-        //   {
-        //     path: 'trainers/:groupName',
-        //     element: <GroupTrainers />,
-        //     loader: loadTrainersByGroup,
-        //   },
-        // ],
       },
       {
         path: '/customer/booking',
         element: <BookingsView />,
+      },
+      {
+        path: '/customer/ticket',
+        element: <TicketSearching />,
       },
       {
         path: '*',

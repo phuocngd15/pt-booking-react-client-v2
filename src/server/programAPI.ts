@@ -60,3 +60,14 @@ export const getAllSessionAvailableOfTrainerByDate = (day: any, uuid: any) => {
     { errorMessageMode: 'modal', withToken: false },
   );
 };
+
+export const bookingSession = (params: any) => {
+  console.log('bookingSession');
+  return deffHttp.post<any>(
+    {
+      url: 'http://localhost:3000/api/sessions/booking',
+      data: { ...params },
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
+};

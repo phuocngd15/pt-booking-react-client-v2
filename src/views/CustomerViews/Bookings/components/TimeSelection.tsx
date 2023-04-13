@@ -32,7 +32,7 @@ const TimeSelection: React.FC<TimeSelectionProps> = memo((props) => {
 
   if (!availableSession) return null;
   return (
-    <div className="w-56 h-80 overflow-y-auto">
+    <div className="w-full h-80 overflow-y-auto">
       <div className='class="mt-2 grid grid-cols-2 gap-4 '>
         {availableSession.map((timeSlot) => {
           const isSame = timeSlot === selectedTime;
@@ -40,8 +40,8 @@ const TimeSelection: React.FC<TimeSelectionProps> = memo((props) => {
             <div
               key={timeSlot}
               className={joinClassNames(
-                isSame ? 'bg-indigo-600 text-white' : 'text-gray-400',
-                'text-center p-1 bg-white border rounded-md',
+                isSame ? 'font-bold' : 'text-gray-400',
+                'text-center p-1 bg-white border rounded-md hover:drop-shadow-xl ',
               )}
               onClick={() => onCheck(timeSlot)}
             >

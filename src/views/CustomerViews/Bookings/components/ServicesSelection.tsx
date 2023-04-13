@@ -41,7 +41,7 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
         return (
           <div
             key={e.uuid}
-            className="hover:drop-shadow-xl cursor-pointer"
+            className="hover:drop-shadow-xl cursor-pointer m-2"
             onClick={() => onCheck(e.uuid)}
           >
             <div className=" p-2 bg-white border rounded-lg">
@@ -49,8 +49,8 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
                 <div className="font-bold lg:text-xl">{e.serviceName || 'Title Service'}</div>
                 <input type="radio" checked={e.uuid === selectedService} onChange={onChangeInput} />
               </div>
-              <div>Program: {e.serviceType}</div>
-              <div>{e.description}</div>
+              <div className='lg:text-sm'>Program: {e.serviceType}</div>
+              <div className='lg:text-sm'>{e.description}</div>
             </div>
           </div>
         );

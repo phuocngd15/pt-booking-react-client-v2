@@ -2,6 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { ServicePrototype } from '@/server/programAPI';
 import {
+  bookingSession,
   getAllPrograms,
   getAllSessionAvailableOfTrainerByDate,
   getTrainerByServiceId,
@@ -74,17 +75,17 @@ export const createBookingTicket = createAsyncThunk(
   'booking/createBookingTicket',
   async (params: any) => {
     console.log('params', params);
-    // const res = await getAllSessionAvailableOfTrainerByDate(params.day, params.uuid);
+     const res = await bookingSession(params);
     // // if (res.code === 1) {
     // //   //setData(res.data);
     // //   return response.data;
     // // }
     //
-    // if (res.code === 1) {
-    //   //setData(res.data);
-    //   return res.data;
-    // }
-    // return undefined;
+    if (res.code === 1) {
+      //setData(res.data);
+      return res.data;
+    }
+    return undefined;
   },
 );
 export const BookingSlice = createSlice({

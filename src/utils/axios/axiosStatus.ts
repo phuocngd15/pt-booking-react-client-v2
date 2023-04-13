@@ -48,6 +48,7 @@ export function checkStatus(
       break;
     default:
   }
+
   if (errMessage) {
     if (errorMessageMode === 'modal') {
       createErrorModal(errMessage);

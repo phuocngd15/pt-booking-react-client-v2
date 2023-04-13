@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash-es';
 import { Disclosure } from '@headlessui/react';
+import TicketSearching from "@/views/CustomerViews/Bookings/TicketSearching";
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(' ');
 };
@@ -11,6 +12,7 @@ const Index = () => {
     { name: 'Home', href: '/customer/home', current: true },
     { name: 'Trainers', href: '/customer/trainers', current: false },
     { name: 'Booking', href: '/customer/booking', current: false },
+    { name: 'Ticket', href: '/customer/ticket', current: false },
   ]);
   const onClick = (path: string) => {
     console.log('path ', path);
@@ -37,7 +39,7 @@ const Index = () => {
       >
         {({ open }) => (
           <>
-            <div className="relative flex items-center py-[2.125rem]">
+            <div className="relative flex items-center py-[1.125rem]">
               <button
                 className="mr-auto flex-none text-slate-900"
                 onClick={() => onClick('/customer/home')}
@@ -65,12 +67,17 @@ const Index = () => {
                 <button className="ml-8" onClick={() => onClick('/customer/trainers')}>
                   TRAINERS
                 </button>
-                {/*<div className="ml-2 hidden rounded-full bg-sky-500 px-1.5 py-0.5 text-xs text-white sm:block">*/}
-                {/*  New*/}
-                {/*</div>*/}
+
                 <button className="ml-8" onClick={() => onClick('/customer/booking')}>
                   BOOKING
                 </button>
+                <div className="ml-2 hidden rounded-full bg-sky-500 px-1.5 py-0.5 text-xs text-white sm:block">
+                  New
+                </div>
+                <TicketSearching/>
+                {/*<button className="ml-8" onClick={() => onClick('/customer/ticket')}>*/}
+                {/*  TICKET*/}
+                {/*</button>*/}
               </div>
 
               <Disclosure.Button
