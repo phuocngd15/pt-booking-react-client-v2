@@ -71,3 +71,13 @@ export const bookingSession = (params: any) => {
     { errorMessageMode: 'modal', withToken: false },
   );
 };
+
+export const getDetailTicketBooking = (ticketCode: string) => {
+  return deffHttp.get<any>(
+    {
+      url: `http://localhost:3000/api/sessions/tickets/${ticketCode}`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
+};

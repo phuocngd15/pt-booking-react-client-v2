@@ -15,12 +15,14 @@ const initialState: {
   availableSession: Date[] | any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+  myTickets: any;
 } = {
   programs: undefined,
   trainers: undefined,
   availableSession: undefined,
   status: 'idle',
   error: null,
+  myTickets: undefined,
 };
 
 export const fetchPrograms = createAsyncThunk('booking/fetchPrograms', async () => {
@@ -92,9 +94,9 @@ export const BookingSlice = createSlice({
   name: 'bookingPageSlice',
   initialState,
   reducers: {
-    saveStore: (state, action: PayloadAction<ServicePrototype>) => {
+    saveStore: (state, action: PayloadAction<any[]>) => {
       console.log('action', action.payload);
-      state.data = action.payload;
+      state.myTickets = action.payload;
     },
   },
   extraReducers: (builder) => {

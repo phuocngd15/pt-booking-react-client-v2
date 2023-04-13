@@ -4,6 +4,7 @@ import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
+import { useNavigate } from 'react-router-dom';
 import ServicesSelection from '@/views/CustomerViews/Bookings/components/ServicesSelection';
 import './index.less';
 import TrainersSelection from '@/views/CustomerViews/Bookings/components/TrainerSelection';
@@ -38,6 +39,8 @@ const View = () => {
   const fullNameRef = useRef(null);
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
+  const navigate = useNavigate();
+  
   useEffect(() => {
     dispatch(fetchPrograms());
   }, [dispatch]);
@@ -88,6 +91,7 @@ const View = () => {
       cusEmail: emailRef?.current.value,
     };
     dispatch(createBookingTicket(params));
+    navigate('/customer/ticketSearching');
   };
   return (
     <div className="tracking-[-0.05em ]  mx-auto mt-16 flex-col max-w-container w-full px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-12 space-y-8 ">

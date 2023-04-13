@@ -14,9 +14,9 @@ const LayoutCus: React.FC = () => {
       <div>
         <MainNav />
         <AppMain />
-        <Footer style={{ textAlign: 'center', padding: 14 }}>
-          © 2023 Phuoc Nguyen Duy. All rights reserved
-        </Footer>
+        {/*<Footer style={{ textAlign: 'center', padding: 14 }}>*/}
+        {/*  © 2023 Phuoc Nguyen Duy. All rights reserved*/}
+        {/*</Footer>*/}
       </div>
     );
   };

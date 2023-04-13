@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash-es';
 import { Disclosure } from '@headlessui/react';
-import TicketSearching from "@/views/CustomerViews/Bookings/TicketSearching";
+import TicketSearching from "@/views/CustomerViews/Bookings/components/TicketSearching";
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(' ');
 };
@@ -74,7 +74,9 @@ const Index = () => {
                 <div className="ml-2 hidden rounded-full bg-sky-500 px-1.5 py-0.5 text-xs text-white sm:block">
                   New
                 </div>
-                <TicketSearching/>
+                <button className="ml-8" onClick={() => onClick('/customer/ticketSearching')}>
+                  MY TICKETS
+                </button>
                 {/*<button className="ml-8" onClick={() => onClick('/customer/ticket')}>*/}
                 {/*  TICKET*/}
                 {/*</button>*/}
