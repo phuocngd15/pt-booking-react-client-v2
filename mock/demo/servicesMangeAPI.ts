@@ -54,8 +54,7 @@ function generateData(numberOfItems): DataType[] {
   return data;
 }
 
-
-const serviceTypesData=[
+const serviceTypesData = [
   {
     key: '1',
     name: 'All',

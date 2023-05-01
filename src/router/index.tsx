@@ -11,7 +11,9 @@ const Home = lazy(() => import('@/views/CustomerViews/Home'));
 const ServicesView = lazy(() => import('@/views/CustomerViews/Services'));
 const TrainersView = lazy(() => import('@/views/CustomerViews/Trainers'));
 const BookingsView = lazy(() => import('@/views/CustomerViews/Bookings'));
-const TicketSearchingPage = lazy(() => import('@/views/CustomerViews/Bookings/TicketSearchingPage'));
+const TicketSearchingPage = lazy(
+  () => import('@/views/CustomerViews/Bookings/TicketSearchingPage'),
+);
 const Login = lazy(() => import('@/views/Login'));
 
 export const errorPage = [
@@ -26,8 +28,6 @@ export interface serviceType {
   name: string;
   description?: string;
 }
-
-
 
 export const baseRouter: RouteObject[] = [
   {
@@ -78,5 +78,3 @@ export const baseRouter: RouteObject[] = [
 ];
 
 export default createBrowserRouter(baseRouter);
-
-

@@ -30,7 +30,7 @@ const Tickets: React.FC<TicketsProps> = (props) => {
   // const tickets = Array.isArray(props.data) ? props.data : [props.data];
 
   return (
-    <div className='grid grid-cols-4 gap-2'>
+    <div className="grid grid-cols-4 gap-2">
       {props.data?.tickets?.map((e) => {
         return <Ticket item={e} />;
       })}
@@ -61,11 +61,12 @@ const Ticket: React.FC<TicketProps> = (props) => {
       });
   };
 
-
-
   return (
-    <div className='relative'>
-      <button onClick={handleExport} className='p-4 w-5 h-5 absolute right-0 top-0 flex items-center justify-center bg-amber-100 shadow-lg rounded-lg'>
+    <div className="relative">
+      <button
+        onClick={handleExport}
+        className="p-4 w-5 h-5 absolute right-0 top-0 flex items-center justify-center bg-amber-100 shadow-lg rounded-lg"
+      >
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,26 +84,21 @@ const Ticket: React.FC<TicketProps> = (props) => {
           </svg>
         </span>
       </button>
-      {/*{imageUrl && (*/}
-      {/*  <div>*/}
-      {/*    <img src={imageUrl} alt="Ticket" />*/}
-      {/*    <button onClick={handleDownload} download="ticket.png">*/}
-      {/*      Download*/}
-      {/*    </button>*/}
-      {/*  </div>*/}
-      {/*)}*/}
-      <div ref={ticketRef} className="flex flex-col items-center border bg-white rounded-lg overflow-hidden shadow-lg p-7  ">
+      <div
+        ref={ticketRef}
+        className="flex flex-col items-center border bg-white rounded-lg overflow-hidden shadow-lg p-7  "
+      >
         <div className=" text-xl font-semibold mb-4">Ticket UUID: 1234-5678-9101</div>
         <div className="text-gray-500 mb-2">
           <span className="font-medium">Day:</span>{' '}
           {dayjs(startTime).tz('Asia/Ho_Chi_Minh').format('dddd DD-MM-YYYY')}
         </div>
         <div className="text-gray-500 mb-2">
-          <span className="font-medium">Time Start:</span>{' '}
+          <span className="font-medium">Start Time :</span>
           {dayjs(startTime).tz('Asia/Ho_Chi_Minh').format('h:mm A')}
         </div>
         <div className="text-gray-500 mb-4">
-          <span className="font-medium">Time End:</span>{' '}
+          <span className="font-medium">End Time:</span>
           {dayjs(endTime).tz('Asia/Ho_Chi_Minh').format('h:mm A')}
         </div>
         <div className="text-gray-500 mb-2">

@@ -52,7 +52,7 @@ export const getTrainerByServiceId = (serviceId: string) => {
     {
       // url: '/mock_api/getTrainers/',
       url: 'http://localhost:3000/api/trainers/serviceId',
-      data: { serviceId: serviceId},
+      data: { serviceId: serviceId },
     },
     { errorMessageMode: 'modal', withToken: false },
   );

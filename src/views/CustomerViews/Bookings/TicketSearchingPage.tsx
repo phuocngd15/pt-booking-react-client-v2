@@ -1,11 +1,11 @@
 import Tickets from '@/views/CustomerViews/Bookings/components/Tickets';
 import './index.less';
 import TicketSearching from '@/views/CustomerViews/Bookings/components/TicketSearching';
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector } from '@/store/hooks';
 
 const TicketSearchingPage = () => {
   const myTickets = useAppSelector((state) => state.bookingPageSlice.myTickets);
-  console.log("my tickets", myTickets);
+  console.log('my tickets', myTickets);
   return (
     <div className="tracking-[-0.05em]">
       <div className="mx-auto mt-16 flex flex-col-reverse w-full justify-between max-w-container md:flex-row px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-24">

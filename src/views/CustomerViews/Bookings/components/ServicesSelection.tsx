@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import type { ServicePrototype } from '@/server/programAPI';
-import { baseRouter } from "@/router";
+import { baseRouter } from '@/router';
 
 export interface serviceInfo {
   serviceName: string;
@@ -49,8 +49,8 @@ const ServicesSelection: React.FC<ServicesSelectionProps> = (props) => {
                 <div className="font-bold lg:text-xl">{e.serviceName || 'Title Service'}</div>
                 <input type="radio" checked={e.uuid === selectedService} onChange={onChangeInput} />
               </div>
-              <div className='lg:text-sm'>Program: {e.serviceType}</div>
-              <div className='lg:text-sm'>{e.description}</div>
+              <div className="lg:text-sm">Program: {e.serviceType}</div>
+              <div className="lg:text-sm">{e.description}</div>
             </div>
           </div>
         );

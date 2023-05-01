@@ -88,7 +88,7 @@ export default [
     method: 'get',
     response: ({ body }: { body: Recordable }) => {
       const { groupName, username, password } = body;
-      console.log('username password groupName', username, password,groupName);
+      console.log('username password groupName', username, password, groupName);
       if (groupName) {
         return generateData(10);
       }

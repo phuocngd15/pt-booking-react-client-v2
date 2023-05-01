@@ -1,12 +1,10 @@
-import React, { useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useRef } from 'react';
 import { getDetailTicketBooking } from '@/server/programAPI';
 
-import { saveStore } from "@/store/modules/booking";
-import { useAppDispatch } from "@/store/hooks";
+import { saveStore } from '@/store/modules/booking';
+import { useAppDispatch } from '@/store/hooks';
 
-export interface TicketSearchingProps {}
-const TicketSearching: React.FC<TicketSearchingProps> = () => {
+const TicketSearching: React.FC = () => {
   const ref = useRef();
   const dispatch = useAppDispatch();
   const onSearching = async (e) => {
@@ -26,7 +24,7 @@ const TicketSearching: React.FC<TicketSearchingProps> = () => {
   };
 
   return (
-    <div className="ml-8 rounded-2xl border-2 border-gray-200 sm:flex items-center w-fit text-left space-x-3  h-12 bg-white text-slate-400 dark:bg-slate-800 dark:text-slate-300 dark:highlight-white/5 dark:hover:bg-slate-700">
+    <div className="ml-8 rounded-2xl border-2 border-gray-200 sm:flex items-center w-fit text-left space-x-3  h-12 bg-white text-slate-400">
       <div>
         <label htmlFor="tracking_code">
           <div className="flex w-full items-center flex-1 px-3">
@@ -61,8 +59,6 @@ const TicketSearching: React.FC<TicketSearchingProps> = () => {
           </div>
         </label>
       </div>
-
-
     </div>
   );
 };

@@ -6,8 +6,6 @@ import MainNav from '@/layoutCus/components/MainNav';
 
 const { Footer } = Layout;
 
-
-
 const LayoutCus: React.FC = () => {
   const render = () => {
     return (

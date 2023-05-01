@@ -62,8 +62,8 @@ const TrainersSelection: React.FC<TrainersSelectionProps> = ({ data, onSelect })
                 <div className="font-bold lg:text-lg">{item.fullName || 'Title Service'}</div>
                 <input type="radio" checked={item.uuid === selected} onChange={onChangeInput} />
               </div>
-              <div className='lg:text-sm'>Certificate: {item.certificates.join(', ')}</div>
-              <div className='lg:text-sm'>{item.skills.join(', ')}</div>
+              <div className="lg:text-sm">Certificate: {item.certificates.join(', ')}</div>
+              <div className="lg:text-sm">{item.skills.join(', ')}</div>
             </div>
           </div>
         );

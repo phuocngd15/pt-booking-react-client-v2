@@ -46,8 +46,7 @@ const DateSelection: React.FC<TimeSelectionProps> = (props) => {
     <Space wrap>
       <div style={wrapperStyle}>
         <Calendar
-           defaultValue={dayjs().add(1, 'day')}
-
+          defaultValue={dayjs().add(1, 'day')}
           fullscreen={false}
           onChange={onChange}
           disabledDate={disabledDate}

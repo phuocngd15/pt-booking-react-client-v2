@@ -77,7 +77,7 @@ export const createBookingTicket = createAsyncThunk(
   'booking/createBookingTicket',
   async (params: any) => {
     console.log('params', params);
-     const res = await bookingSession(params);
+    const res = await bookingSession(params);
     // // if (res.code === 1) {
     // //   //setData(res.data);
     // //   return response.data;

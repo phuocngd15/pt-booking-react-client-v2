@@ -40,7 +40,7 @@ const View = () => {
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     dispatch(fetchPrograms());
   }, [dispatch]);

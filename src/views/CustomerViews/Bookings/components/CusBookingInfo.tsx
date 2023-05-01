@@ -12,7 +12,7 @@ const CusBookingInfo: React.FC<CusBookingInfoProps> = (props) => {
       <div className="space-y-3 ">
         <div>
           <label className="relative block">
-            <div className='text-amber-600 font-bold'>FULL NAME</div>
+            <div className="text-amber-600 font-bold">FULL NAME</div>
             <span className="sr-only">FullName</span>
             <input
               ref={props.fullNameRef}
@@ -22,14 +22,12 @@ const CusBookingInfo: React.FC<CusBookingInfoProps> = (props) => {
               autoComplete="text"
               required
               className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-
             />
           </label>
         </div>
         <div>
           <label className="relative block">
-
-            <div className='text-amber-600 font-bold'>EMAIL</div>
+            <div className="text-amber-600 font-bold">EMAIL</div>
             <span className="sr-only">Email address</span>
             <input
               ref={props.emailRef}
@@ -39,13 +37,12 @@ const CusBookingInfo: React.FC<CusBookingInfoProps> = (props) => {
               autoComplete="email"
               required
               className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-
             />
           </label>
         </div>
         <div>
           <label className="relative block">
-            <div className='text-amber-600 font-bold'>PHONE</div>
+            <div className="text-amber-600 font-bold">PHONE</div>
             <span className="sr-only">Phone address</span>
             <input
               ref={props.phoneRef}
@@ -55,7 +52,6 @@ const CusBookingInfo: React.FC<CusBookingInfoProps> = (props) => {
               autoComplete="phone"
               required
               className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-
             />
           </label>
         </div>
