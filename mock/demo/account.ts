@@ -29,7 +29,7 @@ export default [
     method: 'post',
     response: ({ body }: { body: Recordable }) => {
       const { username, password } = body;
-      if (username == 'admin' && password == 'admin123') {
+      if (username == 'admin@gmail.com' && password == 'admin123') {
         userInfo.token = genID(16);
         return {
           data: userInfo,

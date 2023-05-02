@@ -4,6 +4,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '@/layout';
 import LayoutCus from '@/layoutCus';
 import Authority from '@/layout/Authority';
+import ChangePwdForm from "@/views/Login/ChangePwdForm";
+
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
@@ -15,6 +17,8 @@ const TicketSearchingPage = lazy(
   () => import('@/views/CustomerViews/Bookings/TicketSearchingPage'),
 );
 const Login = lazy(() => import('@/views/Login'));
+const SignUpForm = lazy(() => import('@/views/Login/SignUpForm'));
+const RecoverPwdForm = lazy(() => import('@/views/Login/RecoverPwdForm'));
 
 export const errorPage = [
   {
@@ -43,6 +47,17 @@ export const baseRouter: RouteObject[] = [
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <SignUpForm />,
+  },
+  {
+    path: '/recover-pass',
+    element: <RecoverPwdForm />,
+  },  {
+    path: '/reset-password',
+    element: <ChangePwdForm />,
   },
   {
     path: '/customer',
