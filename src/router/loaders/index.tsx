@@ -1,5 +1,5 @@
 import { getServiceTypes, getTrainerDetail } from '@/server/trainersAPI';
-import { getUserInfo, UseInfoType } from '@/server/useInfo';
+import { getUserInfo, UseInfoType } from '@/views/api/auth';
 import { initAsyncRoute } from '@/router/utils';
 import { setStorage } from '@/utils/storage';
 

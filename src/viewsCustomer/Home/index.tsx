@@ -1,7 +1,7 @@
 import './index.less';
-import image1 from '../../../assets/Frame_450-min.png';
-import image2 from '../../../assets/wellness-health.jpg';
-import CustomCarousel from '@/views/CustomerViews/Home/components/Carousel';
+import image1 from '../../assets/Frame_450-min.png';
+import image2 from '../../assets/wellness-health.jpg';
+import CustomCarousel from '@/viewsCustomer/Home/components/Carousel';
 
 const View = () => {
   return (

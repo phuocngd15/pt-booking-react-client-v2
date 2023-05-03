@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import './index.less';
-import { createUser } from '@/server/useInfo';
+import { useState } from 'react';
+import { createUser } from '@/views/api/auth';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState('');
   const onRegister = async (e: any): Promise<void> => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -13,11 +15,18 @@ export default function SignUpForm() {
     if (res.code === 1) {
       navigate('/login');
     }
+    if (res.code === 2) {
+      setMessage(res.message);
+    }
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState: boolean) => !prevState);
+  };
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+
       <div className="w-full max-w-md space-y-8 shadow-lg p-10 rounded border">
+
         <div>
           <img
             className="mx-auto h-12 w-auto"
@@ -37,6 +46,7 @@ export default function SignUpForm() {
               </a>
             </div>
           </div>
+          <div>{message}</div>
           <div className="space-y-3 ">
             <div>
               <label className="relative block">
@@ -59,7 +69,7 @@ export default function SignUpForm() {
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   required
                   className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
@@ -74,7 +84,7 @@ export default function SignUpForm() {
                 <input
                   id="confirmpassword"
                   name="confirmpassword"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   autoComplete="confirm-password"
                   required
                   className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
@@ -84,12 +94,12 @@ export default function SignUpForm() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between" onClick={togglePasswordVisibility}>
             <div className="flex items-center">
               <input
-                id="remember-me"
-                name="remember-me"
                 type="checkbox"
+                id="show-password"
+                checked={showPassword}
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
@@ -116,7 +126,7 @@ export default function SignUpForm() {
                     clipRule="evenodd"
                   />
                 </svg>
-              </span>
+              </span>3
               Sign up
             </button>
           </div>

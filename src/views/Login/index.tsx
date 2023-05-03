@@ -1,8 +1,8 @@
 import { memo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.less';
-import type { UseInfoType } from '@/server/useInfo';
-import { getUserInfo } from '@/server/useInfo';
+import type { UseInfoType } from '@/views/api/auth';
+import { getUserInfo } from '@/views/api/auth';
 import { setStorage } from '@/utils/storage';
 import { initAsyncRoute } from '@/router/utils';
 import SignIn from '@/views/Login/SignInForm';

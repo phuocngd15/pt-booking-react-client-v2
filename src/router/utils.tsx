@@ -9,14 +9,14 @@ import { getRouteApi } from '@/server/route';
 import type { AsyncRouteType } from '@/store/modules/route';
 import { setStoreAsyncRouter } from '@/store/modules/route';
 import store from '@/store';
-import type { UseInfoType } from '@/server/useInfo';
+import type { UseInfoType } from '@/views/api/auth';
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
 
 // import { HomeOutlined } from '@ant-design/icons';
 
 export async function initAsyncRoute(user: UseInfoType) {
   console.log('initAsyncRoute power', user);
-  const res = await getRouteApi({ name: user.power }, { token: user.token });
+  const res = await getRouteApi({ role: user.power }, { token: user.token });
   if (res.data.length) {
     store.dispatch(setStoreAsyncRouter(res.data));
   }

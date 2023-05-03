@@ -5,10 +5,10 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
 import { useNavigate } from 'react-router-dom';
-import ServicesSelection from '@/views/CustomerViews/Bookings/components/ServicesSelection';
+import ServicesSelection from '@/viewsCustomer/Bookings/components/ServicesSelection';
 import './index.less';
-import TrainersSelection from '@/views/CustomerViews/Bookings/components/TrainerSelection';
-import DateSelection from '@/views/CustomerViews/Bookings/components/DateSelection';
+import TrainersSelection from '@/viewsCustomer/Bookings/components/TrainerSelection';
+import DateSelection from '@/viewsCustomer/Bookings/components/DateSelection';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
   createBookingTicket,
@@ -18,8 +18,8 @@ import {
 } from '@/store/modules/booking';
 import type { ServicePrototype } from '@/server/programAPI';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
-import TimeSelection from '@/views/CustomerViews/Bookings/components/TimeSelection';
-import CusBookingInfo from '@/views/CustomerViews/Bookings/components/CusBookingInfo';
+import TimeSelection from '@/viewsCustomer/Bookings/components/TimeSelection';
+import CusBookingInfo from '@/viewsCustomer/Bookings/components/CusBookingInfo';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

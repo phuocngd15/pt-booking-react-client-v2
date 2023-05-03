@@ -22,7 +22,7 @@ export const getUserInfo = (user: string, pwd: string) =>
   );
 
 export const createUser = (user: string, pwd: string) =>
-  deffHttp.post<UseInfoType>(
+  deffHttp.post<any>(
     {
       //url: '/mock_api/register',
       url: 'http://localhost:3000/api/auth/register',
@@ -32,7 +32,7 @@ export const createUser = (user: string, pwd: string) =>
   );
 
 export const rqForgetPass = (user: string, pwd: string) =>
-  deffHttp.post<UseInfoType>(
+  deffHttp.post<any>(
     {
       //url: '/mock_api/register',
       url: 'http://localhost:3000/api/auth/resetpass',
@@ -41,12 +41,12 @@ export const rqForgetPass = (user: string, pwd: string) =>
     { errorMessageMode: 'modal', withToken: false },
   );
 
-export const resetpass = ( pwd: string, token: string |null) =>
-  deffHttp.post<UseInfoType>(
+export const resetpass = (pwd: string, token: string | null) =>
+  deffHttp.post<any>(
     {
       //url: '/mock_api/register',
       url: `http://localhost:3000/api/auth/reset-password/${token}`,
-      data: {  password: pwd },
+      data: { password: pwd },
     },
     { errorMessageMode: 'modal', withToken: false },
   );

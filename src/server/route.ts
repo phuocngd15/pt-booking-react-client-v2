@@ -7,11 +7,11 @@ enum Api {
 }
 
 interface Param {
-  name: string;
+  role: string;
 }
 
 export const getRouteApi = (data: Param, options: any) =>
   deffHttp.post<AsyncRouteType[]>(
-    { url: Api.MockROUTE_LIST, data },
+    { url: Api.RealROUTE_LIST, data },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: options.token },
   );

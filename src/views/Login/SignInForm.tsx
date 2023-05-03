@@ -1,7 +1,11 @@
+import {useNavigate} from "react-router-dom";
+
 export interface Props {
   handleSubmit: Function;
 }
 export default function SignInForm({ handleSubmit }: Props) {
+  const navigate = useNavigate();
+
   const onSubmit = (e: any) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -13,9 +17,10 @@ export default function SignInForm({ handleSubmit }: Props) {
       <div className="w-full max-w-md space-y-8 shadow-lg p-10 rounded border">
         <div>
           <img
-            className="mx-auto h-12 w-auto"
+            className="mx-auto h-12 w-auto cursor-pointer"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
+            onClick={() => navigate('/customer/home')}
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign in

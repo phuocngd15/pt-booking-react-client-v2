@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash-es';
 import { Disclosure } from '@headlessui/react';
-import TicketSearching from '@/views/CustomerViews/Bookings/components/TicketSearching';
+import TicketSearching from '@/viewsCustomer/Bookings/components/TicketSearching';
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(' ');
 };

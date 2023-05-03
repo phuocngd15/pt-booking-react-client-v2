@@ -5,12 +5,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import yogaImage from '../../../../assets/Frame_455-min.png';
-import nutritionImage from '../../../../assets/Frame_nutri-min.png';
-import dancingImage from '../../../../assets/Frame_dance-min.png';
-import strengImage from '../../../../assets/Frame_streg-min.png';
-import funcImage from '../../../../assets/Frame_func-min.webp';
-import pilateImage from '../../../../assets/Frame_456-min.jpg';
+import yogaImage from '../../../assets/Frame_455-min.png';
+import nutritionImage from '../../../assets/Frame_nutri-min.png';
+import dancingImage from '../../../assets/Frame_dance-min.png';
+import strengImage from '../../../assets/Frame_streg-min.png';
+import funcImage from '../../../assets/Frame_func-min.webp';
+import pilateImage from '../../../assets/Frame_456-min.jpg';
 
 const { Meta } = Card;
 const CustomCarousel: React.FC = () => {

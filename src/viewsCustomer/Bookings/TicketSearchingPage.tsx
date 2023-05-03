@@ -1,6 +1,6 @@
-import Tickets from '@/views/CustomerViews/Bookings/components/Tickets';
+import Tickets from '@/viewsCustomer/Bookings/components/Tickets';
 import './index.less';
-import TicketSearching from '@/views/CustomerViews/Bookings/components/TicketSearching';
+import TicketSearching from '@/viewsCustomer/Bookings/components/TicketSearching';
 import { useAppSelector } from '@/store/hooks';
 
 const TicketSearchingPage = () => {

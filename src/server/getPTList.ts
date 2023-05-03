@@ -15,7 +15,7 @@ export interface PT {
 export const getPts = () =>
   deffHttp.get<any>(
     {
-      url: '/mock_api/getPts',
+      url: '/mock_api/getTrainers',
       data: { username: 'user', password: 'pwd' },
     },
     { errorMessageMode: 'modal', withToken: false },
@@ -23,7 +23,7 @@ export const getPts = () =>
 export const getDetailPt = () =>
   deffHttp.get<any>(
     {
-      url: '/mock_api/getPts/detail',
+      url: '/mock_api/getTrainers/detail',
       data: { username: 'user', password: 'pwd' },
     },
     { errorMessageMode: 'modal', withToken: false },

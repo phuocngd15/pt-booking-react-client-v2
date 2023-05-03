@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { joinClassNames } from '@/utils/classNamesStyle';
 import { useAppDispatch } from '@/store/hooks';
 import { fetchTrainersAsync } from '@/store/modules/trainers';
-import { serviceTypes } from '@/views/CustomerViews/Trainers/const/ServiceTypes';
+import { serviceTypes } from '@/viewsCustomer/Trainers/const/ServiceTypes';
 const Index = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
