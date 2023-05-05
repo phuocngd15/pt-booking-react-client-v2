@@ -4,15 +4,18 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from '@/layout';
 import LayoutCus from '@/layoutCus';
 import Authority from '@/layout/Authority';
+import ChangePwdForm from '@/views/Login/ChangePwdForm';
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
-const Home = lazy(() => import('@/views/CustomerViews/Home'));
-const ServicesView = lazy(() => import('@/views/CustomerViews/Services'));
-const TrainersView = lazy(() => import('@/views/CustomerViews/Trainers'));
-const BookingsView = lazy(() => import('@/views/CustomerViews/Bookings'));
-
+const Home = lazy(() => import('@/viewsCustomer/Home'));
+const ServicesView = lazy(() => import('@/viewsCustomer/Services'));
+const TrainersView = lazy(() => import('@/viewsCustomer/Trainers'));
+const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
+const TicketSearchingPage = lazy(() => import('@/viewsCustomer/Bookings/TicketSearchingPage'));
 const Login = lazy(() => import('@/views/Login'));
+const SignUpForm = lazy(() => import('@/views/Login/SignUpForm'));
+const RecoverPwdForm = lazy(() => import('@/views/Login/RecoverPwdForm'));
 
 export const errorPage = [
   {
@@ -20,6 +23,12 @@ export const errorPage = [
     element: <ErrorPage403 />,
   },
 ];
+
+export interface serviceType {
+  key: string;
+  name: string;
+  description?: string;
+}
 
 export const baseRouter: RouteObject[] = [
   {
@@ -35,6 +44,18 @@ export const baseRouter: RouteObject[] = [
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <SignUpForm />,
+  },
+  {
+    path: '/recover-pass',
+    element: <RecoverPwdForm />,
+  },
+  {
+    path: '/reset-password',
+    element: <ChangePwdForm />,
   },
   {
     path: '/customer',
@@ -55,6 +76,10 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/booking',
         element: <BookingsView />,
+      },
+      {
+        path: '/customer/ticketSearching',
+        element: <TicketSearchingPage />,
       },
       {
         path: '*',

@@ -2,47 +2,73 @@ import type { MockMethod, Recordable } from 'vite-plugin-mock';
 
 interface DataType {
   key: string;
+  personId: string;
   fullName: string;
   phone: string;
-  cmnd: string;
-  email: string;
-  joindate: string;
-  age: number;
+  birthDay: number;
   address: string;
-  description?: string;
+  email: string;
+  rate: number;
+  certificate?: string[];
+  skills?: string[];
 }
 function genID(length: number) {
   return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
 }
+//personId: `${genID(13).toString()}`,
+
+function generateRandomSkills(): string[] {
+  const skills = [
+    'Strength',
+    'Yoga',
+    'Functional',
+    'Pilates',
+    'Weight loss',
+    'Dancing',
+    'Nutrutiology',
+    'Stretching',
+    'Cardio',
+    'Running',
+  ];
+  const randomSkills = [];
+
+  while (randomSkills.length < 3) {
+    const randomIndex = Math.floor(Math.random() * skills.length);
+    const randomSkill = skills[randomIndex];
+
+    if (!randomSkills.includes(randomSkill)) {
+      randomSkills.push(randomSkill);
+    }
+  }
+
+  return randomSkills;
+}
+
 function generateData(count: number): DataType[] {
   const data: DataType[] = [];
 
   for (let i = 0; i < count; i++) {
-    const fullName = `PT ${i + 1}`;
-    const cmnd = `${Math.floor(Math.random() * 900000000) + 100000000}`;
-    const phone = `${Math.floor(Math.random() * 900000000) + 100000000}`;
-    const email = `pt${i + 1}@example.com`;
-    const address = `Địa chỉ PT ${i + 1}`;
-    const joindate = `${Math.floor(Math.random() * 10) + 2012}-01-01`;
-    const age = Math.floor(Math.random() * 20) + 20;
+    const item: DataType = {
+      key: `key_${genID(13).toString()}`,
+      personId: `personId_${genID(13).toString()}`,
+      fullName: `Full Name ${i}`,
+      phone: `+1-555-555-${i}`,
+      birthDay: Math.floor(Math.random() * 31) + 1,
+      address: `Address ${i}`,
+      email: `email_${i}@example.com`,
+      rate: Math.floor(Math.random() * 5) + 1,
+      certificate: [`Certificate ${i}_1`, `Certificate ${i}_2`],
+      skills: generateRandomSkills(),
+    };
 
-    data.push({
-      key: `${genID(13).toString()}`,
-      fullName,
-      cmnd,
-      phone,
-      email,
-      address,
-      joindate,
-      age,
-    });
+    data.push(item);
   }
 
   return data;
 }
 export default [
   {
-    url: '/mock_api/getPts/detail',
+    url: '/mock_api/getTrainers/detail',
     timeout: 1000,
     method: 'get',
     response: ({ body }: { body: Recordable }) => {
@@ -57,10 +83,15 @@ export default [
     },
   },
   {
-    url: '/mock_api/getPts',
+    url: '/mock_api/getTrainers',
     timeout: 1000,
     method: 'get',
-    response: () => {
+    response: ({ body }: { body: Recordable }) => {
+      const { groupName, username, password } = body;
+      console.log('username password groupName', username, password, groupName);
+      if (groupName) {
+        return generateData(10);
+      }
       return generateData(100);
     },
   },

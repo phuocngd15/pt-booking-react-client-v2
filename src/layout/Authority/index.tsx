@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import type { UseInfoType } from '@/server/useInfo';
+import type { UseInfoType } from '@/views/api/auth';
 import { getStorage } from '@/utils/storage';
 
 interface AuthorityType {

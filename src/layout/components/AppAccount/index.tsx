@@ -15,11 +15,21 @@ const AppAccount = () => {
       key: '1',
       label: 'Logout',
     },
+    {
+      key: '2',
+      label: 'Profile',
+    },
   ];
 
-  const memuChange: MenuProps['onClick'] = (_e) => {
-    removeStorage('userInfo');
-    navigate('/customer/home');
+  const menuClickHandler: MenuProps['onClick'] = (_e) => {
+    switch (_e.key) {
+      case '1':
+        removeStorage('userInfo');
+        navigate('/customer/home');
+        break;
+      default:
+        return;
+    }
   };
 
   return (
@@ -27,7 +37,7 @@ const AppAccount = () => {
       <Dropdown
         menu={{
           items,
-          onClick: memuChange,
+          onClick: menuClickHandler,
         }}
         placement="bottom"
         arrow

@@ -8,7 +8,7 @@ function createElMessageBox(messageg: string, title: string, options: ModalFuncP
 }
 
 export function createErrorModal(msg: string) {
-  createElMessageBox(msg, getIntlText('api.errorTip'), { centered: true });
+  createElMessageBox(msg, getIntlText('api.errorTip'), { centered: true, closable: true });
 }
 
 export function createErrorMsg(msg: string) {
