@@ -107,9 +107,7 @@ const Index = () => {
                     Sign in <span aria-hidden="true">→</span>
                   </a>
                 ) : (
-                  <a href="/home">
-                    Dashboard
-                  </a>
+                  <a href="/home">Dashboard</a>
                 )}
               </div>
             </div>

@@ -1,5 +1,5 @@
-import {useNavigate} from "react-router-dom";
-import {AppLogo} from "@/components/AppLogo";
+import { useNavigate } from 'react-router-dom';
+import { AppLogo } from '@/components/AppLogo';
 
 export interface Props {
   handleSubmit: Function;
@@ -114,4 +114,4 @@ export default function SignInForm({ handleSubmit }: Props) {
       </div>
     </div>
   );
-};
+}

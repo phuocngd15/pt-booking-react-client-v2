@@ -12,7 +12,7 @@ const AppLogo = memo(() => {
       <div className="logo">
         <Image width={38} src={logo} preview={false} />
       </div>
-      <div className="name " style={{ color: thme.token.colorText }} >
+      <div className="name " style={{ color: thme.token.colorText }}>
         PT-Booking
       </div>
     </div>

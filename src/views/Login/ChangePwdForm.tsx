@@ -1,20 +1,20 @@
-import { useNavigate ,useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './index.less';
 import { resetpass } from '@/api/auth';
 
 export default function ChangePwdForm() {
   const navigate = useNavigate();
-    const { search } = useLocation();
-    const params = new URLSearchParams(search);
-    const token = params.get('token');
-    console.log("token",token)
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const token = params.get('token');
+  console.log('token', token);
   const onRegister = async (e: any): Promise<void> => {
     e.preventDefault();
-   // const email = e.target.email.value;
+    // const email = e.target.email.value;
     const password = e.target.newpassword?.value;
-  //  console.log('email', email);
+    //  console.log('email', email);
     console.log('password', password);
-    const res = await resetpass( password, token);
+    const res = await resetpass(password, token);
     if (res.code === 1) {
       navigate('/login');
     }

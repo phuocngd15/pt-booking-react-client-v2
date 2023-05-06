@@ -5,7 +5,7 @@ import { getAccountStyle } from './style';
 import avatar from '@/assets/avatar.png';
 import { removeStorage } from '@/utils/storage';
 import { useAppDispatch } from '@/store/hooks';
-import {updateWhoIsUsing} from "@/store/modules/customer";
+import { updateWhoIsUsing } from '@/store/modules/customer';
 
 const AppAccount = () => {
   const { AccountDiv } = getAccountStyle();

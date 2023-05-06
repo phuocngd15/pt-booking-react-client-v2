@@ -19,7 +19,7 @@ interface DemoAppState {
   currentEvents: EventApi[];
 }
 
-  export default function Calendar() {
+export default function Calendar() {
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([]);
   const [weekendsVisible, setWeekendsVisible] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<EventClickArg['event']>();
