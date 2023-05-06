@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Spin } from 'antd';
 import AccountsTable from './components/AccountsTable';
-import type { Account } from '@/views/api/accounts';
-import { getAccounts } from '@/views/api/accounts';
+import type { Account } from '@/api/accounts';
+import { getAccounts } from '@/api/accounts';
 import { DetailCusGrid } from '@/views/CusManagement/components/DetailCusGird';
 
 export default function AccountsManagement() {

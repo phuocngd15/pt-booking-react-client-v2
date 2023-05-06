@@ -1,6 +1,6 @@
 import { useNavigate ,useLocation} from 'react-router-dom';
 import './index.less';
-import { resetpass } from '@/views/api/auth';
+import { resetpass } from '@/api/auth';
 
 export default function ChangePwdForm() {
   const navigate = useNavigate();

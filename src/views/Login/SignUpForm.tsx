@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import './index.less';
 import { useState } from 'react';
-import { createUser } from '@/views/api/auth';
+import { createUser } from '@/api/auth';
+import { AppLogo } from '@/components/AppLogo';
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -24,14 +25,11 @@ export default function SignUpForm() {
   };
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-
       <div className="w-full max-w-md space-y-8 shadow-lg p-10 rounded border">
-
         <div>
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
+          <AppLogo
+            className="mx-auto h-12 w-auto cursor-pointer"
+            onClickCalBack={() => navigate('/customer/home')}
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign up
@@ -126,8 +124,8 @@ export default function SignUpForm() {
                     clipRule="evenodd"
                   />
                 </svg>
-              </span>3
-              Sign up
+              </span>
+              3 Sign up
             </button>
           </div>
         </form>

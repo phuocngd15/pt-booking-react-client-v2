@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { getAccountStyle } from './style';
 import avatar from '@/assets/avatar.png';
 import { removeStorage } from '@/utils/storage';
+import { useAppDispatch } from '@/store/hooks';
+import {updateWhoIsUsing} from "@/store/modules/customer";
 
 const AppAccount = () => {
   const { AccountDiv } = getAccountStyle();
-
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const items: MenuProps['items'] = [
@@ -25,6 +27,7 @@ const AppAccount = () => {
     switch (_e.key) {
       case '1':
         removeStorage('userInfo');
+        dispatch(updateWhoIsUsing(undefined));
         navigate('/customer/home');
         break;
       default:

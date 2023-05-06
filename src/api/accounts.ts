@@ -1,6 +1,6 @@
 import { deffHttp } from '@/utils/axios';
 import { getStorage } from '@/utils/storage';
-import type { UseInfoType } from '@/views/api/auth';
+import type { UseInfoType } from '@/api/auth';
 const userInfo = getStorage<UseInfoType>('userInfo');
 export interface Account {
   username: string;

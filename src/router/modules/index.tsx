@@ -12,6 +12,8 @@ import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
 
 const Home = lazy(() => import('@/views/Home'));
+const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
+const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
 const PTManagement = lazy(() => import('@/views/PTManagement'));
 const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
@@ -22,6 +24,18 @@ const defaultRoute: RouteList[] = [
     id: 'Home',
     element: <Home />,
     meta: { label: FormattedMessage({ id: 'layout.memu.home' }), icon: <HomeOutlined /> },
+  },
+  {
+    path: '/calendar',
+    id: 'CusCalendar',
+    element: <CusCalendar />,
+    meta: { label: 'Calendar', icon: <HomeOutlined /> },
+  },
+  {
+    path: '/calendar',
+    id: 'AdminCalendar',
+    element: <AdminCalendar />,
+    meta: { label: 'AdminCalendar', icon: <HomeOutlined /> },
   },
   {
     path: '/accounts-management',

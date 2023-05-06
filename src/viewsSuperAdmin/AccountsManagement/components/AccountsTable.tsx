@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ColumnsType } from 'antd/es/table';
 import { CustomTable } from '@/components/TableAnt';
-import type { Account } from '@/views/api/accounts';
+import type { Account } from '@/api/accounts';
 
 export default function AccountsTable({ dataSource, onCickDetailCallback }: any) {
   const columns: ColumnsType<Account> = [

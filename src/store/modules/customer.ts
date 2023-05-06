@@ -6,20 +6,24 @@ const initialState = {
   // levelAsyncRouter: [],
   email: 'default@gmail.com',
   detailInfo: {},
+  whoIsUsing: {},
 };
+
+// ban dau nay de Supper dung
 export const customerSlice = createSlice({
   name: 'customerSlice',
   initialState,
   reducers: {
     changeStateDetailCus: (state, action: PayloadAction<{}>) => {
-      // const { type, tabs } = action.payload;
-      console.log('state', state);
-      console.log('action.payload', action.payload);
+      console.log('changeStateDetailCus', action.payload);
       state.detailInfo = cloneDeep(action.payload);
+    },
+    updateWhoIsUsing: (state, action) => {
+      state.whoIsUsing = cloneDeep(action.payload);
     },
   },
 });
-// 每个 case reducer 函数会生成对应的 Action creators
-export const { changeStateDetailCus } = customerSlice.actions;
+
+export const { changeStateDetailCus, updateWhoIsUsing } = customerSlice.actions;
 
 export default customerSlice.reducer;

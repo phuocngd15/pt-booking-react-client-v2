@@ -13,7 +13,7 @@ import { localeConfig, setIntl } from './locales';
 import Pages from './Pages';
 import { useAppSelector } from './store/hooks';
 import { getStorage } from './utils/storage';
-import type { UseInfoType } from './views/api/auth';
+import type { UseInfoType } from '@/api/auth';
 import { initAsyncRoute } from './router/utils';
 import LayoutSpin from './components/LayoutSpin';
 

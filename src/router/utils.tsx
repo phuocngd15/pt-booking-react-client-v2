@@ -9,7 +9,7 @@ import { getRouteApi } from '@/server/route';
 import type { AsyncRouteType } from '@/store/modules/route';
 import { setStoreAsyncRouter } from '@/store/modules/route';
 import store from '@/store';
-import type { UseInfoType } from '@/views/api/auth';
+import type { UseInfoType } from '@/api/auth';
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
 
 // import { HomeOutlined } from '@ant-design/icons';

@@ -1,4 +1,5 @@
 import {useNavigate} from "react-router-dom";
+import {AppLogo} from "@/components/AppLogo";
 
 export interface Props {
   handleSubmit: Function;
@@ -16,11 +17,9 @@ export default function SignInForm({ handleSubmit }: Props) {
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 shadow-lg p-10 rounded border">
         <div>
-          <img
+          <AppLogo
             className="mx-auto h-12 w-auto cursor-pointer"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-            onClick={() => navigate('/customer/home')}
+            onClickCalBack={() => navigate('/customer/home')}
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign in
