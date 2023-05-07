@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Button } from 'antd';
 
 const AvatarUploader = () => {
   const [fileInputState, setFileInputState] = useState('');
+  const [OriginSource] = useState('https://bootdey.com/img/Content/avatar/avatar7.png');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
 
@@ -23,6 +25,11 @@ const AvatarUploader = () => {
     reader.onerror = () => {
       console.error('Error');
     };
+  };
+  const cancelUpload = (e) => {
+    setPreviewSource('');
+    setFileInputState('');
+    setPreviewSource('');
   };
 
   const uploadImage = async (base64EncodedImage) => {
@@ -46,12 +53,19 @@ const AvatarUploader = () => {
       setPreviewSource(reader.result);
     };
   };
-
+  console.log("previewSource",previewSource)
   return (
     <div>
-      <h1>Upload</h1>
+      <img
+        src={previewSource || OriginSource}
+        alt="chosen"
+        className="flex-none w-300 h-300 border-solid border-2 border-sky-500 rounded-full object-cover"
+        style={{ width: '300px' }}
+      />
+
       <form onSubmit={handleSubmitFile} className="form">
         <input
+          hidden={previewSource !== ''}
           id="fileInput"
           type="file"
           name="image"
@@ -59,11 +73,9 @@ const AvatarUploader = () => {
           value={fileInputState}
           className="form-input"
         />
-        <button className="btn" type="submit">
-          Submit
-        </button>
+        {previewSource && <Button htmlType="submit">Update</Button>}
+        {previewSource && <Button onClick={cancelUpload}>Cancel</Button>}
       </form>
-      {previewSource && <img src={previewSource} alt="chosen" style={{ height: '300px' }} />}
     </div>
   );
 };

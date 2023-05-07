@@ -45,7 +45,8 @@ const AppAccount = () => {
         placement="bottom"
         arrow
       >
-        <img src={avatar} className="wave" />
+        {/*<img src={avatar} className="wave" />*/}
+        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="wave" />
       </Dropdown>
     </AccountDiv>
   );
