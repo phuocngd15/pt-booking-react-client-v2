@@ -1,8 +1,7 @@
 import {
-  AppstoreOutlined,
-  DatabaseOutlined,
   HomeOutlined,
-  UserSwitchOutlined,
+  BookOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 import { lazy } from 'react';
 import type { RouteList } from '@/router/route';
@@ -11,12 +10,15 @@ import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
 
+
 const Home = lazy(() => import('@/views/Home'));
 const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
 const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
 const PTManagement = lazy(() => import('@/views/PTManagement'));
 const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
+const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
+const ProfilesView = lazy(() => import('@/views/Profile'));
 // after login have routes
 const defaultRoute: RouteList[] = [
   {
@@ -29,13 +31,25 @@ const defaultRoute: RouteList[] = [
     path: '/calendar',
     id: 'CusCalendar',
     element: <CusCalendar />,
-    meta: { label: 'Calendar', icon: <HomeOutlined /> },
+    meta: { label: 'Calendar', icon: <CalendarOutlined /> },
   },
   {
     path: '/calendar',
     id: 'AdminCalendar',
     element: <AdminCalendar />,
     meta: { label: 'AdminCalendar', icon: <HomeOutlined /> },
+  },
+  {
+    path: '/profile',
+    id: 'Profile',
+    element: <ProfilesView />,
+    meta: { label: 'Profile' },
+  },
+  {
+    path: '/booking',
+    id: 'BookingsView',
+    element: <BookingsView />,
+    meta: { label: 'Booking', icon: <BookOutlined /> },
   },
   {
     path: '/accounts-management',

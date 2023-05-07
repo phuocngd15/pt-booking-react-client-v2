@@ -1,12 +1,8 @@
-import { Layout } from 'antd';
 import { memo, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { getAppMainStyle } from './style';
 import { KeepAlive } from '@/layout/components/AppMain/KeepAlive';
-// import TabsPage from './TabsPage';
 import LayoutSpin from '@/components/LayoutSpin';
-
-const { Content } = Layout;
+import TabsPage from '@/layout/components/AppMain/TabsPage';
 
 const Main = memo(() => {
   const isKeepAlive = false;

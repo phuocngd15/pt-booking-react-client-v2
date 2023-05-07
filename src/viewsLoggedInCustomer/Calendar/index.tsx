@@ -45,9 +45,6 @@ export default function CusCalendar() {
 
   return (
     <>
-      <a href="/customer/booking">
-        Book class <span aria-hidden="true">→</span>
-      </a>
       <div className="demo-app">
         <div className="demo-app-main">
           <FullCalendar
