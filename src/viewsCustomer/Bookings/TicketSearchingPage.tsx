@@ -1,5 +1,5 @@
 import Tickets from '@/viewsCustomer/Bookings/components/Tickets';
-import './index.css';
+import './index.less';
 import TicketSearching from '@/viewsCustomer/Bookings/components/TicketSearching';
 import { useAppSelector } from '@/store/hooks';
 

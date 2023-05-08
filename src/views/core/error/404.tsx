@@ -10,7 +10,7 @@ export default memo(() => {
       status="404"
       title="404"
       subTitle={init.formatMessage({ id: 'layout.error.404' })}
-      extra={<Button type="primary">Back Home</Button>}
+      extra={<Button>Back Home</Button>}
     />
   );
 });

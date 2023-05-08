@@ -15,7 +15,6 @@ export default memo(() => {
       subTitle={init.formatMessage({ id: 'layout.error.403' })}
       extra={
         <Button
-          type="primary"
           onClick={() => {
             navigate('/');
           }}

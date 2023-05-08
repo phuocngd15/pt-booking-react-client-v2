@@ -13,7 +13,7 @@ const CustomBtnModal: React.FC<CustomBtnModalProps> = ({ nameBtn, customForm, ic
 
   return (
     <>
-      <Button type="primary" icon={icon} onClick={() => setIsOpenModal(true)}>
+      <Button icon={icon} onClick={() => setIsOpenModal(true)}>
         {nameBtn}
       </Button>
       <Modal

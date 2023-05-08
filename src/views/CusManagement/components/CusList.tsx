@@ -87,7 +87,6 @@ export const CusList: React.FC<CusListProps> = memo(({ dataSource }) => {
             Reset
           </Button>
           <Button
-            type="primary"
             onClick={() =>
               handleSearch(
                 selectedKeys as string[],

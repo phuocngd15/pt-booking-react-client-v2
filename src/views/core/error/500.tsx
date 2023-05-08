@@ -9,7 +9,7 @@ export default memo(() => {
       status="500"
       title="500"
       subTitle={init.formatMessage({ id: 'layout.error.500' })}
-      extra={<Button type="primary">Back Home</Button>}
+      extra={<Button>Back Home</Button>}
     />
   );
 });

@@ -98,7 +98,6 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource }) => {
             Reset
           </Button>
           <Button
-            type="primary"
             onClick={() =>
               handleSearch(
                 selectedKeys as string[],

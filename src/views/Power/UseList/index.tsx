@@ -6,7 +6,7 @@ const UseList = () => {
     initAsyncRoute('test');
   };
   return (
-    <Button type="primary" onClick={setCount}>
+    <Button onClick={setCount}>
       Thay đổi quyền hạn
     </Button>
   );
