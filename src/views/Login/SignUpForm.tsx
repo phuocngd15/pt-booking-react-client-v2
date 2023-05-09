@@ -125,7 +125,7 @@ export default function SignUpForm() {
                   />
                 </svg>
               </span>
-              3 Sign up
+              Sign up
             </button>
           </div>
         </form>

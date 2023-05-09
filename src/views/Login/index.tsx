@@ -17,6 +17,7 @@ const Login = memo(() => {
     if (res.code === 1) {
       await initAsyncRoute(res.data);
       setStorage<UseInfoType>('userInfo', res.data);
+
       dispatch(updateWhoIsUsing(res.data));
       navigate('/home');
     }

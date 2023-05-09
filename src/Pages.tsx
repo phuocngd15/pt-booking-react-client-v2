@@ -30,8 +30,6 @@ const mapBaseRouter = (baseRouter: RouteObject[], asyncRouter: AsyncRouteType[])
 
 const Pages = memo(() => {
   const asyncRouter = useAppSelector((state) => state.route.asyncRouter);
-  console.log('baseRouter', baseRouter);
-  console.log('asyncRouter', asyncRouter);
   const [route, setRoute] = useState<RouteObject[]>(mapBaseRouter(baseRouter, asyncRouter));
 
   // "Update the list of routes."
@@ -40,7 +38,6 @@ const Pages = memo(() => {
   }, [asyncRouter]);
 
   const routeElemt = createBrowserRouter(route);
-  console.log('routeElemt', routeElemt);
   return <RouterProvider router={routeElemt} />;
 
   // const routeElemt = useRoutes(route);

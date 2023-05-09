@@ -67,7 +67,7 @@ const GroupTrainers = () => {
 
           <Card
             key={trainer.key}
-            cover={<img alt="avatar" src={'https://placekitten.com/g/200/200'} />}
+            cover={<img alt="avatar" src={trainer.avatar||'https://placekitten.com/g/200/200'} />}
             actions={[<div>Show more</div>]}
           >
             <Meta

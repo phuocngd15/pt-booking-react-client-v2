@@ -6,7 +6,8 @@ const initialState = {
   // levelAsyncRouter: [],
   email: 'default@gmail.com',
   detailInfo: {},
-  whoIsUsing: {},
+  whoIsUsing: undefined,
+  myProfile: undefined,
 };
 
 // ban dau nay de Supper dung
@@ -20,6 +21,7 @@ export const customerSlice = createSlice({
     },
     updateWhoIsUsing: (state, action) => {
       state.whoIsUsing = cloneDeep(action.payload);
+      state.myProfile = cloneDeep(action.payload?.profile);
     },
   },
 });

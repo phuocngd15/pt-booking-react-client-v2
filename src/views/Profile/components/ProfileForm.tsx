@@ -1,5 +1,7 @@
 import { Button, Form, Input, InputNumber, Select } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { updateProfile } from '@/api/user';
+
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -15,13 +17,21 @@ const validateMessages = {
     range: '${label} must be between ${min} and ${max}',
   },
 };
-export default function ProfileForm() {
+export default function ProfileForm({ myProfile }) {
+  console.log('myProfile', myProfile);
   const [form] = Form.useForm();
   const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
-
-  const onFinish = (values: any) => {
+  useEffect(() => {
+    form.setFieldsValue({ user: myProfile });
+  }, [myProfile]);
+  const onFinish = async (values: any) => {
     setComponentDisabled((prevState) => !prevState);
-    console.log(values);
+    try {
+      const result = await updateProfile(values.user, myProfile._id);
+      console.log('result', result);
+    } catch (e) {
+      console.log('e', e);
+    }
   };
   const onCancel = () => {
     form.setFieldsValue({ user: { name: 'aaa', gender: 'male' } });
@@ -36,7 +46,7 @@ export default function ProfileForm() {
       validateMessages={validateMessages}
       disabled={componentDisabled}
     >
-      <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+      <Form.Item name={['user', 'fullName']} label="Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item
@@ -64,7 +74,7 @@ export default function ProfileForm() {
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button hidden={componentDisabled} htmlType="submit" >
+        <Button hidden={componentDisabled} htmlType="submit">
           Save
         </Button>
         <Button

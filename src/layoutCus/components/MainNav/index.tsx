@@ -18,6 +18,7 @@ const Index = () => {
     { name: 'Ticket', href: '/customer/ticketSearching', current: false },
   ]);
   const whoIsUsing = useAppSelector((e) => e.customer.whoIsUsing);
+  console.log("whoIsUsing",whoIsUsing)
   const onClick = (path: string) => {
     const newSelectedNav = cloneDeep(selectedNav);
     newSelectedNav.forEach((e) => {

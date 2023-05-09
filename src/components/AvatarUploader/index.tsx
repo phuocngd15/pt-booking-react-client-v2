@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
+import AvatarDefault from '@/views/Profile/components/DefaultAvatarSVG';
 
 const AvatarUploader = () => {
   const [fileInputState, setFileInputState] = useState('');
@@ -53,15 +54,19 @@ const AvatarUploader = () => {
       setPreviewSource(reader.result);
     };
   };
-  console.log("previewSource",previewSource)
+  console.log('previewSource', previewSource);
   return (
     <div>
-      <img
-        src={previewSource || OriginSource}
-        alt="chosen"
-        className="flex-none w-300 h-300 border-solid border-2 border-sky-500 rounded-full object-cover"
-        style={{ width: '300px' }}
-      />
+      {previewSource ? (
+        <img
+          src={previewSource || OriginSource}
+          alt="chosen"
+          className="flex-none w-300 h-300 border-solid border-2 border-sky-500 rounded-full object-cover"
+          style={{ width: '300px' }}
+        />
+      ) : (
+        <AvatarDefault width="300px" height="300px" />
+      )}
 
       <form onSubmit={handleSubmitFile} className="form">
         <input

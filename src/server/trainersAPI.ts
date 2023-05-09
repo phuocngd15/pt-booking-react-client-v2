@@ -10,6 +10,7 @@ export interface Trainer {
   rate: number;
   certificate?: string[];
   skills?: string[];
+  avatar: string;
 }
 
 interface serviceType {
