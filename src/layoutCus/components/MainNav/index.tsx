@@ -55,6 +55,9 @@ const Index = () => {
                 <button className="ml-8" onClick={() => onClick('/customer/trainers')}>
                   TRAINERS
                 </button>
+                <button className="ml-8" onClick={() => onClick('/customer/healthCheck')}>
+                  HEALTH CHECK
+                </button>
 
                 <button className="ml-8" onClick={() => onClick('/customer/booking')}>
                   BOOKING

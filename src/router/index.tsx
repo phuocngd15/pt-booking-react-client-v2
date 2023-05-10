@@ -5,6 +5,8 @@ import Layout from '@/layout';
 import LayoutCus from '@/layoutCus';
 import Authority from '@/layout/Authority';
 import ChangePwdForm from '@/views/Login/ChangePwdForm';
+import HealthCheck from '@/viewsCustomer/HealthCheck';
+import ToolBMI from "@/viewsCustomer/HealthCheck/BMI";
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
@@ -80,6 +82,14 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/ticketSearching',
         element: <TicketSearchingPage />,
+      },
+      {
+        path: '/customer/healthCheck',
+        element: <HealthCheck />,
+      },
+      {
+        path: '/customer/healthCheck/toolBMI',
+        element: <ToolBMI />,
       },
       {
         path: '*',
