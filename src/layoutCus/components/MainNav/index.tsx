@@ -34,7 +34,7 @@ const Index = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full flex-none text-sm font-semibold leading-6 text-slate-900 z-50 lg:border-b lg:border-slate-900/10 bg-white supports-backdrop-blur:bg-white/95">
+    <header className="bg-amber-500 sticky top-0 w-full flex-none text-sm font-semibold leading-6 text-slate-900 z-50 lg:border-b lg:border-slate-900/10  supports-backdrop-blur:bg-white/95">
       <Disclosure
         as="nav"
         aria-label="Global"

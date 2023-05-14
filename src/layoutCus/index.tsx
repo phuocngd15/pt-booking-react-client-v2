@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import './index.less';
 import AppMain from './components/Main';
 import MainNav from '@/layoutCus/components/MainNav';
+import CustomerLayoutFooter from "@/layoutCus/components/Footer";
 
 const { Footer } = Layout;
 
@@ -12,9 +13,9 @@ const LayoutCus: React.FC = () => {
       <div>
         <MainNav />
         <AppMain />
-        {/*<Footer style={{ textAlign: 'center', padding: 14 }}>*/}
-        {/*  © 2023 Phuoc Nguyen Duy. All rights reserved*/}
-        {/*</Footer>*/}
+        <Footer style={{ textAlign: 'center'}}>
+          <CustomerLayoutFooter/>
+        </Footer>
       </div>
     );
   };
