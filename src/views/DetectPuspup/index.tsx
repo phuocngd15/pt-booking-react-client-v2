@@ -1,35 +1,74 @@
-// @ts-expect-error
-import { PoseLandmarker, FilesetResolver, DrawingUtils } from '@mediapipe/tasks-vision';
-import { useRef, useState, useEffect } from 'react';
+import type { PoseLandmarkerResult } from '@mediapipe/tasks-vision';
+import { PoseLandmarker, DrawingUtils } from '@mediapipe/tasks-vision';
+import { useState, useEffect } from 'react';
+import { countBy } from 'lodash-es';
+import imageTestSquat1 from './Squat-1.jpg';
+import { createPoseLandmarker, DetectSquat } from '@/views/DetectPuspup/DetectPose';
+import ImageUploader from '@/views/DetectPuspup/UploadImage';
+// let poseLandmarker: PoseLandmarker;
 
-const demosSection = document.getElementById('demos');
-let poseLandmarker: PoseLandmarker;
-let runningMode = 'IMAGE';
+const MIN_HIP_ANGLE = 100; // Minimum angle for hip flexion
+const MAX_KNEE_ANGLE = 150; // Maximum angle for knee flexion
+let squatCount = 0;
+// let isSquatting = false;
 
-const createPoseLandmarker = async () => {
-  const vision = await FilesetResolver.forVisionTasks(
-    'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm',
-  );
-  poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
-    baseOptions: {
-      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`,
-      delegate: 'CPU',
-    },
-    runningMode: runningMode,
-    numPoses: 2,
-  });
-  // demosSection.classList.remove("invisible");
-};
+function calculateAngle(point1, point2, point3) {
+  const vec1 = [point1.x - point2.x, point1.y - point2.y];
+  const vec2 = [point3.x - point2.x, point3.y - point2.y];
 
+  const dotProduct = vec1[0] * vec2[0] + vec1[1] * vec2[1];
+  const mag1 = Math.sqrt(vec1[0] ** 2 + vec1[1] ** 2);
+  const mag2 = Math.sqrt(vec2[0] ** 2 + vec2[1] ** 2);
+
+  return Math.acos(dotProduct / (mag1 * mag2)) * (180 / Math.PI);
+}
+function detectSquats(poseLandmarks) {
+  if (
+    !poseLandmarks ||
+    !poseLandmarks[11] ||
+    !poseLandmarks[12] ||
+    !poseLandmarks[13] ||
+    !poseLandmarks[14]
+  )
+    return;
+  const leftHip = poseLandmarks[11];
+  const rightHip = poseLandmarks[12];
+  const leftKnee = poseLandmarks[13];
+  const rightKnee = poseLandmarks[14];
+
+  // Calculate the angles at the hips and knees
+  const hipAngle = calculateAngle(leftHip, rightHip, leftKnee);
+  const kneeAngle = calculateAngle(leftKnee, rightKnee, leftHip);
+
+  if (hipAngle > MIN_HIP_ANGLE && kneeAngle < MAX_KNEE_ANGLE) {
+    if (!isSquatting) {
+      isSquatting = true; // Start of a squat repetition
+      squatCount++;
+      console.log('squatCount', squatCount);
+    }
+  } else {
+    isSquatting = false;
+  }
+}
 export default function DetectPose() {
   const [webcamRunning, setWebcamRunning] = useState(false);
-  createPoseLandmarker();
+  const [poseLandmark, setPoseLandmark] = useState<PoseLandmarker>();
+  const [runningMode, setRunningMode] = useState<string>('VIDEO');
+
+  useEffect(() => {
+    (async () => {
+      const poseLandmark = await createPoseLandmarker(runningMode);
+      setPoseLandmark(poseLandmark);
+    })();
+    return () => {};
+  }, []);
+
   const videoHeight = '360px';
   const videoWidth = '480px';
-  const video: HTMLElement | null = document.getElementById('webcam');
+  const video: any = document.getElementById('webcam');
   const canvasElement = document.getElementById('output_canvas') as HTMLCanvasElement;
   const canvasCtx = canvasElement?.getContext('2d');
-  const drawingUtils = new DrawingUtils(canvasCtx);
+  const drawingUtils = canvasCtx ? new DrawingUtils(canvasCtx) : undefined;
 
   // Check if webcam access is supported.
   const hasGetUserMedia = () => !!navigator.mediaDevices?.getUserMedia;
@@ -41,52 +80,107 @@ export default function DetectPose() {
   }
 
   // Enable the live webcam view and start detection.
-  function enableWC() {
-    if (webcamRunning) return;
-    if (!video) return;
-    if (!poseLandmarker) {
-      console.log('Wait! poseLandmaker not loaded yet.');
-      return;
-    }
-
-    setWebcamRunning(true);
-
+  function enableWebCam(video: any) {
     // getUsermedia parameters.
     const constraints = {
       video: true,
     };
-
     // Activate the webcam stream.
     navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
       video.srcObject = stream;
-      // video.addEventListener('loadeddata', predictWebcam);
     });
   }
 
   let lastVideoTime = -1;
+  let preLEFT_SHOULDER_HIP_KNEE = 0;
+  let isSitting = 3;
+  let isStandUp = 1;
   async function predictWebcam() {
+    if (!webcamRunning) return;
     canvasElement.style.height = videoHeight;
     video.style.height = videoHeight;
     canvasElement.style.width = videoWidth;
     video.style.width = videoWidth;
     // Now let's start detecting the stream.
-    if (runningMode === 'IMAGE') {
-      runningMode = 'VIDEO';
-      await poseLandmarker.setOptions({ runningMode: 'VIDEO' });
-    }
     const startTimeMs = performance.now();
-    if (lastVideoTime !== video.currentTime) {
+    if (lastVideoTime !== video.currentTime && video.srcObject) {
       lastVideoTime = video.currentTime;
-      poseLandmarker.detectForVideo(video, startTimeMs, (result) => {
-        canvasCtx.save();
-        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+      poseLandmark?.detectForVideo(video, startTimeMs, (result: PoseLandmarkerResult) => {
+        canvasCtx?.save();
+        canvasCtx?.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+        // detectSquats(result.landmarks[0]);
+        //DetectSquat(result.landmarks[0]);
+        const [LEFT_SHOULDER_HIP_KNEE, CR_SHOULDER_HIP_KNEE, DL, DR, isSquarting] = DetectSquat(
+          result.landmarks[0],
+        );
+
+        if (
+          135 < LEFT_SHOULDER_HIP_KNEE &&
+          LEFT_SHOULDER_HIP_KNEE < 165 &&
+          135 < DL &&
+          DL < 165 &&
+          135 < DR &&
+          DR < 165 &&
+          135 < CR_SHOULDER_HIP_KNEE &&
+          CR_SHOULDER_HIP_KNEE < 165 &&
+          isStandUp === 1 &&
+          isSitting === 3
+        ) {
+          const bigger = preLEFT_SHOULDER_HIP_KNEE > LEFT_SHOULDER_HIP_KNEE;
+          if (bigger) {
+            isSitting = 2;
+            console.log('is sitting: isStandUp isSitting', isStandUp, isSitting);
+          }
+
+          setTimeout(() => {
+            preLEFT_SHOULDER_HIP_KNEE = LEFT_SHOULDER_HIP_KNEE;
+          }, 200);
+        }
+        if (isSitting === 2 && isSquarting) {
+          isSitting = 1;
+          isStandUp = 2;
+          console.log(' squating: isStandUp, isSitting', isStandUp, isSitting);
+        }
+        if (
+          LEFT_SHOULDER_HIP_KNEE < 180 &&
+          LEFT_SHOULDER_HIP_KNEE > 130 &&
+          DL < 180 &&
+          DL > 130 &&
+          DR < 180 &&
+          DR > 130 &&
+          CR_SHOULDER_HIP_KNEE < 180 &&
+          CR_SHOULDER_HIP_KNEE > 130 &&
+          isSitting === 1 &&
+          isStandUp === 2
+        ) {
+          isStandUp = 3;
+          console.log('isStandUp, isSitting', isStandUp, isSitting);
+          setTimeout(() => {
+            preLEFT_SHOULDER_HIP_KNEE = LEFT_SHOULDER_HIP_KNEE;
+          }, 200);
+        }
+
+        if (
+          isStandUp === 3 &&
+          isSitting === 1 &&
+          LEFT_SHOULDER_HIP_KNEE !== 0 &&
+          CR_SHOULDER_HIP_KNEE !== 0
+        ) {
+          isStandUp = 1;
+          isSitting = 3;
+          squatCount++;
+          console.log('squatCount', squatCount);
+        }
+
         for (const landmark of result.landmarks) {
-          drawingUtils.drawLandmarks(landmark, {
+          drawingUtils?.drawLandmarks(landmark, {
             radius: (data) => DrawingUtils.lerp(data.from!.z, -0.15, 0.1, 5, 1),
           });
-          drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
+          drawingUtils?.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
         }
-        canvasCtx.restore();
+        canvasCtx?.restore();
       });
     }
 
@@ -96,8 +190,43 @@ export default function DetectPose() {
     }
   }
 
-  function stopPredict() {
+  function stopPredict(videoElment: any, canvasMask: any) {
     setWebcamRunning(false);
+    videoElment.srcObject = null;
+    canvasMask?.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    setPoseLandmark(undefined);
+  }
+  async function detectImage(e) {
+    if (runningMode === 'VIDEO') {
+      setRunningMode('IMAGE');
+      await poseLandmark?.setOptions({ runningMode: 'IMAGE' });
+    }
+    poseLandmark?.detect(e.target, (result) => {
+      // const canvas = document.createElement('canvas');
+      // canvas.setAttribute('class', 'canvas');
+      // canvas.setAttribute('width', e.target.naturalWidth + 'px');
+      // canvas.setAttribute('height', e.target.naturalHeight + 'px');
+      // canvas.style =
+      //   'left: 0px;' +
+      //   'top: 0px;' +
+      //   'width: ' +
+      //   e.target.width +
+      //   'px;' +
+      //   'height: ' +
+      //   e.target.height +
+      //   'px;';
+      //
+      // e.target.parentNode.appendChild(canvas);
+      // const canvasCtx = canvas.getContext('2d');
+      //const drawingUtils = new DrawingUtils(canvasCtx);
+      DetectSquat(result.landmarks[0]);
+      // for (const landmark of result.landmarks) {
+      //   drawingUtils.drawLandmarks(landmark, {
+      //     radius: (data) => DrawingUtils.lerp(data.from!.z, -0.15, 0.1, 5, 1),
+      //   });
+      //   drawingUtils.drawConnectors(landmark, PoseLandmarker.POSE_CONNECTIONS);
+      // }
+    });
   }
   return (
     <div>
@@ -117,7 +246,19 @@ export default function DetectPose() {
           </p>
 
           <div id="liveView" className="videoView">
-            <button id="webcamButton" className="mdc-button mdc-button--raised" onClick={enableWC}>
+            <button
+              id="webcamButton"
+              className="mdc-button mdc-button--raised"
+              onClick={async () => {
+                createPoseLandmarker(runningMode)
+                  .then((newPoseLandmarker) => setPoseLandmark(newPoseLandmarker))
+                  .then(() => {
+                    setWebcamRunning(true);
+                    squatCount = 0;
+                    enableWebCam(video);
+                  });
+              }}
+            >
               <span className="mdc-button__ripple" />
               <span className="mdc-button__label">
                 {webcamRunning ? 'DISABLE PREDICTIONS' : 'ENABLE PREDICTIONS'}
@@ -126,16 +267,20 @@ export default function DetectPose() {
             <button
               id="webcamButton"
               className="mdc-button mdc-button--raised"
-              onClick={stopPredict}
+              onClick={() => {
+                stopPredict(video, canvasCtx);
+              }}
             >
               Stop PREDICTIONS
             </button>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', alignItems: 'center' }}>
               <video
                 id="webcam"
-                style={{ width: '1280px', height: '720px', position: 'relative' }}
+                style={{ width: videoWidth, height: videoHeight, position: 'relative' }}
                 autoPlay={true}
-                onLoadedData={predictWebcam}
+                onLoadedData={() => {
+                  setTimeout(predictWebcam, 2000);
+                }}
               />
               <canvas
                 className="output_canvas"
@@ -144,6 +289,8 @@ export default function DetectPose() {
                 height="720"
                 style={{ position: 'absolute', left: '0px', top: '0px' }}
               />
+              <img src={imageTestSquat1} onClick={(e) => detectImage(e)} />
+              <ImageUploader onClickImg={detectImage} />
             </div>
           </div>
         </div>
