@@ -6,8 +6,11 @@ import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
 
+
 const Home = lazy(() => import('@/views/Home'));
+const LoggedInCustomerHome = lazy(() => import('@/viewsLoggedInCustomer/Home'));
 const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
+const TrainerCalendar = lazy(() => import('@/viewsTrainer/Calendar'));
 const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
 const PTManagement = lazy(() => import('@/views/PTManagement'));
@@ -23,6 +26,12 @@ const defaultRoute: RouteList[] = [
     meta: { label: FormattedMessage({ id: 'layout.memu.home' }), icon: <HomeOutlined /> },
   },
   {
+    path: '/loggedCusHome',
+    id: 'loggedCusHome',
+    element: <LoggedInCustomerHome />,
+    meta: { label: FormattedMessage({ id: 'layout.memu.home' }), icon: <HomeOutlined /> },
+  },
+  {
     path: '/calendar',
     id: 'CusCalendar',
     element: <CusCalendar />,
@@ -33,6 +42,12 @@ const defaultRoute: RouteList[] = [
     id: 'AdminCalendar',
     element: <AdminCalendar />,
     meta: { label: 'AdminCalendar', icon: <HomeOutlined /> },
+  },
+  {
+    path: '/calendar',
+    id: 'TrainerCalendar',
+    element: <TrainerCalendar />,
+    meta: { label: 'Calendar', icon: <HomeOutlined /> },
   },
   {
     path: '/profile',

@@ -10,14 +10,14 @@ export default function Profile() {
   const myProfile = useAppSelector((e) => e.customer.myProfile);
   return (
     <Row gutter={[12, 12]}>
-      <Col lg={8} sm={24} xs={24}>
+      <Col lg={6} sm={24} xs={24}>
         <Card size="small" title="">
           <div>
             <AvatarUploader />
           </div>
         </Card>
       </Col>
-      <Col lg={16} sm={24} xs={24}>
+      <Col lg={10} sm={24} xs={24}>
         <Card size="small" title="">
           {/*<Alert*/}
           {/*  message={*/}
@@ -28,7 +28,7 @@ export default function Profile() {
           {/*  type="success"*/}
           {/*/>*/}
 
-          <div className="font-medium text-lg ">PERSONAL INFO</div>
+          <div className="font-bold text-lg">PERSONAL INFO</div>
 
           <ProfileForm myProfile={myProfile} />
         </Card>

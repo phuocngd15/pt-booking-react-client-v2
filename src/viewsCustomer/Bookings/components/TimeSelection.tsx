@@ -30,7 +30,7 @@ const TimeSelection: React.FC<TimeSelectionProps> = memo((props) => {
     }
   };
 
-  if (!availableSession) return null;
+  if (!availableSession) return <div></div>;
   return (
     <div className="w-full h-80 overflow-y-auto">
       <div className='class="mt-2 grid grid-cols-2 gap-4 '>
