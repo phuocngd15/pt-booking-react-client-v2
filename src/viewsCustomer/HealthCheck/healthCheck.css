@@ -1,151 +1,163 @@
-:root{
-    --space-unit: 1rem;
-    --space-xxs: calc(var(--space-unit)*0.375);
-    --space-xs: calc(var(--space-unit)*0.5);
-    --color-contrast-higher: #fff;
-    --space-sm: calc(var(--space-unit)*0.75);
-    --color-contrast-medium: #8f8f8f;
-    --color-contrast-medium-h: 0;
-    --color-contrast-medium-s: 0%;
-    --color-contrast-medium-l: 56%;
-    --color-accent-darker: #3c8d02;
-    --color-accent-darker-h: 95;
-    --color-accent-darker-s: 97%;
-    --color-accent-darker-l: 28%;
-    --color-accent-dark: #51bf03;
-    --color-accent-dark-h: 95;
-    --color-accent-dark-s: 97%;
-    --color-accent-dark-l: 38%;
-    --color-accent: #67f104;
-    --color-accent-h: 95;
-    --color-accent-s: 97%;
-    --color-accent-l: 48%;
-    --color-accent-light: #83fc2c;
-    --color-accent-light-h: 95;
-    --color-accent-light-s: 97%;
-    --color-accent-light-l: 58%;
-    --color-accent-lighter: #dbfec3;
-    --color-accent-lighter-h: 95;
-    --color-accent-lighter-s: 97%;
-    --color-accent-lighter-l: 88%;
+:root {
+  --space-unit: 1rem;
+  --space-xxs: calc(var(--space-unit) * 0.375);
+  --space-xs: calc(var(--space-unit) * 0.5);
+  --color-contrast-higher: #fff;
+  --space-sm: calc(var(--space-unit) * 0.75);
+  --color-contrast-medium: #8f8f8f;
+  --color-contrast-medium-h: 0;
+  --color-contrast-medium-s: 0%;
+  --color-contrast-medium-l: 56%;
+  --color-accent-darker: #3c8d02;
+  --color-accent-darker-h: 95;
+  --color-accent-darker-s: 97%;
+  --color-accent-darker-l: 28%;
+  --color-accent-dark: #51bf03;
+  --color-accent-dark-h: 95;
+  --color-accent-dark-s: 97%;
+  --color-accent-dark-l: 38%;
+  --color-accent: #67f104;
+  --color-accent-h: 95;
+  --color-accent-s: 97%;
+  --color-accent-l: 48%;
+  --color-accent-light: #83fc2c;
+  --color-accent-light-h: 95;
+  --color-accent-light-s: 97%;
+  --color-accent-light-l: 58%;
+  --color-accent-lighter: #dbfec3;
+  --color-accent-lighter-h: 95;
+  --color-accent-lighter-s: 97%;
+  --color-accent-lighter-l: 88%;
 }
-.bmi-display,.bmi__result {
-    position: relative
+.bmi-display,
+.bmi__result {
+  position: relative;
 }
 
 .bmi__result {
-    display: inline-block;
-    margin-bottom: 1rem;
-    margin-bottom: var(--space-unit);
-    padding: .375rem .5rem;
-    padding: var(--space-xxs) var(--space-xs);
-    color: #1a1a1a;
-    color: var(--color-contrast-higher);
-    font-weight: 600;
-    border-radius: 2px;
-    transform: translateX(-50%)
+  display: inline-block;
+  margin-bottom: 1rem;
+  margin-bottom: var(--space-unit);
+  padding: 0.375rem 0.5rem;
+  padding: var(--space-xxs) var(--space-xs);
+  color: #1a1a1a;
+  color: var(--color-contrast-higher);
+  font-weight: 600;
+  border-radius: 2px;
+  transform: translateX(-50%);
 }
 
 .bmi__result:after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    transform: translateX(-50%)
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  transform: translateX(-50%);
 }
 
 .bmi--level-1 .bmi__result {
-    left: 10%;
-    background-color: #2386bd
+  left: 10%;
+  background-color: #2386bd;
 }
 
 .bmi--level-1 .bmi__result:after {
-    border-top: 10px solid #2386bd
+  border-top: 10px solid #2386bd;
 }
 
 .bmi--level-2 .bmi__result {
-    left: 30%;
-    background-color: #208e4f;
+  left: 30%;
+  background-color: #208e4f;
 }
 
 .bmi--level-2 .bmi__result:after {
-    border-top: 10px solid #208e4f
+  border-top: 10px solid #208e4f;
 }
 
 .bmi--level-3 .bmi__result {
-    left: 50%;
-    background-color: #74a80c
+  left: 50%;
+  background-color: #74a80c;
 }
 
 .bmi--level-3 .bmi__result:after {
-    border-top: 10px solid #74a80c
+  border-top: 10px solid #74a80c;
 }
 
 .bmi--level-4 .bmi__result {
-    left: 70%;
-    background-color: #e77800
+  left: 70%;
+  background-color: #e77800;
 }
 
 .bmi--level-4 .bmi__result:after {
-    border-top: 10px solid #e77800
+  border-top: 10px solid #e77800;
 }
 
 .bmi--level-5 .bmi__result {
-    left: 90%;
-    background-color: #c80900
+  left: 90%;
+  background-color: #c80900;
 }
 
 .bmi--level-5 .bmi__result:after {
-    border-top: 10px solid #c80900
+  border-top: 10px solid #c80900;
 }
 
 .bmi__bar {
-    margin-bottom: .75rem;
-    margin-bottom: var(--space-sm);
-    height: 12px;
-    border-radius: 2px;
-    background: linear-gradient(90.12deg,#2b95ff -.63%,#009a96 18.76%,#00a12b 41.21%,#fed205 61.12%,#dc3500 79.49%,#dc1900 97.35%),#c4c4c4;
+  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
+  height: 12px;
+  border-radius: 2px;
+  background: linear-gradient(
+      90.12deg,
+      #2b95ff -0.63%,
+      #009a96 18.76%,
+      #00a12b 41.21%,
+      #fed205 61.12%,
+      #dc3500 79.49%,
+      #dc1900 97.35%
+    ),
+    #c4c4c4;
 }
 
 .bmi__levels {
-    -ms-flex-pack: distribute;
-    justify-content: space-around
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
 }
 
-.bmi__levels,.bmi__levels>* {
-    display: -ms-flexbox;
-    display: flex
+.bmi__levels,
+.bmi__levels > * {
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.bmi__levels>* {
-    -ms-flex-align: center;
-    align-items: center;
-    color: #787878;
-    color: var(--color-contrast-medium)
+.bmi__levels > * {
+  -ms-flex-align: center;
+  align-items: center;
+  color: #787878;
+  color: var(--color-contrast-medium);
 }
 
-.bmi__levels>:before {
-    content: "";
-    margin-right: 1rem;
-    margin-right: var(--space-unit);
-    width: 8px;
-    height: 8px;
-    background-color: #787878;
-    background-color: var(--color-contrast-medium);
-    transform: skewX(-25deg)
+.bmi__levels > :before {
+  content: '';
+  margin-right: 1rem;
+  margin-right: var(--space-unit);
+  width: 8px;
+  height: 8px;
+  background-color: #787878;
+  background-color: var(--color-contrast-medium);
+  transform: skewX(-25deg);
 }
 
-.bmi__levels>.active {
-    color: #67f104;
-    color: var(--color-accent);
-    font-weight: 700
+.bmi__levels > .active {
+  color: #67f104;
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
-.bmi__levels>.active:before,.circle-label {
-    background-color: #67f104;
-    background-color: var(--color-accent)
+.bmi__levels > .active:before,
+.circle-label {
+  background-color: #67f104;
+  background-color: var(--color-accent);
 }

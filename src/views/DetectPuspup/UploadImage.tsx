@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import AvatarDefault from '@/views/Profile/components/DefaultAvatarSVG';
 
-const ImageUploader = ({onClickImg}) => {
+const ImageUploader = ({ onClickImg }) => {
   const [fileInputState, setFileInputState] = useState('');
   const [OriginSource] = useState('https://bootdey.com/img/Content/avatar/avatar7.png');
   const [previewSource, setPreviewSource] = useState('');

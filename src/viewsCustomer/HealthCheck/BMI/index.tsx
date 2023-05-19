@@ -1,10 +1,10 @@
 import { Button, Card, Form, Input, Select } from 'antd';
 import { updateProfile } from '@/api/user';
 const { Option } = Select;
-export default function ToolBMI({onSubmit}) {
+export default function ToolBMI({ onSubmit }) {
   const onFinish = (values: any) => {
     console.log('values', values);
-    onSubmit(values)
+    onSubmit(values);
   };
   return (
     <div>
@@ -71,7 +71,10 @@ export default function ToolBMI({onSubmit}) {
             </Form.Item>
           </div>
           <div className="form-item">
-            <Button htmlType="submit" className=" rounded-lg text-sm font-semibold bg-amber-600 text-white hover:bg-amber-400">
+            <Button
+              htmlType="submit"
+              className=" rounded-lg text-sm font-semibold bg-amber-600 text-white hover:bg-amber-400"
+            >
               Kết quả
             </Button>
           </div>

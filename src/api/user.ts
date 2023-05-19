@@ -19,7 +19,7 @@ export const getProfile = (email: string) =>
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
 
-export const updateProfile = (user: any,id:string) =>
+export const updateProfile = (user: any, id: string) =>
   deffHttp.put<any>(
     {
       url: `${rootServer}/api/users/profile/${id}`,

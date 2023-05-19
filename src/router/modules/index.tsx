@@ -1,15 +1,10 @@
-import {
-  HomeOutlined,
-  BookOutlined,
-  CalendarOutlined,
-} from '@ant-design/icons';
+import { HomeOutlined, BookOutlined, CalendarOutlined } from '@ant-design/icons';
 import { lazy } from 'react';
 import type { RouteList } from '@/router/route';
 import { FormattedMessage } from '@/locales';
 import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
-
 
 const Home = lazy(() => import('@/views/Home'));
 const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));

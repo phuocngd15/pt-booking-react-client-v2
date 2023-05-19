@@ -6,8 +6,8 @@ import LayoutCus from '@/layoutCus';
 import Authority from '@/layout/Authority';
 import ChangePwdForm from '@/views/Login/ChangePwdForm';
 import HealthCheck from '@/viewsCustomer/HealthCheck';
-import ToolBMI from "@/viewsCustomer/HealthCheck/BMI";
-import DetectPose from "@/views/DetectPuspup";
+import ToolBMI from '@/viewsCustomer/HealthCheck/BMI';
+import DetectPose from '@/views/DetectPuspup';
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));

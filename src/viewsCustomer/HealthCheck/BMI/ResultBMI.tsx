@@ -47,7 +47,7 @@ function getBMIMessage(level) {
 export default function ResultBMI({ result, setResult }) {
   console.log('result ResultBMI', result);
   const [bmi, level] = calculateBMI(result?.user?.weight, result?.user?.height);
-  console.log("level",level)
+  console.log('level', level);
   return (
     <div className="position-relative padding-md@sm padding-bottom-0 text-component margin-bottom-lg">
       <h2 className="text-md font-bold color-accent">Kết quả</h2>
@@ -72,7 +72,9 @@ export default function ResultBMI({ result, setResult }) {
       </div>
       {/*<h2 className="text-lg font-semibold  color-contrast-higher">Chỉ số BMI của tôi có ổn không?</h2>*/}
       {/*<p>Chỉ số BMI của bạn là 23.4 Chúc mừng bạn, với chỉ số này cơ thể bạn đang rất khỏe mạnh.</p>*/}
-      <h2 className=" font-semibold color-contrast-higher">Tôi cần làm gì để duy trì chỉ số hiện tại?</h2>
+      <h2 className=" font-semibold color-contrast-higher">
+        Tôi cần làm gì để duy trì chỉ số hiện tại?
+      </h2>
       <p>{getBMIMessage(level)}</p>
 
       <Button

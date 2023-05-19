@@ -5,11 +5,7 @@ const UseList = () => {
   const setCount = async () => {
     initAsyncRoute('test');
   };
-  return (
-    <Button onClick={setCount}>
-      Thay đổi quyền hạn
-    </Button>
-  );
+  return <Button onClick={setCount}>Thay đổi quyền hạn</Button>;
 };
 
 export default UseList;

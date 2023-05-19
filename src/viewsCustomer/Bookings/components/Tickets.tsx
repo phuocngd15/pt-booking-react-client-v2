@@ -43,7 +43,7 @@ export function Ticket({ data }: TicketProps) {
   const { startTime, endTime } = data ?? { startTime: '9:00 AM', endTime: '12:00 PM' };
   const handleDownload = (imageUrl) => {
     const link = document.createElement('a');
-    link.download = `${data.classroom.serviceName.trim().replace(' ','')}.png`;
+    link.download = `${data.classroom.serviceName.trim().replace(' ', '')}.png`;
     link.href = imageUrl;
     link.click();
   };

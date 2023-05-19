@@ -7,7 +7,7 @@ import ProfileForm from '@/views/Profile/components/ProfileForm';
 import { useAppSelector } from '@/store/hooks';
 
 export default function Profile() {
-    const myProfile = useAppSelector((e) => e.customer.myProfile);
+  const myProfile = useAppSelector((e) => e.customer.myProfile);
   return (
     <Row gutter={[12, 12]}>
       <Col lg={8} sm={24} xs={24}>
@@ -30,7 +30,7 @@ export default function Profile() {
 
           <div className="font-medium text-lg ">PERSONAL INFO</div>
 
-          <ProfileForm myProfile={myProfile}/>
+          <ProfileForm myProfile={myProfile} />
         </Card>
       </Col>
     </Row>

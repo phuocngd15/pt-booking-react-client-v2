@@ -9,9 +9,7 @@ import { getPts } from '@/server/getPTList';
 const ExtraMenu = () => {
   return (
     <>
-      <Button icon={<PlusOutlined />}>
-        Thêm Khách Hàng Mới
-      </Button>
+      <Button icon={<PlusOutlined />}>Thêm Khách Hàng Mới</Button>
     </>
   );
 };
