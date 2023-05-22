@@ -5,10 +5,11 @@ import type { FieldData } from '@/views/CusManagement/components/EditCusForm';
 import { CustomizedForm } from '@/views/CusManagement/components/EditCusForm';
 import { GeneralSession } from '@/components/Uncategorized/GeneralSession';
 import { BookingIndex } from '@/views/Booking';
+import dayjs from 'dayjs';
 
 export const DetailCusGrid = () => {
   const customerDetail = useAppSelector((state) => state.customer.detailInfo);
-  console.log('DetailCus render');
+  console.log("customerDetail",customerDetail)
   const [fields, setFields] = useState<FieldData[]>([]);
   useEffect(() => {
     setFields([
@@ -16,7 +17,7 @@ export const DetailCusGrid = () => {
       { name: 'email', value: `${customerDetail.email}` },
       { name: 'phone', value: `${customerDetail.phone}` },
       { name: 'gender', value: `${customerDetail.gender || ''}` },
-      { name: 'age', value: `${customerDetail.age}` },
+      { name: 'birthday', value: `${customerDetail.birthday}` },
       { name: 'cmnd', value: `${customerDetail.cmnd}` },
     ]);
   }, [customerDetail]);
@@ -47,7 +48,8 @@ export const DetailCusGrid = () => {
           formEdit={
             <Modal
               open={isOpenModal}
-              onOk={() => setIsOpenModal(false)}
+               onOk={() => setIsOpenModal(false)}
+              okType={'default'}
               onCancel={() => setIsOpenModal(false)}
             >
               <CustomizedForm
@@ -74,9 +76,9 @@ export const DetailCusGrid = () => {
       <Col lg={24} sm={24} xs={24}>
         <Card title={'Thông tin liên lạc'}>
           <div>
-            <div>SDT: {fields.find((e) => e.name[0] === 'phone')?.value}</div>
-            <div>Gioi tinh: {fields.find((e) => e.name[0] === 'gender')?.value}</div>
-            <div>Email: {fields.find((e) => e.name[0] === 'email')?.value}</div>
+            <div>SDT: {fields.find((e) => e.name === 'phone')?.value}</div>
+            <div>Gioi tinh: {fields.find((e) => e.name === 'gender')?.value}</div>
+            <div>Email: {fields.find((e) => e.name === 'email')?.value}</div>
           </div>
         </Card>
       </Col>

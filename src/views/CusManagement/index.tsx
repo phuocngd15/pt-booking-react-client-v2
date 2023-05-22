@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import CusList from './components/CusList';
 
 import { getPts } from '@/server/getPTList';
+import {getCustomers} from "@/api/user";
 const ExtraMenu = () => {
   return (
     <>
@@ -19,7 +20,7 @@ const CusManagement = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await getPts();
+      const res = await getCustomers();
       if (res.code === 1) {
         setData(res.data);
       }

@@ -1,6 +1,9 @@
 import React from 'react';
-import { Form, Input, InputNumber, Select } from 'antd';
+import type { DatePickerProps } from 'antd';
+import { DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import { MailOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
+import type { Dayjs } from 'dayjs';
 
 export interface FieldData {
   name: string | number | (string | number)[];
@@ -21,6 +24,10 @@ const layout = {
 export const CustomizedForm: React.FC<CustomizedFormProps> = ({ onChange, fields }) => {
   if (!fields.length) return;
   const isDiableCMND = fields?.find((e) => e.name === 'cmnd')?.value;
+  const customFormat = (value) => {
+    console.log(value);
+  };
+  // `custom format: ${value.format(dateFormat)}`;
   return (
     <Form
       {...layout}
@@ -53,8 +60,8 @@ export const CustomizedForm: React.FC<CustomizedFormProps> = ({ onChange, fields
       >
         <Input disabled={isDiableCMND} style={{ width: '100%' }} />
       </Form.Item>
-      <Form.Item name="age" label="Age" rules={[{ type: 'number', min: 0, max: 99 }]}>
-        <InputNumber />
+      <Form.Item name="birthday" label="Birth Day">
+        <CustomDatePicker />
       </Form.Item>
       <Form.Item
         name="gender"
@@ -68,5 +75,15 @@ export const CustomizedForm: React.FC<CustomizedFormProps> = ({ onChange, fields
         </Select>
       </Form.Item>
     </Form>
+  );
+};
+const CustomDatePicker = (props: any) => {
+  const dateFormat = 'YYYY/MM/DD';
+  const customFormat: DatePickerProps['format'] = (value) => `${value.format(dateFormat)}`;
+  const onChange = (time: any) => {
+    props.onChange(time);
+  };
+  return (
+    <DatePicker value={dayjs(props.value, dateFormat)} format={customFormat} onChange={onChange} />
   );
 };

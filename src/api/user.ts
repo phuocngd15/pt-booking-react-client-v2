@@ -19,11 +19,27 @@ export const getProfile = (email: string) =>
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
 
-export const updateProfile = (user: any, id: string) =>
-  deffHttp.put<any>(
+export const updateProfile = (user: any, id: string, role: string) => {
+  let url;
+  if (role === 'trainer') {
+    url = `${rootServer}/api/trainers/profile/${id}`;
+  }
+  if (role === 'customer') {
+    url = `${rootServer}/api/users/profile/${id}`;
+  }
+  return deffHttp.put<any>(
     {
-      url: `${rootServer}/api/users/profile/${id}`,
+      url: url,
       data: { ...user },
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
+};
+export const getCustomers = () =>
+    deffHttp.get<any>(
+        {
+            url: `${rootServer}/api/users/`,
+            data: {},
+        },
+        { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+    );

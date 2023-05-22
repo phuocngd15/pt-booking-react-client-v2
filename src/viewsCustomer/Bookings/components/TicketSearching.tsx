@@ -34,7 +34,7 @@ const TicketSearching: React.FC = () => {
               className="focus:outline-none"
               // id="tracking_code"
               name="tracking_code"
-              placeholder="TicketCode"
+              placeholder="mail"
             />
             <button type="button" className="button-search" onClick={onSearching}>
               <span>

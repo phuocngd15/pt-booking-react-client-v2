@@ -2,8 +2,9 @@ import React from 'react';
 import type { ColumnsType } from 'antd/es/table';
 import { CustomTable } from '@/components/TableAnt';
 import type { Account } from '@/api/accounts';
+import {Button} from "antd";
 
-export default function AccountsTable({ dataSource, onCickDetailCallback }: any) {
+export default function AccountsTable({ dataSource, onClickBlockCallback,onClickActiveCallback }) {
   const columns: ColumnsType<Account> = [
     {
       title: 'Username',
@@ -25,18 +26,36 @@ export default function AccountsTable({ dataSource, onCickDetailCallback }: any)
       children: [],
     },
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      filterSearch: true,
+      children: [],
+    },
+    {
       title: '',
       dataIndex: '',
       key: 'fullName',
       render: (value, record, _index) => {
         return (
-          <div
-            onClick={() => {
-              onCickDetailCallback(record);
-            }}
-          >
-            <a>Detail</a>
-          </div>
+          <>
+            <Button
+              hidden={record.status !== 'active'}
+              onClick={() => {
+                onClickBlockCallback(record);
+              }}
+            >
+              <a>Block</a>
+            </Button>
+            <Button
+              hidden={record.status === 'active'}
+              onClick={() => {
+                onClickActiveCallback(record);
+              }}
+            >
+              <a>Open</a>
+            </Button>
+          </>
         );
       },
     },

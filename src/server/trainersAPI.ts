@@ -11,6 +11,8 @@ export interface Trainer {
   certificate?: string[];
   skills?: string[];
   avatar: string;
+  avatars: string[];
+    yearExperience:number,
 }
 
 interface serviceType {

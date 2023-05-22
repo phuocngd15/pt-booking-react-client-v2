@@ -8,6 +8,7 @@ import ChangePwdForm from '@/views/Login/ChangePwdForm';
 import HealthCheck from '@/viewsCustomer/HealthCheck';
 import ToolBMI from '@/viewsCustomer/HealthCheck/BMI';
 import DetectPose from '@/views/DetectPuspup';
+import DetailTrainerInfo from "@/views/DetailTrainerInfo";
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
@@ -75,6 +76,10 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/trainers',
         element: <TrainersView />,
+      },
+      {
+        path: '/customer/trainers/:detail',
+        element: <DetailTrainerInfo />,
       },
       {
         path: '/customer/booking',

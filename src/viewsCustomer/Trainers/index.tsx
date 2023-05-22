@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import './index.less';
-// import { Outlet } from 'react-router-dom';
 import VerticalNav from './components/Nav';
 import LayoutSpin from '@/components/LayoutSpin';
 import GroupTrainers from '@/viewsCustomer/Trainers/GroupTrainers';
+
 
 const View = () => {
   return (
@@ -28,7 +28,6 @@ const View = () => {
         <VerticalNav />
         <div className="flex-1">
           <Suspense fallback={<LayoutSpin />}>
-            {/*<Outlet />*/}
             <GroupTrainers />
           </Suspense>
         </div>

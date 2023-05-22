@@ -4,13 +4,14 @@ import { Card, Spin } from 'antd';
 import Table from './components/Table';
 
 import { getPts } from '@/server/getPTList';
+import {getAllTickets} from "@/api/tickets";
 
 const TicketsManagement = memo(() => {
   console.log('TicketsManagement');
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await getPts();
+      const res = await getAllTickets();
       if (res.code === 1) {
         setData(res.data);
       }

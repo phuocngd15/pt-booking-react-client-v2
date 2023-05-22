@@ -10,7 +10,7 @@ const Main = memo(() => {
   return (
     <div>
       {/*<TabsPage maxLen={maxLen} />*/}
-      <div className="main-content">
+      <div className="main-content min-h-screen">
         {isKeepAlive ? (
           <KeepAlive maxLen={maxLen} />
         ) : (

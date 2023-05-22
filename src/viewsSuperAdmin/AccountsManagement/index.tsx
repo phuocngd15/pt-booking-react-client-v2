@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Spin } from 'antd';
 import AccountsTable from './components/AccountsTable';
 import type { Account } from '@/api/accounts';
-import { getAccounts } from '@/api/accounts';
-import { DetailCusGrid } from '@/views/CusManagement/components/DetailCusGird';
+import {getAccounts, updateStatusAccount} from '@/api/accounts';
 
 export default function AccountsManagement() {
   const [data, setData] = useState<Account[]>([]);
@@ -23,8 +22,31 @@ export default function AccountsManagement() {
       // cleanup logic here
     };
   }, []);
-  console.log('AccountsManagement');
+
   if (!data.length) return <Spin />;
+
+  const onClickBlockCallback=async (account:any)=>{
+    const res = await updateStatusAccount(account._id,"block")
+    if(res.code){
+      const res2 = await getAccounts();
+      if (res2.code === 1) {
+        res2.data.forEach((e, i) => (e.key = ''.concat(e.username, i.toString())));
+        setData(res2.data);
+        setDetailAccount(res2.data[0]);
+      }
+    }
+  }
+  const onClickActiveCallback=async (account:any)=>{
+    const res = await updateStatusAccount(account._id,"active")
+    if(res.code){
+      const res2 = await getAccounts();
+      if (res2.code === 1) {
+        res2.data.forEach((e, i) => (e.key = ''.concat(e.username, i.toString())));
+        setData(res2.data);
+        setDetailAccount(res2.data[0]);
+      }
+    }
+  }
   return (
     <Row gutter={[12, 12]}>
       <Col lg={8} sm={24} xs={24}>
@@ -38,17 +60,18 @@ export default function AccountsManagement() {
               dataSource={
                 searchUserName ? data.filter((e) => e.username.includes(searchUserName)) : data
               }
-              onCickDetailCallback={(e: Account) => setDetailAccount(e)}
+              onClickBlockCallback={onClickBlockCallback}
+              onClickActiveCallback={onClickActiveCallback}
             />
           </div>
         </Card>
       </Col>
-      <Col lg={16} sm={24} xs={24}>
-        <Card size="small" title="">
-          <DetailCusGrid />
-          <DetailAccount data={detailAccount} />
-        </Card>
-      </Col>
+      {/*<Col lg={16} sm={24} xs={24}>*/}
+      {/*  <Card size="small" title="">*/}
+      {/*    /!*<DetailCusGrid />*!/*/}
+      {/*    <DetailAccount data={detailAccount} />*/}
+      {/*  </Card>*/}
+      {/*</Col>*/}
     </Row>
   );
 }

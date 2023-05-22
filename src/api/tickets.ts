@@ -11,3 +11,12 @@ export const getTickets = (user?: string) =>
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
+export const getAllTickets = (user?: string) =>
+  deffHttp.get<any>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/tickets/`,
+      data: { username: user },
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );

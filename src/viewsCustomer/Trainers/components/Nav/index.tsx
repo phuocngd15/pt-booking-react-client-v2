@@ -22,7 +22,7 @@ const Index = () => {
           {serviceTypes.length ? (
             <ul>
               {serviceTypes.map((serviceType: { key: string; name: any }) => (
-                <li>
+                <li key={serviceType.key}>
                   <button
                     key={serviceType.key}
                     // to={`trainers/${serviceType.name}`}

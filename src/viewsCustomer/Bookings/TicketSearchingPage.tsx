@@ -7,8 +7,8 @@ const TicketSearchingPage = () => {
   const myTickets = useAppSelector((state) => state.bookingPageSlice.myTickets);
   console.log('my tickets', myTickets);
   return (
-    <div className="tracking-[-0.05em]">
-      <div className="mx-auto mt-16 flex flex-col-reverse w-full justify-between max-w-container md:flex-row px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-24">
+
+      <div className="tracking-[-0.05em] mx-auto mt-16 flex flex-col-reverse w-full justify-between max-w-container md:flex-row px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-24">
         <div>
           <h1 className="basis-2/3  row-start-2 mt-4 max-w-[36rem] text-5xl font-extrabold tracking-tight text-amber-600 sm:text-7xl xl:max-w-[43.5rem]">
             <div>MY TICKETS</div>
@@ -20,7 +20,7 @@ const TicketSearchingPage = () => {
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 export default TicketSearchingPage;
