@@ -1,5 +1,6 @@
 import { Card, Avatar, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import SquatSVG from "@/sgvIcon/squat";
 
 const data = [
   {
@@ -38,9 +39,7 @@ export default function PhysicalActivity() {
             ]}
           >
             <List.Item.Meta
-              avatar={
-                <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />
-              }
+              avatar={<Avatar src={`https://freesvg.org/img/Squats.png`} />}
               title={<a href="https://ant.design">{item.title}</a>}
               description={item.des}
             />

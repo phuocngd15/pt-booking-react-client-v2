@@ -40,9 +40,10 @@ export function detect_squat(cL, cR, dL, dR) {
 
 export function hand_gesture(aL, aR, bL, bR) {
   if (aL > 130 && aR > 130 && bL < 120 && bR < 120 && bL > 30 && bR > 30) {
-    return 'Hand Gesture: True';
+   //Hand Gesture: True
+    return true;
   } else {
-    return 'Hand Gesture: False';
+    return false;
   }
 }
 
@@ -82,10 +83,10 @@ const kp = {
   RIGHT_FOOT_INDEX: 32,
 };
 
-export function DetectSquat(landmarks): [number, number, number, number, boolean] {
+export function DetectSquat(landmarks): [number, number, number, number, boolean,boolean] {
   // Get coordinates and angle (Left Elbow angle)
   if (!landmarks || !landmarks[11] || !landmarks[12] || !landmarks[13] || !landmarks[14])
-    return [0, 0, 0, 0, false];
+    return [0, 0, 0, 0, false, false];
 
   const ALp1 = [landmarks[kp.LEFT_SHOULDER].x, landmarks[kp.LEFT_SHOULDER].y];
   const ALp2 = [landmarks[kp.LEFT_ELBOW].x, landmarks[kp.LEFT_ELBOW].y];
@@ -135,17 +136,9 @@ export function DetectSquat(landmarks): [number, number, number, number, boolean
   const DR = angleBetweenThreePoints(DRp1, DRp2, DRp3);
 
   // Squat Detection
-  const status = detect_squat(LEFT_SHOULDER_HIP_KNEE, CR_SHOULDER_HIP_KNEE, DL, DR);
+  const isQuat = detect_squat(LEFT_SHOULDER_HIP_KNEE, CR_SHOULDER_HIP_KNEE, DL, DR);
   // Hand Gesture
-  const status2 = hand_gesture(AL, AR, BL, BR);
-  // console.log(
-  //   'squat: CL, CR, DL, DR',
-  //   LEFT_SHOULDER_HIP_KNEE,
-  //   LEFT_SHOULDER_HIP_KNEE,
-  //   DL,
-  //   DR,
-  //   status,
-  //   status2,
-  // );
-  return [LEFT_SHOULDER_HIP_KNEE, CR_SHOULDER_HIP_KNEE, DL, DR, status];
+  const isGoodHand = hand_gesture(AL, AR, BL, BR);
+
+  return [LEFT_SHOULDER_HIP_KNEE, CR_SHOULDER_HIP_KNEE, DL, DR, isQuat, isGoodHand];
 }
