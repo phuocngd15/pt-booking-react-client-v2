@@ -5,6 +5,7 @@ import { FormattedMessage } from '@/locales';
 import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
+import DetectPose from "@/views/DetectPuspup";
 
 
 const Home = lazy(() => import('@/views/Home'));
@@ -30,6 +31,12 @@ const defaultRoute: RouteList[] = [
     id: 'loggedCusHome',
     element: <LoggedInCustomerHome />,
     meta: { label: FormattedMessage({ id: 'layout.memu.home' }), icon: <HomeOutlined /> },
+  },
+  {
+    path: '/squatCounter',
+    id: 'SquatCounter',
+    element: <DetectPose />,
+    meta: { label: 'Squat Counter' },
   },
   {
     path: '/calendar',

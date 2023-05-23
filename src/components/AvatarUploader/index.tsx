@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import AvatarDefault from '@/views/Profile/components/DefaultAvatarSVG';
 
-const AvatarUploader = () => {
+const AvatarUploader = ({ avatar }) => {
   const [fileInputState, setFileInputState] = useState('');
-  const [OriginSource] = useState('https://bootdey.com/img/Content/avatar/avatar7.png');
+  const [OriginSource] = useState(avatar);
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
 
@@ -65,7 +65,7 @@ const AvatarUploader = () => {
           style={{ width: '300px' }}
         />
       ) : (
-        <AvatarDefault width="300px" height="300px" />
+        <AvatarDefault avatar={avatar} width="300px" height="300px" />
       )}
 
       <form onSubmit={handleSubmitFile} className="form">

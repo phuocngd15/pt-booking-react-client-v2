@@ -1,4 +1,15 @@
-export default function AvatarDefault({ width, height }) {
+import React from 'react';
+
+export default function AvatarDefault({ avatar, width, height }) {
+  if (avatar)
+    return (
+      <img
+        src={avatar}
+        alt="chosen"
+        className="flex-none w-300 h-300 border-solid border-2 border-sky-500 rounded-full object-cover"
+        style={{ width: '300px' }}
+      />
+    );
   return (
     <svg
       width={width}

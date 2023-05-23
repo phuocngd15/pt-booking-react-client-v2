@@ -15,7 +15,7 @@ export default function Profile() {
       <Col lg={6} sm={24} xs={24}>
         <Card size="small" title="">
           <div>
-            <AvatarUploader />
+            <AvatarUploader avatar={myProfile?.avatar}/>
           </div>
         </Card>
       </Col>
