@@ -5,8 +5,7 @@ import { FormattedMessage } from '@/locales';
 import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
-import DetectPose from "@/views/DetectPuspup";
-
+import WorkoutCounter from '@/views/DetectPuspup';
 
 const Home = lazy(() => import('@/views/Home'));
 const LoggedInCustomerHome = lazy(() => import('@/viewsLoggedInCustomer/Home'));
@@ -35,8 +34,8 @@ const defaultRoute: RouteList[] = [
   {
     path: '/squatCounter',
     id: 'SquatCounter',
-    element: <DetectPose />,
-    meta: { label: 'Squat Counter' },
+    element: <WorkoutCounter />,
+    meta: { label: 'Squat Counter', hideSidebar: true },
   },
   {
     path: '/calendar',

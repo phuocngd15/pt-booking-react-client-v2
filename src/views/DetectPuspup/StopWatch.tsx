@@ -45,12 +45,14 @@ const useTimer = (initialState = 0) => {
   return { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset };
 };
 export default function Timer({
+  title,
   reps,
   repsGoal,
   startPreDict,
   resetPredict,
   onFinishWorkout,
 }: {
+  title: string;
   startPreDict: Function;
   reps: number;
   repsGoal: number;
@@ -63,14 +65,14 @@ export default function Timer({
   useEffect(() => {
     if (reps === repsGoal) {
       handleReset();
-      onFinishWorkout();
+      onFinishWorkout({ times: timer });
     }
     return () => {};
   }, [reps]);
 
   return (
     <div className="timer-container">
-      <h3>Stopwatch</h3>
+      <h3>{title}</h3>
       <div className="stopwatch-card">
         <p>{formatTime(timer)}</p>
         <p>

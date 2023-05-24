@@ -1,10 +1,35 @@
 import type { PoseLandmarkerResult } from '@mediapipe/tasks-vision';
 import { PoseLandmarker, DrawingUtils } from '@mediapipe/tasks-vision';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Alert } from 'antd';
 import { createPoseLandmarker, DetectSquat } from '@/views/DetectPuspup/DetectPose';
 import Timer from '@/views/DetectPuspup/StopWatch';
+import { completeActivity } from '@/api/dailyActivitiesTask';
 
-export default function DetectPose() {
+export default function WorkoutCounter() {
+  const location = useLocation();
+  const workout = location.state?.workout;
+
+  const onFinishWorkout = (e) => {
+    console.log('WorkoutCounter finish', e);
+    completeActivity(123, e.times ,e.completeReps).then((r) => {
+      console.log(r);
+    });
+  };
+  return (
+    <div>
+      {/*<Alert*/}
+      {/*  message="Success Text"*/}
+      {/*  type="success"*/}
+      {/*  onClick={() => onFinishWorkout({ time: '2222', completeReps: 3 })}*/}
+      {/*/>*/}
+      <DetectPose workout={workout} handleWorkoutDone={onFinishWorkout} />
+    </div>
+  );
+}
+
+function DetectPose({ workout, handleWorkoutDone }) {
   const [localStream, setSocalStream] = useState<MediaStream>();
   const [webcamRunning, setWebcamRunning] = useState(false);
   const [poseLandmark, setPoseLandmark] = useState<PoseLandmarker>();
@@ -171,18 +196,20 @@ export default function DetectPose() {
         <div id="demos" className="flex">
           <div className=" ">
             <Timer
+              title={workout.title}
               reps={squatCount}
               repsGoal={3}
               startPreDict={startPredict}
               resetPredict={() => {
                 stopPredict(video, canvasCtx);
               }}
-              onFinishWorkout={()=>{
+              onFinishWorkout={(time: any) => {
+                stopPredict(video, canvasCtx); // stop predict
+                handleWorkoutDone({ ...time, completeReps: squatCount });
                 // notify success workout
-                // stop predict
                 // call api finish activity task.
                 // BE will update activity task done.
-                stopPredict(video, canvasCtx);
+                // navigate Home
               }}
             />
           </div>

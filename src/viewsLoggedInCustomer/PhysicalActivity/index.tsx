@@ -1,11 +1,11 @@
 import { Card, Avatar, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import SquatSVG from "@/sgvIcon/squat";
 
 const data = [
   {
     title: 'Basic Squat',
     des: '10 reps',
+    id: '123444',
   },
   // {
   //   title: 'Activity 2',
@@ -29,11 +29,15 @@ export default function PhysicalActivity() {
         dataSource={data}
         renderItem={(item, index) => (
           <List.Item
+            key={index}
             style={{
               background: 'rgba(255, 168, 2, 0.44)',
             }}
             actions={[
-              <button className="text-blue-500" onClick={() => navigate('/squatCounter')}>
+              <button
+                className="text-blue-500"
+                onClick={() => navigate('/squatCounter', { state: { workout: item } })}
+              >
                 Do it!
               </button>,
             ]}
