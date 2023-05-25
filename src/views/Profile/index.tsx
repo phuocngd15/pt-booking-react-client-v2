@@ -9,13 +9,13 @@ import { useAppSelector } from '@/store/hooks';
 export default function Profile() {
   const myProfile = useAppSelector((e) => e.customer.myProfile);
   const whoIsUsing = useAppSelector((e) => e.customer.whoIsUsing);
-    console.log("whoIsUsing",whoIsUsing)
+  console.log('whoIsUsing', whoIsUsing);
   return (
     <Row gutter={[12, 12]}>
       <Col lg={6} sm={24} xs={24}>
         <Card size="small" title="">
           <div>
-            <AvatarUploader avatar={myProfile?.avatar}/>
+            <AvatarUploader avatar={myProfile?.avatar} />
           </div>
         </Card>
       </Col>

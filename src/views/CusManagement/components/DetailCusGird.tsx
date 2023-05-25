@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 export const DetailCusGrid = () => {
   const customerDetail = useAppSelector((state) => state.customer.detailInfo);
-  console.log("customerDetail",customerDetail)
+  console.log('customerDetail', customerDetail);
   const [fields, setFields] = useState<FieldData[]>([]);
   useEffect(() => {
     setFields([
@@ -48,7 +48,7 @@ export const DetailCusGrid = () => {
           formEdit={
             <Modal
               open={isOpenModal}
-               onOk={() => setIsOpenModal(false)}
+              onOk={() => setIsOpenModal(false)}
               okType={'default'}
               onCancel={() => setIsOpenModal(false)}
             >

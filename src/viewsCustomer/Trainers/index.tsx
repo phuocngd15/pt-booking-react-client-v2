@@ -4,7 +4,6 @@ import VerticalNav from './components/Nav';
 import LayoutSpin from '@/components/LayoutSpin';
 import GroupTrainers from '@/viewsCustomer/Trainers/GroupTrainers';
 
-
 const View = () => {
   return (
     <div className="tracking-[-0.05em]">

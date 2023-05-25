@@ -1,32 +1,27 @@
 import { Card, Avatar, List } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import type { IActivity } from '@/api/dailyActivitiesTask';
+import { getActivitiesUnComplete } from '@/api/dailyActivitiesTask';
 
-const data = [
-  {
-    title: 'Basic Squat',
-    des: '10 reps',
-    id: '123444',
-  },
-  // {
-  //   title: 'Activity 2',
-  //   des: 'des active2',
-  // },
-  // {
-  //   title: 'Activity 3',
-  //   des: 'des active3',
-  // },
-  // {
-  //   title: 'Activity 4',
-  //   des: 'des active4',
-  // },
-];
 export default function PhysicalActivity() {
   const navigate = useNavigate();
+  const [activities, setActivities] = useState<IActivity[]>([]);
+  useEffect(() => {
+    (async () => {
+      const result = await getActivitiesUnComplete();
+      if (result.code) {
+        setActivities(result.data);
+      }
+    })();
+    return () => {};
+  }, []);
+
   return (
     <Card title="Daily Activity">
       <List
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={activities}
         renderItem={(item, index) => (
           <List.Item
             key={index}
@@ -44,8 +39,13 @@ export default function PhysicalActivity() {
           >
             <List.Item.Meta
               avatar={<Avatar src={`https://freesvg.org/img/Squats.png`} />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description={item.des}
+              title={<a href="https://ant.design">{item.name.toUpperCase()}</a>}
+              description={
+                <div>
+                  <div>{item.des}</div>
+                  <div>Reps: {item.reps}</div>
+                </div>
+              }
             />
           </List.Item>
         )}

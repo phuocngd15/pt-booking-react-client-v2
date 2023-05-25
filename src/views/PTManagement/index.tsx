@@ -4,7 +4,7 @@ import { Card, Spin } from 'antd';
 import Table from './components/Table';
 
 import { getPts } from '@/server/getPTList';
-import {getTrainers} from "@/api/trainer";
+import { getTrainers } from '@/api/trainer';
 
 const PTManagement = memo(() => {
   console.log('PTManagament');

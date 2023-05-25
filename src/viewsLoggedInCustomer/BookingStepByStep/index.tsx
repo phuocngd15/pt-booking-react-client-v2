@@ -5,10 +5,10 @@ import ServicesSelection from '@/viewsCustomer/Bookings/components/ServicesSelec
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { ServicePrototype } from '@/server/programAPI';
 import {
-    createBookingTicket,
-    fetchAvailableSession,
-    fetchPrograms,
-    fetchTrainersByServiceId,
+  createBookingTicket,
+  fetchAvailableSession,
+  fetchPrograms,
+  fetchTrainersByServiceId,
 } from '@/store/modules/booking';
 import TrainersSelection from '@/viewsCustomer/Bookings/components/TrainerSelection';
 import { ITrainer } from '@/server/InterfaceMappingDataServer';
@@ -94,19 +94,19 @@ export default function BookingStepByStep() {
     setSelectedTime(e);
     console.log('onSelectTime', e);
   };
-    const onSubmit = () => {
-      console.log("myProfile",myProfile)
-        const params = {
-            programsUUID: selectedProgram?.uuid,
-            trainerUUID: selectedTrainer?.uuid,
-            date: selectedDate,
-            time: selectedTime,
-            cusName: myProfile?.fullName,
-            cusPhone: myProfile.phone,
-            cusEmail: myProfile.email,
-        };
-         dispatch(createBookingTicket(params));
+  const onSubmit = () => {
+    console.log('myProfile', myProfile);
+    const params = {
+      programsUUID: selectedProgram?.uuid,
+      trainerUUID: selectedTrainer?.uuid,
+      date: selectedDate,
+      time: selectedTime,
+      cusName: myProfile?.fullName,
+      cusPhone: myProfile.phone,
+      cusEmail: myProfile.email,
     };
+    dispatch(createBookingTicket(params));
+  };
   return (
     <div>
       <Row gutter={[12, 12]}>
@@ -141,10 +141,7 @@ export default function BookingStepByStep() {
             </div>
             <div hidden={selectStep !== 3}>
               <div>
-
-                <div>
-                  Class: {selectedProgram?.serviceName}
-                </div>
+                <div>Class: {selectedProgram?.serviceName}</div>
 
                 <button
                   type="submit"
@@ -156,10 +153,10 @@ export default function BookingStepByStep() {
               </div>
             </div>
             <div hidden={selectStep !== 4}>
-                <div>
-                   Cảm ơn bạn đã booking
-                  <a href={'/calendar'} >Xem Lịch tập</a>
-                </div>
+              <div>
+                Cảm ơn bạn đã booking
+                <a href={'/calendar'}>Xem Lịch tập</a>
+              </div>
             </div>
           </Card>
         </Col>

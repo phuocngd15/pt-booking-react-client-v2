@@ -27,7 +27,7 @@ export default function ProfileForm({ myProfile }) {
   const onFinish = async (values: any) => {
     setComponentDisabled((prevState) => !prevState);
     try {
-      const result = await updateProfile(values.user, myProfile._id,myProfile.role);
+      const result = await updateProfile(values.user, myProfile._id, myProfile.role);
       console.log('result', result);
     } catch (e) {
       console.log('e', e);

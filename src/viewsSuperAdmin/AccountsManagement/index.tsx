@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Spin } from 'antd';
 import AccountsTable from './components/AccountsTable';
 import type { Account } from '@/api/accounts';
-import {getAccounts, updateStatusAccount} from '@/api/accounts';
+import { getAccounts, updateStatusAccount } from '@/api/accounts';
 
 export default function AccountsManagement() {
   const [data, setData] = useState<Account[]>([]);
@@ -25,9 +25,9 @@ export default function AccountsManagement() {
 
   if (!data.length) return <Spin />;
 
-  const onClickBlockCallback=async (account:any)=>{
-    const res = await updateStatusAccount(account._id,"block")
-    if(res.code){
+  const onClickBlockCallback = async (account: any) => {
+    const res = await updateStatusAccount(account._id, 'block');
+    if (res.code) {
       const res2 = await getAccounts();
       if (res2.code === 1) {
         res2.data.forEach((e, i) => (e.key = ''.concat(e.username, i.toString())));
@@ -35,10 +35,10 @@ export default function AccountsManagement() {
         setDetailAccount(res2.data[0]);
       }
     }
-  }
-  const onClickActiveCallback=async (account:any)=>{
-    const res = await updateStatusAccount(account._id,"active")
-    if(res.code){
+  };
+  const onClickActiveCallback = async (account: any) => {
+    const res = await updateStatusAccount(account._id, 'active');
+    if (res.code) {
       const res2 = await getAccounts();
       if (res2.code === 1) {
         res2.data.forEach((e, i) => (e.key = ''.concat(e.username, i.toString())));
@@ -46,7 +46,7 @@ export default function AccountsManagement() {
         setDetailAccount(res2.data[0]);
       }
     }
-  }
+  };
   return (
     <Row gutter={[12, 12]}>
       <Col lg={8} sm={24} xs={24}>

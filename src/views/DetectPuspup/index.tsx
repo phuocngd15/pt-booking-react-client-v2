@@ -6,14 +6,22 @@ import { Alert } from 'antd';
 import { createPoseLandmarker, DetectSquat } from '@/views/DetectPuspup/DetectPose';
 import Timer from '@/views/DetectPuspup/StopWatch';
 import { completeActivity } from '@/api/dailyActivitiesTask';
+import { Button, message, Space } from 'antd';
 
 export default function WorkoutCounter() {
   const location = useLocation();
   const workout = location.state?.workout;
-
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Congratulations! You did great.!',
+    });
+  };
   const onFinishWorkout = (e) => {
     console.log('WorkoutCounter finish', e);
-    completeActivity(123, e.times ,e.completeReps).then((r) => {
+    success();
+    completeActivity(workout._id, e.times, e.completeReps).then((r) => {
       console.log(r);
     });
   };
@@ -24,6 +32,7 @@ export default function WorkoutCounter() {
       {/*  type="success"*/}
       {/*  onClick={() => onFinishWorkout({ time: '2222', completeReps: 3 })}*/}
       {/*/>*/}
+      {contextHolder}
       <DetectPose workout={workout} handleWorkoutDone={onFinishWorkout} />
     </div>
   );
@@ -195,10 +204,13 @@ function DetectPose({ workout, handleWorkoutDone }) {
       <div>
         <div id="demos" className="flex">
           <div className=" ">
+            {workout?.imageDemo && (
+              <img src={workout?.imageDemo} style={{ width: 300, height: 300 }} />
+            )}
             <Timer
-              title={workout.title}
+              title={workout.name.toUpperCase()}
               reps={squatCount}
-              repsGoal={3}
+              repsGoal={workout.reps}
               startPreDict={startPredict}
               resetPredict={() => {
                 stopPredict(video, canvasCtx);
@@ -206,10 +218,6 @@ function DetectPose({ workout, handleWorkoutDone }) {
               onFinishWorkout={(time: any) => {
                 stopPredict(video, canvasCtx); // stop predict
                 handleWorkoutDone({ ...time, completeReps: squatCount });
-                // notify success workout
-                // call api finish activity task.
-                // BE will update activity task done.
-                // navigate Home
               }}
             />
           </div>

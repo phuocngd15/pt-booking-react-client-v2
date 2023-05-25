@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import strengImage from '../../../assets/Frame_streg-min.png';
 
-export default function CustomCarousel({images}) {
+export default function CustomCarousel({ images }) {
   const settings: Settings = {
     dots: true,
     infinite: true,
@@ -41,8 +41,8 @@ export default function CustomCarousel({images}) {
       },
     ],
   };
-  const imageMapping = (images:any) => {
-    const a = images?.map((src,i) => <img key={i} alt={`avatar-${i}`} src={src} />);
+  const imageMapping = (images: any) => {
+    const a = images?.map((src, i) => <img key={i} alt={`avatar-${i}`} src={src} />);
     return a;
   };
   return (

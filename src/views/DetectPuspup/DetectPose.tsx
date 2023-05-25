@@ -40,7 +40,7 @@ export function detect_squat(cL, cR, dL, dR) {
 
 export function hand_gesture(aL, aR, bL, bR) {
   if (aL > 130 && aR > 130 && bL < 120 && bR < 120 && bL > 30 && bR > 30) {
-   //Hand Gesture: True
+    //Hand Gesture: True
     return true;
   } else {
     return false;
@@ -83,7 +83,7 @@ const kp = {
   RIGHT_FOOT_INDEX: 32,
 };
 
-export function DetectSquat(landmarks): [number, number, number, number, boolean,boolean] {
+export function DetectSquat(landmarks): [number, number, number, number, boolean, boolean] {
   // Get coordinates and angle (Left Elbow angle)
   if (!landmarks || !landmarks[11] || !landmarks[12] || !landmarks[13] || !landmarks[14])
     return [0, 0, 0, 0, false, false];

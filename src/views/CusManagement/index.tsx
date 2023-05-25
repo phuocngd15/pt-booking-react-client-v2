@@ -6,7 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import CusList from './components/CusList';
 
 import { getPts } from '@/server/getPTList';
-import {getCustomers} from "@/api/user";
+import { getCustomers } from '@/api/user';
 const ExtraMenu = () => {
   return (
     <>

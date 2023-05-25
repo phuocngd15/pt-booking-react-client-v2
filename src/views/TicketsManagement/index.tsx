@@ -4,7 +4,7 @@ import { Card, Spin } from 'antd';
 import Table from './components/Table';
 
 import { getPts } from '@/server/getPTList';
-import {getAllTickets} from "@/api/tickets";
+import { getAllTickets } from '@/api/tickets';
 
 const TicketsManagement = memo(() => {
   console.log('TicketsManagement');

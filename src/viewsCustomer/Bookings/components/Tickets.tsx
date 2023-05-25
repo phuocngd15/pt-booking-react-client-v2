@@ -96,8 +96,9 @@ export function Ticket({ data }: TicketProps) {
         </div>
         <div className="text-gray-500">
           <span className="font-medium">Trainer: {data.trainer?.fullName}</span>
-        </div>  <div className="text-gray-500 mb-4">
-        <span className="font-medium">Customer: {data.customer?.fullName}</span>
+        </div>{' '}
+        <div className="text-gray-500 mb-4">
+          <span className="font-medium">Customer: {data.customer?.fullName}</span>
         </div>
         <QRCode value={data.uuid} />
       </div>

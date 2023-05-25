@@ -36,10 +36,10 @@ export const updateProfile = (user: any, id: string, role: string) => {
   );
 };
 export const getCustomers = () =>
-    deffHttp.get<any>(
-        {
-            url: `${rootServer}/api/users/`,
-            data: {},
-        },
-        { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
-    );
+  deffHttp.get<any>(
+    {
+      url: `${rootServer}/api/users/`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );

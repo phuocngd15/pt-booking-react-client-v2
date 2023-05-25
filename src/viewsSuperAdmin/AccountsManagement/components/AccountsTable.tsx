@@ -2,9 +2,9 @@ import React from 'react';
 import type { ColumnsType } from 'antd/es/table';
 import { CustomTable } from '@/components/TableAnt';
 import type { Account } from '@/api/accounts';
-import {Button} from "antd";
+import { Button } from 'antd';
 
-export default function AccountsTable({ dataSource, onClickBlockCallback,onClickActiveCallback }) {
+export default function AccountsTable({ dataSource, onClickBlockCallback, onClickActiveCallback }) {
   const columns: ColumnsType<Account> = [
     {
       title: 'Username',

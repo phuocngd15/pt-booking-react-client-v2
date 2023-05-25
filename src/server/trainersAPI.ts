@@ -12,7 +12,7 @@ export interface Trainer {
   skills?: string[];
   avatar: string;
   avatars: string[];
-    yearExperience:number,
+  yearExperience: number;
 }
 
 interface serviceType {

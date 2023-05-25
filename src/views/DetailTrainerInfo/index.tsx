@@ -15,13 +15,11 @@ export default function DetailTrainerInfo() {
         <div className="grid grid-cols-1 gap-2">
           <div className="text-3xl font-bold">{trainer?.fullName || 'NoName'}</div>
           <div>{trainer?.yearExperience}+ years of experience</div>
-          <div>
-            {trainer?.introduction}
-          </div>
+          <div>{trainer?.introduction}</div>
           <div>
             <div className="text-2xl font-bold">Specialties</div>
             <ul>
-              {trainer?.skills?.map((e,i) => (
+              {trainer?.skills?.map((e, i) => (
                 <li key={`skill-${i}`}>{e}</li>
               ))}
             </ul>
