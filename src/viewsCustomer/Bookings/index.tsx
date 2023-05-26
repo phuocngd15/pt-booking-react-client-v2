@@ -60,7 +60,7 @@ const View = () => {
     dispatch(
       fetchAvailableSession({
         day: selectedDate?.utc() || dayjs().day(),
-        uuid: e?.uuid,
+        uuid: e?._id,
       }),
     );
   };
@@ -71,7 +71,7 @@ const View = () => {
     dispatch(
       fetchAvailableSession({
         day: e.utc(),
-        uuid: selectedTrainer?.uuid,
+        uuid: selectedTrainer?._id,
       }),
     );
   };
@@ -83,7 +83,7 @@ const View = () => {
   const onSubmit = () => {
     const params = {
       programsUUID: selectedProgram?.uuid,
-      trainerUUID: selectedTrainer?.uuid,
+      trainerUUID: selectedTrainer?._id,
       date: selectedDate,
       time: selectedTime,
       cusName: fullNameRef?.current.value,

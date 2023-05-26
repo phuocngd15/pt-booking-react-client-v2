@@ -8,15 +8,21 @@ import TimeSlotManagement from '@/views/TimeSlotManagement';
 import WorkoutCounter from '@/views/DetectPuspup';
 
 const Home = lazy(() => import('@/views/Home'));
-const LoggedInCustomerHome = lazy(() => import('@/viewsLoggedInCustomer/Home'));
-const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
-const TrainerCalendar = lazy(() => import('@/viewsTrainer/Calendar'));
-const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
 const PTManagement = lazy(() => import('@/views/PTManagement'));
-const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
-const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
 const ProfilesView = lazy(() => import('@/views/Profile'));
+
+const LoggedInCustomerHome = lazy(() => import('@/viewsLoggedInCustomer/Home'));
+const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
+
+const TrainerCalendar = lazy(() => import('@/viewsTrainer/Calendar'));
+const MyCustomer = lazy(() => import('@/viewsTrainer/MyCustomer'));
+
+const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
+const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
+
+const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
+
 // after login have routes
 const defaultRoute: RouteList[] = [
   {
@@ -53,6 +59,12 @@ const defaultRoute: RouteList[] = [
     path: '/calendar',
     id: 'TrainerCalendar',
     element: <TrainerCalendar />,
+    meta: { label: 'Calendar', icon: <HomeOutlined /> },
+  },
+  {
+    path: '/myCustomer',
+    id: 'MyCustomer',
+    element: <MyCustomer />,
     meta: { label: 'Calendar', icon: <HomeOutlined /> },
   },
   {

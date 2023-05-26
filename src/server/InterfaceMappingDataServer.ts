@@ -14,4 +14,5 @@ export interface ITrainer {
 
   rate: number;
   certificates: string[];
+  _id: string;
 }
