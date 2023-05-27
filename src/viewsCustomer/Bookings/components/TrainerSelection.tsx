@@ -3,30 +3,19 @@ import { Select } from 'antd';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 
 export interface TrainersSelectionProps {
-  data: ITrainer[];
+  data: any;
   onSelect: (selectedTrainer: ITrainer | undefined) => void;
 }
 
 const TrainersSelection: React.FC<TrainersSelectionProps> = ({ data, onSelect }) => {
   const [selected, setSelected] = useState<string>();
-  // const handleSelect = (value: any, _: any) => {
-  //   const selectedTrainer = availableTrainers.find((trainer) => trainer.uuid === value);
-  //   onSelect(selectedTrainer);
-  // };
-  //
-  //
-  // if(!availableTrainers) return null
-  // const options = availableTrainers.map((trainer) => ({
-  //   value: trainer.uuid,
-  //   label: trainer.fullName,
-  //   ...trainer,
-  // }));
-  const onCheck = (value: string) => {
-    const clickedItemInfo = data.find((item) => item.uuid === value);
+  console.log('data', data);
+  const onCheck = (trainerId: string) => {
+    //const clickedItemInfo = data.find((item) => item.uuid === value);
 
-    setSelected(value);
+    setSelected(trainerId);
     if (onSelect) {
-      onSelect(clickedItemInfo);
+      onSelect(trainerId);
     }
   };
 
@@ -50,20 +39,28 @@ const TrainersSelection: React.FC<TrainersSelectionProps> = ({ data, onSelect })
     //   options={[{ value: '', label: 'Anyone', uuid: '' }, ...options]}
     // />
     <div className="h-80 overflow-y-auto">
-      {data?.map((item) => {
+      {data?.map((item, index) => {
         return (
           <div
-            key={item.uuid}
+            key={index}
             className="hover:drop-shadow-xl cursor-pointer m-2"
-            onClick={() => onCheck(item.uuid)}
+            onClick={() => onCheck(item?.profile._id)}
           >
             <div className=" p-2 bg-white border rounded-lg">
               <div className="flex md:justify-between">
-                <div className="font-bold lg:text-lg">{item.fullName || 'Title Service'}</div>
-                <input type="radio" checked={item.uuid === selected} onChange={onChangeInput} />
+                <div className="font-bold lg:text-lg">
+                  {item?.profile.fullName || 'Title Service'}
+                </div>
+                <input
+                  type="radio"
+                  checked={item?.profile._id === selected}
+                  onChange={onChangeInput}
+                />
               </div>
-              <div className="lg:text-sm">Certificate: {item.certificates.join(', ')}</div>
-              <div className="lg:text-sm">{item.skills.join(', ')}</div>
+              <div className="lg:text-sm">
+                Certificate: {item?.profile.certificates?.join(', ')}
+              </div>
+              <div className="lg:text-sm">{item?.profile.skills.join(', ')}</div>
             </div>
           </div>
         );

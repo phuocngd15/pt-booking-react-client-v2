@@ -36,14 +36,31 @@ const Tickets: React.FC<TicketsProps> = (props) => {
   );
 };
 interface TicketProps {
-  data?: TicketType | any;
+  ticketName?: string;
+  startTime?: string;
+  endTime?: string;
+  trainerUUID?: string;
+  customerUUID?: string;
+  createdAt?: string;
+  status?: string;
+  programName?: string;
+  trainerName?: string;
+  customerName?: string;
 }
-export function Ticket({ data }: TicketProps) {
+export function Ticket({
+  startTime,
+  endTime,
+  createdAt,
+  status,
+  trainerName,
+  programName,
+  customerName,
+}: TicketProps) {
   const ticketRef = React.useRef();
-  const { startTime, endTime } = data ?? { startTime: '9:00 AM', endTime: '12:00 PM' };
+  //const { startTime, endTime } = data ?? { startTime: '9:00 AM', endTime: '12:00 PM' };
   const handleDownload = (imageUrl) => {
     const link = document.createElement('a');
-    link.download = `${data.classroom.serviceName.trim().replace(' ', '')}.png`;
+    link.download = `${programName.trim().replace(' ', '')}.png`;
     link.href = imageUrl;
     link.click();
   };
@@ -58,7 +75,7 @@ export function Ticket({ data }: TicketProps) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-auto h-auto">
       <button
         onClick={handleExport}
         className="p-4 w-5 h-5 absolute right-0 top-0 flex items-center justify-center shadow-lg rounded-lg"
@@ -84,7 +101,7 @@ export function Ticket({ data }: TicketProps) {
         ref={ticketRef}
         className="flex flex-col items-center border bg-white rounded-lg overflow-hidden shadow-lg p-7  "
       >
-        <div className="text-xl font-semibold mb-4">{data.classroom.serviceName}</div>
+        <div className="text-xl font-semibold mb-4">{programName}</div>
         <div className="text-gray-500 mb-2 font-medium">
           {dayjs(startTime).tz('Asia/Ho_Chi_Minh').format('dddd DD-MM-YYYY')}
         </div>
@@ -95,12 +112,22 @@ export function Ticket({ data }: TicketProps) {
           {dayjs(endTime).tz('Asia/Ho_Chi_Minh').format('h:mm A')}
         </div>
         <div className="text-gray-500">
-          <span className="font-medium">Trainer: {data.trainer?.fullName}</span>
+          <span className="font-medium">Trainer: {trainerName}</span>
         </div>{' '}
         <div className="text-gray-500 mb-4">
-          <span className="font-medium">Customer: {data.customer?.fullName}</span>
+          <span className="font-medium">Customer: {customerName}</span>
         </div>
-        <QRCode value={data.uuid} />
+        <QRCode
+          value={JSON.stringify({
+            startTime,
+            endTime,
+            createdAt,
+            status,
+            trainerName,
+            programName,
+            customerName,
+          })}
+        />
       </div>
     </div>
   );

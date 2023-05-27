@@ -9,7 +9,6 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
 import { getDetailPt } from '@/server/getPTList';
 
-
 interface DataType {
   key: React.Key;
   fullName: string;

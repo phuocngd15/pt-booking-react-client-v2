@@ -5,7 +5,7 @@ import { getStorage } from '@/utils/storage';
 import type { UseInfoType } from '@/api/auth';
 import { rootServer } from '@/api/rootServer';
 import type { IActivity } from '@/api/dailyActivitiesTask';
-import React from "react";
+import React from 'react';
 const userInfo = getStorage<UseInfoType>('userInfo');
 // export interface Account {
 //     username: string;
@@ -47,17 +47,17 @@ export const getCustomers = () =>
   );
 
 export interface Customer {
-    key: React.Key;
-    _id: string;
-    firstName: string;
-    fullName: string;
-    lastName: string;
-    gender: string;
-    age: number;
-    weight: number;
-    height: number;
-    address: string;
-    tags: string[];
+  key: React.Key;
+  _id: string;
+  firstName: string;
+  fullName: string;
+  lastName: string;
+  gender: string;
+  age: number;
+  weight: number;
+  height: number;
+  address: string;
+  tags: string[];
 }
 
 export const getMyCustomers = () => {
@@ -71,11 +71,11 @@ export const getMyCustomers = () => {
   );
 };
 export const updateMyUserTags = (user: any, id: string) => {
-    return deffHttp.put<any>(
-        {
-            url: `${rootServer}/api/users/profile/${id}`,
-            data: { ...user },
-        },
-        { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
-    );
+  return deffHttp.put<any>(
+    {
+      url: `${rootServer}/api/users/profile/${id}`,
+      data: { ...user },
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
 };

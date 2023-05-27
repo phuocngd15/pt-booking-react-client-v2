@@ -6,6 +6,8 @@ import TicketsManagement from '@/views/TicketsManagement';
 import ServicesManagement from '@/views/ServicesManagement';
 import TimeSlotManagement from '@/views/TimeSlotManagement';
 import WorkoutCounter from '@/views/DetectPuspup';
+import ProgramsManagement from '@/viewsSuperAdmin/ProgramsManagement';
+import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
 
 const Home = lazy(() => import('@/views/Home'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
@@ -53,30 +55,30 @@ const defaultRoute: RouteList[] = [
     path: '/calendar',
     id: 'AdminCalendar',
     element: <AdminCalendar />,
-    meta: { label: 'AdminCalendar', icon: <HomeOutlined /> },
+    meta: { label: 'AdminCalendar', icon: <CalendarOutlined /> },
   },
   {
     path: '/calendar',
     id: 'TrainerCalendar',
     element: <TrainerCalendar />,
-    meta: { label: 'Calendar', icon: <HomeOutlined /> },
+    meta: { label: 'My Calendar', icon: <CalendarOutlined /> },
   },
   {
     path: '/myCustomer',
     id: 'MyCustomer',
     element: <MyCustomer />,
-    meta: { label: 'Calendar', icon: <HomeOutlined /> },
+    meta: { label: 'My Customer' },
   },
   {
     path: '/profile',
     id: 'Profile',
     element: <ProfilesView />,
-    meta: { label: 'Profile' },
+    meta: { label: 'Profile', hideSidebar: true },
   },
   {
     path: '/booking',
     id: 'BookingsView',
-    element: <BookingsView />,
+    element: <BookingStepByStep />,
     meta: { label: 'Booking', icon: <BookOutlined /> },
   },
   {
@@ -108,9 +110,10 @@ const defaultRoute: RouteList[] = [
   {
     path: '/classRooms-management',
     id: 'ClassRoomsManagemen',
-    element: <ServicesManagement />,
+    //  element: <ServicesManagement />,
+    element: <ProgramsManagement />,
     meta: {
-      label: FormattedMessage({ id: 'layout.memu.ClassRoomsManagemen' }),
+      label: 'Programs',
     },
   },
   {

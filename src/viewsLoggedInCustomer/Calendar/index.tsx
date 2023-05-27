@@ -7,7 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Modal } from 'antd';
 import './calendar.css';
 import { Ticket } from '@/viewsCustomer/Bookings/components/Tickets';
-import { getTickets } from '@/api/tickets';
+import { getCusTickets } from '@/api/tickets';
 //https://fullcalendar.io/docs/react
 //https://github.com/fullcalendar/fullcalendar-examples/blob/main/react-typescript/src/DemoApp.tsx
 export default function CusCalendar() {
@@ -17,13 +17,13 @@ export default function CusCalendar() {
 
   useEffect(() => {
     (async () => {
-      const res = await getTickets();
+      const res = await getCusTickets();
       if (res.code === 1) {
         console.log('feach data tickets', res);
-        const events = res.data.tickets.map((e) => {
+        const events = res.data.map((e) => {
           return {
-            id: e.uuid,
-            title: e.classroom.serviceName,
+            id: e._id,
+            title: e.programUUID.serviceName,
             start: e.startTime,
             extendedProps: { ...e },
           };
@@ -60,15 +60,8 @@ export default function CusCalendar() {
             selectMirror={false}
             dayMaxEvents={true}
             weekends={true}
-            // initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            //select={handleDateSelect} // select new even tren calaendar
             eventContent={renderEventContent} // custom render function
             eventClick={handleEventClick} // open detail event
-            /* you can update a remote database when these fire:
-                            eventAdd={function(){}}
-                            eventChange={function(){}}
-                            eventRemove={function(){}}
-                            */
             events={bookedEvents}
             height="auto" // will activate stickyHeaderDates automatically!
           />
@@ -78,7 +71,13 @@ export default function CusCalendar() {
             footer={null}
             onCancel={() => setIsOpen(false)}
           >
-            <Ticket data={selectedEvent?._def.extendedProps} />
+            <Ticket
+              startTime={selectedEvent?._def.extendedProps.startTime}
+              endTime={selectedEvent?._def.extendedProps.endTime}
+              trainerName={selectedEvent?._def.extendedProps.trainerUUID.fullName}
+              customerName={selectedEvent?._def.extendedProps.customerUUID.fullName}
+              programName={selectedEvent?._def.extendedProps.programUUID.serviceName}
+            />
           </Modal>
         </div>
       </div>

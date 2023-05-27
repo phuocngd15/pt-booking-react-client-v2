@@ -1,79 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Space, Table, Tag, Button, Modal, Form, Input, Popconfirm } from 'antd';
-import type { FormInstance } from 'antd/es/form';
 import type { InputRef } from 'antd';
-import './styleEditTag.less';
-import { getActivitiesUnComplete, IActivity } from '@/api/dailyActivitiesTask';
-import type { Customer } from '@/api/user';
-import { getMyCustomers, updateMyUserTags } from '@/api/user';
+import { Button, Form, Input, Modal, Popconfirm, Table } from 'antd';
+import type { FormInstance } from 'antd/es/form';
 
-const { Column, ColumnGroup } = Table;
-
-export default function MyCustomer() {
-  const [data, setData] = useState<Customer[]>([]);
-  useEffect(() => {
-    (async () => {
-      const result = await getMyCustomers();
-      if (result.code) {
-        setData(result.data);
-      }
-    })();
-    return () => {};
-  }, []);
-
-  return (
-    <DataTable
-      data={data}
-      refreshData={() => {
-        getMyCustomers().then((result) => {
-          if (result.code) {
-            setData(result.data);
-          }
-        });
-      }}
-    />
-  );
-}
-
-function DataTable({ data, refreshData }) {
-  const inputRef = useRef<InputRef>(null);
-
-  return (
-    <Table dataSource={data.users} size="middle">
-      <Column title="Full Name" dataIndex="fullName" key="fullName" />
-      <Column title="Gender" dataIndex="gender" key="gender" />
-      <Column title="Age" dataIndex="age" key="age" />
-      <Column title="Weight" dataIndex="weight" key="weight" />
-      <Column title="Height" dataIndex="height" key="height" />
-      <Column
-        title="Tags"
-        dataIndex="tags"
-        key="tags"
-        render={(tags: string[]) => (
-          <>
-            {tags.map((tag) => (
-              <Tag color="blue" key={tag}>
-                {tag}
-              </Tag>
-            ))}
-          </>
-        )}
-      />
-      <Column
-        title="Action"
-        key="action"
-        render={(_: any, record: DataType) => (
-          <Space size="middle">
-            <a>Add workout activity</a>
-            <EditTag data={record} refreshData={refreshData} />
-          </Space>
-        )}
-      />
-    </Table>
-  );
-}
-
-function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
+export default function EditProgramType({
+  data,
+  _id,
+  tags,
+  updateFunction,
+  keyProperty,
+  refreshData,
+}: {
+  data: any;
+  tags: any;
+  keyProperty: string;
+  _id: string;
+  refreshData: Function;
+  updateFunction: Function;
+}) {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   // const [modalText, setModalText] = useState('Content of the modal');
@@ -87,7 +31,8 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
     // setModalText('The modal will be closed after two seconds');
     setConfirmLoading(true);
     console.log('newTags', newTags);
-    updateMyUserTags({ tags: newTags }, data._id).then((e) => {
+    updateFunction(_id, { newValue: newTags, keyProperty: keyProperty }).then((result: any) => {
+      console.log('updateFunction result ', result);
       setOpen(false);
       setConfirmLoading(false);
       refreshData();
@@ -125,7 +70,7 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
         {/*  ))}*/}
         {/*</div>*/}
         <TableTags
-          Tags={data?.tags.map((e, i) => {
+          Tags={tags.map((e, i) => {
             const item: TagType = { name: e, key: i.toString() };
             return item;
           })}

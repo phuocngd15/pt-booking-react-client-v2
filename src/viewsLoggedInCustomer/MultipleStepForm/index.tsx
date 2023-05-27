@@ -1,8 +1,9 @@
-import { StepProps, Steps } from 'antd';
+import type { StepProps } from 'antd';
+import { Steps } from 'antd';
 import { useState } from 'react';
 
 export default function MultipleStepForm({
-  selectedDefault = 1,
+  selectStep = 0,
   onChangeSelect,
   stepItems,
 }: {
@@ -10,19 +11,19 @@ export default function MultipleStepForm({
   onChangeSelect: Function;
   stepItems: StepProps[] | undefined;
 }) {
-  const [selectStep, setSelectStep] = useState(selectedDefault);
-  const onClickStep = (e: any) => {
-    console.log(e);
-    setSelectStep(e);
-    onChangeSelect(e);
-  };
+  // const [selectStep, setSelectStep] = useState(selectedDefault);
+  // const onClickStep = (e: any) => {
+  //   console.log(e);
+  //   setSelectStep(e);
+  //   onChangeSelect(e);
+  // };
   return (
     <Steps
       direction="vertical"
       size="small"
       current={selectStep}
       items={stepItems}
-      onChange={onClickStep}
+      onChange={(e) => onChangeSelect(e)}
     />
   );
 }

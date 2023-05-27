@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { deffHttp } from '@/utils/axios';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
+import { rootServer } from '@/api/rootServer';
 export type serviceState = 'active' | 'pending' | 'planing';
 
 // export interface ServicePrototype {
@@ -25,24 +26,24 @@ export interface ServicePrototype {
   canBookBefore?: number;
   serviceType: string[];
   state?: string;
-  responsibleEmployees?: string[];
+  responsibleEmployees?: any[];
 }
-export const getTrainerByServiceId = (uuid: string) => {
-  console.log('getTrainerByServiceId', uuid);
-  return deffHttp.post<ITrainer[]>(
-    {
-      url: 'http://localhost:3000/api/services/serviceId',
-      data: { uuid: uuid },
-    },
-    { errorMessageMode: 'modal', withToken: false },
-  );
-};
+// export const getTrainerByServiceId = (uuid: string) => {
+//   console.log('getTrainerByServiceId', uuid);
+//   return deffHttp.get<ITrainer[]>(
+//     {
+//       url: `${rootServer}/api/programs/${uuid}/trainers`,
+//       data: { uuid: uuid },
+//     },
+//     { errorMessageMode: 'modal', withToken: false },
+//   );
+// };
 
 export const getAllPrograms = () => {
   console.log('getAllPrograms');
   return deffHttp.get<ServicePrototype[]>(
     {
-      url: 'http://localhost:3000/api/services/',
+      url: 'http://localhost:3000/api/programs/',
       data: {},
     },
     { errorMessageMode: 'modal', withToken: false },
@@ -50,16 +51,6 @@ export const getAllPrograms = () => {
 };
 
 // uncategorized
-export const getAllSessionAvailableOfTrainerByDate = (day: any, uuid: any) => {
-  console.log('getAllSessionAvailableOfTrainerByDate');
-  return deffHttp.post<any[]>(
-    {
-      url: 'http://localhost:3000/api/sessions/available',
-      data: { trainerId: uuid, date: day },
-    },
-    { errorMessageMode: 'modal', withToken: false },
-  );
-};
 
 export const bookingSession = (params: any) => {
   console.log('bookingSession');

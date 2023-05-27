@@ -9,6 +9,11 @@ export interface UseInfoType {
   title: string;
   token: string;
   power: string;
+  profile: {
+    fullName: string;
+    phone: string;
+    email: string;
+  };
 }
 
 export const getUserInfo = (user: string, pwd: string) =>

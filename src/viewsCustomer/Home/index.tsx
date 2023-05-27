@@ -21,7 +21,7 @@ const View = () => {
             <div className="col-start-1 row-start-4 mt-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
               <a
                 className="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-4 bg-amber-600 text-white hover:bg-amber-400"
-                href="/customer/booking"
+                href="/login"
               >
                 <span>Try for Free</span>
               </a>

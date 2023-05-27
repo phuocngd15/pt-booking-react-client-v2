@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import type { EventApi, DateSelectArg, EventClickArg, EventContentArg } from '@fullcalendar/core';
-import { formatDate } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -11,8 +10,6 @@ import './calendar.css';
 // import { AddNewBookingTicket, BookingTicket } from '../booking/booking-ticket';
 //https://fullcalendar.io/docs/react
 //https://github.com/fullcalendar/fullcalendar-examples/blob/main/react-typescript/src/DemoApp.tsx
-// note lai thuoc long css mocking trong dau
-// tap luyen len css nhanh nhat co the khoong can doc tai lieu css
 
 interface DemoAppState {
   weekendsVisible: boolean;

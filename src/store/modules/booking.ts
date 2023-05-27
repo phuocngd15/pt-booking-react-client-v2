@@ -1,13 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { ServicePrototype } from '@/server/programAPI';
-import {
-  bookingSession,
-  getAllPrograms,
-  getAllSessionAvailableOfTrainerByDate,
-  getTrainerByServiceId,
-} from '@/server/programAPI';
+import { bookingSession, getAllPrograms } from '@/server/programAPI';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
+import { getAllSessionAvailableOfTrainerByDate } from '@/api/tickets';
+import { getTrainerByServiceId } from '@/api/programs';
 
 const initialState: {
   programs: ServicePrototype[] | any;

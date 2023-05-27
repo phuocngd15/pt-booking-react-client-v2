@@ -10,7 +10,7 @@ import { baseRouter } from '@/router';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 interface TimeSelectionProps {
-  availableSession: any[];
+  availableSession: any;
   onCheckCallBack?: Function;
 }
 
@@ -34,14 +34,14 @@ const TimeSelection: React.FC<TimeSelectionProps> = memo((props) => {
   return (
     <div className="w-full h-80 overflow-y-auto">
       <div className='class="mt-2 grid grid-cols-2 gap-4 '>
-        {availableSession.map((timeSlot) => {
+        {availableSession?.map((timeSlot) => {
           const isSame = timeSlot === selectedTime;
           return (
             <div
               key={timeSlot}
               className={joinClassNames(
                 isSame ? 'font-bold' : 'text-gray-400',
-                'text-center p-1 bg-white border rounded-md hover:drop-shadow-xl ',
+                'text-center p-1  border rounded-md hover:drop-shadow-xl ',
               )}
               onClick={() => onCheck(timeSlot)}
             >

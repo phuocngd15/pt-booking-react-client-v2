@@ -1,9 +1,10 @@
 import { deffHttp } from '@/utils/axios';
 import { getStorage } from '@/utils/storage';
 import type { UseInfoType } from '@/api/auth';
-const userInfo = getStorage<UseInfoType>('userInfo');
-export const getTickets = (user?: string) =>
-  deffHttp.get<any[]>(
+
+export const getTickets = (user?: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  return deffHttp.get<any[]>(
     {
       // url: '/mock_api/login',
       url: `http://localhost:3000/api/sessions/tickets/${userInfo?.email}`,
@@ -11,8 +12,37 @@ export const getTickets = (user?: string) =>
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
-export const getAllTickets = (user?: string) =>
-  deffHttp.get<any>(
+};
+
+export const getCusTickets = (cusId?: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  console.log('userInfo', userInfo);
+  return deffHttp.get<any[]>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/tickets/cus/${userInfo?.profile._id}`,
+      data: { cusId: cusId },
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
+
+export const getTrainerTickets = (cusId?: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  console.log('userInfo', userInfo);
+  return deffHttp.get<any[]>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/tickets/trainer/${userInfo?.profile._id}`,
+      data: { cusId: cusId },
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
+
+export const getAllTickets = (user?: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  return deffHttp.get<any>(
     {
       // url: '/mock_api/login',
       url: `http://localhost:3000/api/sessions/tickets/`,
@@ -20,3 +50,15 @@ export const getAllTickets = (user?: string) =>
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
+};
+
+export const getAllSessionAvailableOfTrainerByDate = (day: any, id: any) => {
+  console.log('getAllSessionAvailableOfTrainerByDate');
+  return deffHttp.post<any[]>(
+    {
+      url: 'http://localhost:3000/api/sessions/available',
+      data: { trainerId: id, date: day },
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
+};

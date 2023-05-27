@@ -30,6 +30,11 @@ const AppAccount = () => {
         dispatch(updateWhoIsUsing(undefined));
         navigate('/customer/home');
         break;
+      case '2':
+        // removeStorage('userInfo');
+        // dispatch(updateWhoIsUsing(undefined));
+        navigate('/profile');
+        break;
       default:
         return;
     }

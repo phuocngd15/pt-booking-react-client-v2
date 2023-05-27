@@ -7,7 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { Modal } from 'antd';
 import './calendar.css';
 import { Ticket } from '@/viewsCustomer/Bookings/components/Tickets';
-import { getTickets } from '@/api/tickets';
+import { getTrainerTickets } from '@/api/tickets';
 //https://fullcalendar.io/docs/react
 //https://github.com/fullcalendar/fullcalendar-examples/blob/main/react-typescript/src/DemoApp.tsx
 export default function TrainerCalendar() {
@@ -17,13 +17,13 @@ export default function TrainerCalendar() {
 
   useEffect(() => {
     (async () => {
-      const res = await getTickets();
+      const res = await getTrainerTickets();
       if (res.code === 1) {
         console.log('feach data tickets', res);
-        const events = res.data.tickets.map((e) => {
+        const events = res.data.map((e) => {
           return {
-            id: e.uuid,
-            title: e.classroom.serviceName,
+            id: e._id,
+            title: e.programUUID.serviceName,
             start: e.startTime,
             extendedProps: { ...e },
           };
@@ -78,7 +78,13 @@ export default function TrainerCalendar() {
             footer={null}
             onCancel={() => setIsOpen(false)}
           >
-            <Ticket data={selectedEvent?._def.extendedProps} />
+            <Ticket
+              startTime={selectedEvent?._def.extendedProps.startTime}
+              endTime={selectedEvent?._def.extendedProps.endTime}
+              trainerName={selectedEvent?._def.extendedProps.trainerUUID.fullName}
+              customerName={selectedEvent?._def.extendedProps.customerUUID.fullName}
+              programName={selectedEvent?._def.extendedProps.programUUID.serviceName}
+            />
           </Modal>
         </div>
       </div>

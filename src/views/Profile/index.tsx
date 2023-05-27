@@ -5,17 +5,17 @@ import AvatarUploader from '@/components/AvatarUploader';
 
 import ProfileForm from '@/views/Profile/components/ProfileForm';
 import { useAppSelector } from '@/store/hooks';
+import { getStorage } from '@/utils/storage';
+import { UseInfoType } from '@/api/auth';
 
 export default function Profile() {
-  const myProfile = useAppSelector((e) => e.customer.myProfile);
-  const whoIsUsing = useAppSelector((e) => e.customer.whoIsUsing);
-  console.log('whoIsUsing', whoIsUsing);
+  const userInfo = getStorage<UseInfoType>('userInfo');
   return (
     <Row gutter={[12, 12]}>
       <Col lg={6} sm={24} xs={24}>
         <Card size="small" title="">
           <div>
-            <AvatarUploader avatar={myProfile?.avatar} />
+            <AvatarUploader avatar={userInfo?.profile.avatar} />
           </div>
         </Card>
       </Col>
@@ -32,7 +32,7 @@ export default function Profile() {
 
           <div className="font-bold text-lg">PERSONAL INFO</div>
 
-          <ProfileForm myProfile={myProfile} />
+          <ProfileForm myProfile={userInfo?.profile} />
         </Card>
       </Col>
     </Row>
