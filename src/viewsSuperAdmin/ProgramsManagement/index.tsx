@@ -4,8 +4,9 @@ import { Space, Table, Tag } from 'antd';
 import type { Customer } from '@/api/user';
 import { getMyCustomers } from '@/api/user';
 import type { Programs } from '@/api/programs';
-import { getPrograms, updatePrograms } from '@/api/programs';
+import { getPrograms, updateMultiplePropPrograms, updatePrograms } from '@/api/programs';
 import EditProgramType from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgramType';
+import EditRowData from '@/viewsSuperAdmin/ProgramsManagement/components/EditRowData';
 const { Column, ColumnGroup } = Table;
 
 export default function ProgramsManagement() {
@@ -40,7 +41,7 @@ function DataTable({ data, refreshData }) {
   return (
     <Table dataSource={data} size="middle">
       <Column title="" dataIndex="key" key="key" />
-      <Column title="Full Name" dataIndex="serviceName" key="serviceName" />
+      <Column title="Name" dataIndex="serviceName" key="serviceName" />
       <Column title="Description" dataIndex="description" key="description" />
       <Column title="State" dataIndex="state" key="state" />
       <Column
@@ -60,13 +61,20 @@ function DataTable({ data, refreshData }) {
       <Column
         title="Action"
         key="action"
-        render={(_: any, record: any) => (
+        render={(value: any, record: any) => (
           <Space size="middle">
-            <a>Add workout activity</a>
+            <EditRowData
+              title={'Edit Program'}
+              _id={record._id}
+              data={value}
+              updateFunction={updateMultiplePropPrograms}
+              refreshData={refreshData}
+            />
             <EditProgramType
+              title="Edit Type Program"
               keyProperty={'serviceType'}
               updateFunction={updatePrograms}
-              data={record}
+              data={record.serviceType}
               refreshData={refreshData}
               _id={record._id}
               tags={record.serviceType}

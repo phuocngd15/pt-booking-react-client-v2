@@ -51,3 +51,13 @@ export const updatePrograms = (id: string, payload: { newValue: any; keyProperty
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
 };
+
+export const updateMultiplePropPrograms = (id: string, payload: any) => {
+  return deffHttp.put<any>(
+    {
+      url: `${rootServer}/api/programs/${id}`,
+      data: payload,
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
