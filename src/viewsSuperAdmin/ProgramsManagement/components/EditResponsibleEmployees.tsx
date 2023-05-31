@@ -2,15 +2,17 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import type { InputRef } from 'antd';
 import { Button, Form, Input, Modal, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
-
-export default function EditRowData({
+const { Column, ColumnGroup } = Table;
+export default function EditResponsibleEmployees({
   data,
   title,
   _id,
   updateFunction,
+  keyProperty,
   refreshData,
 }: {
   data: any;
+  keyProperty: string;
   title: string;
   _id: string;
   refreshData: Function;
@@ -20,7 +22,7 @@ export default function EditRowData({
   const [confirmLoading, setConfirmLoading] = useState(false);
   // const [modalText, setModalText] = useState('Content of the modal');
   const [newTags, setNewTags] = useState();
-  const [newDataRow, setNewDataRow] = useState();
+  console.log('data', data);
   const showModal = () => {
     setOpen(true);
   };
@@ -29,7 +31,7 @@ export default function EditRowData({
     // setModalText('The modal will be closed after two seconds');
     setConfirmLoading(true);
     console.log('newTags', newTags);
-    updateFunction(_id, newDataRow).then((result: any) => {
+    updateFunction(_id, { newValue: newTags, keyProperty: keyProperty }).then((result: any) => {
       console.log('updateFunction result ', result);
       setOpen(false);
       setConfirmLoading(false);
@@ -42,15 +44,15 @@ export default function EditRowData({
     setOpen(false);
   };
 
-  const handleChangeTags = (newdata) => {
-    setNewDataRow(newdata);
+  const handleChangeTags = (tags) => {
+    console.log('handleChangeTags', tags);
+    setNewTags(tags.map((e) => e.name));
   };
 
   return (
     <>
       <Button onClick={showModal}>{title}</Button>
       <Modal
-        width="auto"
         title={title.toUpperCase()}
         open={open}
         onOk={handleOk}
@@ -59,7 +61,17 @@ export default function EditRowData({
         okType={'default'}
         okText={'Save'}
       >
-        <TableTags Tags={data} onChangeData={handleChangeTags} />
+        <TableEmployees
+          Tags={data?.map((e, i) => {
+            const item: TagType = { name: e, key: i.toString() };
+            return item;
+          })}
+          employees={data?.map((e) => {
+            const item: { name: any; key: any } = { name: e.profile.fullName, key: e._id };
+            return item;
+          })}
+          onChangeData={handleChangeTags}
+        />
       </Modal>
     </>
   );
@@ -95,6 +107,7 @@ interface EditableCellProps {
   editable: boolean;
   children: React.ReactNode;
   dataIndex: keyof Item;
+  dataIndexL2?: string;
   record: Item;
   handleSave: (record: Item) => void;
 }
@@ -135,7 +148,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   };
 
   let childNode = children;
-
+    console.log("dataIndex",dataIndex)
   if (editable) {
     childNode = editing ? (
       <Form.Item
@@ -162,57 +175,75 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 type EditableTableProps = Parameters<typeof Table>[0];
 
-interface RowType {
+interface TagType {
   key: React.Key;
   name: string;
+  employees: [];
 }
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-function TableTags({ Tags, onChangeData }: { Tags: RowType; onChangeData: Function }) {
-  const [dataSource, setDataSource] = useState<RowType>(Tags);
+function TableEmployees({ Tags, onChangeData ,employees }: { Tags: TagType[]; onChangeData: Function,employees }) {
+  const [dataSource, setDataSource] = useState<TagType[]>(Tags);
 
   const [count, setCount] = useState(2);
 
-  const defaultColumns: (ColumnTypes[number] & { editable?: boolean; dataIndex: string })[] = [
+  console.log('employees', employees);
+  const handleDelete = (key: React.Key) => {
+    const newData = dataSource.filter((item) => item.key !== key);
+    setDataSource(newData);
+    onChangeData(newData);
+  };
+
+  const defaultColumns: (ColumnTypes[number] & {
+    editable?: boolean;
+    dataIndex: string;
+    dataIndexL2?: string;
+  })[] = [
     {
-      title: 'Name',
-      dataIndex: 'serviceName',
+      title: 'Employee',
+      dataIndex: 'profile',
+      dataIndexL2: 'fullName',
+      width: '30%',
       editable: true,
     },
     {
-      title: 'State',
-      dataIndex: 'state',
-      editable: true,
-    },
-    {
-      title: 'Tag',
-      dataIndex: 'serviceType',
-      editable: true,
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      editable: true,
-    },
-    {
-      title: 'Image',
-      dataIndex: 'avatar',
-      editable: true,
+      width: '30%',
+      title: 'Action',
+      dataIndex: 'action',
+      render: (_, record: { key: React.Key }) =>
+        dataSource.length >= 1 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.key)}
+            okType={'danger'}
+          >
+            <a>Delete</a>
+          </Popconfirm>
+        ) : null,
     },
   ];
 
-  const handleSave = (row: RowType) => {
-    console.log('handleSave', row);
-    // const newData = [...dataSource];
-    // const index = newData.findIndex((item) => row.key === item.key);
-    // const item = newData[index];
-    // newData.splice(index, 1, {
-    //   ...item,
-    //   ...row,
-    // });
-    setDataSource(row);
-    onChangeData(row);
+  const handleAdd = () => {
+    const newData: TagType = {
+      key: count,
+      name: `New Employee ${count}`,
+    };
+    setDataSource([...dataSource, newData]);
+    onChangeData([...dataSource, newData]);
+    setCount(count + 1);
+  };
+
+  const handleSave = (row: TagType) => {
+    const newData = [...dataSource];
+    const index = newData.findIndex((item) => row.key === item.key);
+    const item = newData[index];
+    newData.splice(index, 1, {
+      ...item,
+      ...row,
+    });
+    setDataSource(newData);
+    onChangeData(newData);
   };
 
   const components = {
@@ -228,7 +259,7 @@ function TableTags({ Tags, onChangeData }: { Tags: RowType; onChangeData: Functi
     }
     return {
       ...col,
-      onCell: (record: RowType) => ({
+      onCell: (record: TagType) => ({
         record,
         editable: col.editable,
         dataIndex: col.dataIndex,
@@ -240,12 +271,15 @@ function TableTags({ Tags, onChangeData }: { Tags: RowType; onChangeData: Functi
 
   return (
     <div>
+      <Button onClick={handleAdd} style={{ marginBottom: 16 }}>
+        Add a Tag
+      </Button>
       <Table
         pagination={false}
         components={components}
         rowClassName={() => 'editable-row'}
         bordered
-        dataSource={[dataSource]}
+        dataSource={dataSource}
         columns={columns as ColumnTypes}
       />
     </div>

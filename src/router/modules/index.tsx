@@ -22,6 +22,7 @@ const MyCustomer = lazy(() => import('@/viewsTrainer/MyCustomer'));
 
 const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
+const TicketManagement = lazy(() => import('@/viewsSuperAdmin/TicketManagement'));
 
 const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
 
@@ -102,7 +103,7 @@ const defaultRoute: RouteList[] = [
   {
     path: '/tickets-management',
     id: 'TicketsManagement',
-    element: <TicketsManagement />,
+    element: <TicketManagement />,
     meta: {
       label: FormattedMessage({ id: 'layout.memu.ticketsmanagement' }),
     },

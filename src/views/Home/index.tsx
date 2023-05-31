@@ -79,14 +79,14 @@ const Home = memo(() => {
           </Card>
         </Col>
         <Col lg={18} sm={24} xs={24}>
-          <Card size="small" title="Comment List">
-            <Comment />
-          </Card>
+          {/*<Card size="small" title="Comment List">*/}
+          {/*  <Comment />*/}
+          {/*</Card>*/}
         </Col>
         <Col lg={6} sm={24} xs={24}>
-          <Card size="small" title="word cloud">
-            <WordCloudChart />
-          </Card>
+          {/*<Card size="small" title="word cloud">*/}
+          {/*  <WordCloudChart />*/}
+          {/*</Card>*/}
         </Col>
       </Row>
     </div>

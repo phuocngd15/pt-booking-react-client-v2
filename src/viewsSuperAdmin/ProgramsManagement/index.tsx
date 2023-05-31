@@ -7,6 +7,7 @@ import type { Programs } from '@/api/programs';
 import { getPrograms, updateMultiplePropPrograms, updatePrograms } from '@/api/programs';
 import EditProgramType from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgramType';
 import EditRowData from '@/viewsSuperAdmin/ProgramsManagement/components/EditRowData';
+import EditResponsibleEmployees from "@/viewsSuperAdmin/ProgramsManagement/components/EditResponsibleEmployees";
 const { Column, ColumnGroup } = Table;
 
 export default function ProgramsManagement() {
@@ -42,8 +43,23 @@ function DataTable({ data, refreshData }) {
     <Table dataSource={data} size="middle">
       <Column title="" dataIndex="key" key="key" />
       <Column title="Name" dataIndex="serviceName" key="serviceName" />
+      <Column
+        title="Image"
+        dataIndex="avatar"
+        key="avatar"
+        render={(image) => <div className="truncate w-36 hover:text-clip">{image}</div>}
+      />
       <Column title="Description" dataIndex="description" key="description" />
       <Column title="State" dataIndex="state" key="state" />
+      <Column
+        title="Employess"
+        dataIndex="responsibleEmployees"
+        key="responsibleEmployees"
+        render={(e: any[]) => {
+          console.log('employe', e);
+          return <div>{e.map((i) => i.profile.fullName).join(',')}</div>;
+        }}
+      />
       <Column
         title="Type"
         dataIndex="serviceType"
@@ -79,6 +95,14 @@ function DataTable({ data, refreshData }) {
               _id={record._id}
               tags={record.serviceType}
             />
+            {/*<EditResponsibleEmployees*/}
+            {/*  title={'Edit Responsible Employees'}*/}
+            {/*  _id={record._id}*/}
+            {/*  data={value.responsibleEmployees}*/}
+            {/*  updateFunction={updateMultiplePropPrograms}*/}
+            {/*  refreshData={refreshData}*/}
+            {/*  keyProperty={'responsibleEmployees'}*/}
+            {/*/>*/}
           </Space>
         )}
       />
