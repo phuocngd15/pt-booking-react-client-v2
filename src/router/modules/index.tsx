@@ -8,6 +8,7 @@ import TimeSlotManagement from '@/views/TimeSlotManagement';
 import WorkoutCounter from '@/views/DetectPuspup';
 import ProgramsManagement from '@/viewsSuperAdmin/ProgramsManagement';
 import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
+import BookingProgram from '@/viewsSuperAdmin/BookingProgram';
 
 const Home = lazy(() => import('@/views/Home'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
@@ -80,6 +81,12 @@ const defaultRoute: RouteList[] = [
     path: '/booking',
     id: 'BookingsView',
     element: <BookingStepByStep />,
+    meta: { label: 'Booking', icon: <BookOutlined /> },
+  },
+  {
+    path: '/adBooking',
+    id: 'adBookingsView',
+    element: <BookingProgram />,
     meta: { label: 'Booking', icon: <BookOutlined /> },
   },
   {

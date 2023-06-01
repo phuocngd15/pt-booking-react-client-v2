@@ -35,21 +35,21 @@ export default function ChangePwdForm() {
         </div>
         <form className="mt-8 space-y-6" method="POST" onSubmit={onRegister}>
           <div className="space-y-3 ">
-            <div>
-              <label className="relative block">
-                <span className="sr-only">Old Password</span>
+            {/*<div>*/}
+            {/*  <label className="relative block">*/}
+            {/*    <span className="sr-only">Old Password</span>*/}
 
-                <input
-                  id="oldpassword"
-                  name="oldpassword"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                  placeholder="Old Password"
-                />
-              </label>
-            </div>
+            {/*    <input*/}
+            {/*      id="oldpassword"*/}
+            {/*      name="oldpassword"*/}
+            {/*      type="password"*/}
+            {/*      autoComplete="current-password"*/}
+            {/*      required*/}
+            {/*      className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"*/}
+            {/*      placeholder="Old Password"*/}
+            {/*    />*/}
+            {/*  </label>*/}
+            {/*</div>*/}
             <div>
               <label className="relative block">
                 <span className="sr-only">New Password</span>

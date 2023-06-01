@@ -1,9 +1,8 @@
-import { Space, Table, Tag } from 'antd';
+import { Button, Popconfirm, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
-import type { Programs } from '@/api/programs';
-import { getPrograms } from '@/api/programs';
-import { getAllTickets } from '@/api/tickets';
-const { Column, ColumnGroup } = Table;
+import { cancelTicket, confirmTicket, getAllTickets } from '@/api/tickets';
+
+const { Column } = Table;
 
 export default function TicketManagement() {
   const [data, setData] = useState<any[]>([]);
@@ -18,6 +17,23 @@ export default function TicketManagement() {
     })();
     return () => {};
   }, []);
+
+  const refreshData = () => {
+    getAllTickets().then((result) => {
+      if (result.code) {
+        result.data.forEach((e, i) => (e.key = (i + 1).toString()));
+        setData(result.data);
+      }
+    });
+  };
+
+  const handleConfirmTicket = async (id) => {
+    confirmTicket(id).then(refreshData);
+  };
+  const handleVoidTicket = async (id) => {
+    cancelTicket(id).then(refreshData);
+  };
+
   return (
     <div>
       <Table dataSource={data}>
@@ -35,7 +51,7 @@ export default function TicketManagement() {
           dataIndex="trainerUUID"
           key="trainerUUID"
           render={(e) => {
-            return <div>{e.trainerUUID}</div>;
+            return <div>{e.fullName}</div>;
           }}
         />
         <Column
@@ -48,11 +64,43 @@ export default function TicketManagement() {
         />
         <Column
           title="State"
-          dataIndex="serviceName"
-          key="serviceName"
+          dataIndex="status"
+          key="status"
           render={(e) => {
-            return <div>{e.serviceName}</div>;
+            switch (e) {
+              case 1:
+                return <div>Waiting Confirm</div>;
+              case 2:
+                return <div>Confirmed</div>;
+              case 3:
+                return <div>Done</div>;
+              case 4:
+                return <div>Cancelled</div>;
+            }
+            return <div>{e}</div>;
           }}
+        />
+        <Column
+          title="Action"
+          key="action"
+          render={(value: any, record: any) => (
+            <Space size="middle">
+              {record.status === 1 && (
+                <Button onClick={() => handleConfirmTicket(record._id)}>Confirm Booking</Button>
+              )}
+              {record.status === 2 && (
+                <>
+                  <Popconfirm
+                    title="Sure to Cancel?"
+                    onConfirm={() => handleVoidTicket(record._id)}
+                    okType={'danger'}
+                  >
+                    <Button>Cancel Ticket</Button>
+                  </Popconfirm>
+                </>
+              )}
+            </Space>
+          )}
         />
       </Table>
     </div>

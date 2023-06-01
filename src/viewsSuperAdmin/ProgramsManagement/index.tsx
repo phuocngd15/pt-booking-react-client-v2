@@ -7,7 +7,7 @@ import type { Programs } from '@/api/programs';
 import { getPrograms, updateMultiplePropPrograms, updatePrograms } from '@/api/programs';
 import EditProgramType from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgramType';
 import EditRowData from '@/viewsSuperAdmin/ProgramsManagement/components/EditRowData';
-import EditResponsibleEmployees from "@/viewsSuperAdmin/ProgramsManagement/components/EditResponsibleEmployees";
+import EditResponsibleEmployees from '@/viewsSuperAdmin/ProgramsManagement/components/EditResponsibleEmployees';
 const { Column, ColumnGroup } = Table;
 
 export default function ProgramsManagement() {

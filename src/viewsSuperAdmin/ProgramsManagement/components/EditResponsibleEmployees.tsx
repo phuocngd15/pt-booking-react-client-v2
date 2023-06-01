@@ -148,7 +148,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
   };
 
   let childNode = children;
-    console.log("dataIndex",dataIndex)
+  console.log('dataIndex', dataIndex);
   if (editable) {
     childNode = editing ? (
       <Form.Item
@@ -183,7 +183,15 @@ interface TagType {
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-function TableEmployees({ Tags, onChangeData ,employees }: { Tags: TagType[]; onChangeData: Function,employees }) {
+function TableEmployees({
+  Tags,
+  onChangeData,
+  employees,
+}: {
+  Tags: TagType[];
+  onChangeData: Function;
+  employees;
+}) {
   const [dataSource, setDataSource] = useState<TagType[]>(Tags);
 
   const [count, setCount] = useState(2);

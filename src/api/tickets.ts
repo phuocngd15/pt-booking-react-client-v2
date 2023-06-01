@@ -52,6 +52,30 @@ export const getAllTickets = (user?: string) => {
   );
 };
 
+export const confirmTicket = (id: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  return deffHttp.post<any>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/ticket/${id}/confirm`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
+
+export const cancelTicket = (id: string) => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  return deffHttp.post<any>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/ticket/${id}/cancel`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
+
 export const getAllSessionAvailableOfTrainerByDate = (day: any, id: any) => {
   console.log('getAllSessionAvailableOfTrainerByDate');
   return deffHttp.post<any[]>(
