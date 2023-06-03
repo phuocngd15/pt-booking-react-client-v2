@@ -25,7 +25,11 @@ const PTManagement = memo(() => {
     if (!data.length) return <Spin />;
     return <Table dataSource={data} />;
   };
-  return <Card title="Danh sách Huấn Luyện Viên Cá Nhân">{renderTable()}</Card>;
+  return (
+    <div>
+      <Card title={<div className="text-2xl">Trainers</div>}>{renderTable()}</Card>
+    </div>
+  );
 });
 
 export default PTManagement;

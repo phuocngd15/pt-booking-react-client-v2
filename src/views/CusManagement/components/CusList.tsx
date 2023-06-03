@@ -143,7 +143,7 @@ export const CusList: React.FC<CusListProps> = memo(({ dataSource }) => {
       children: [],
     },
     {
-      title: 'Thao tác',
+      title: 'Actions',
       dataIndex: '',
       key: 'fullName',
       render: (value, record, _index) => {

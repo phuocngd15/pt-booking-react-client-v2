@@ -74,10 +74,10 @@ export const DetailCusGrid = () => {
         />
       </Col>
       <Col lg={24} sm={24} xs={24}>
-        <Card title={'Thông tin liên lạc'}>
+        <Card title={'Contact Information'}>
           <div>
-            <div>SDT: {fields.find((e) => e.name === 'phone')?.value}</div>
-            <div>Gioi tinh: {fields.find((e) => e.name === 'gender')?.value}</div>
+            <div>Phone: {fields.find((e) => e.name === 'phone')?.value}</div>
+            <div>Gender: {fields.find((e) => e.name === 'gender')?.value}</div>
             <div>Email: {fields.find((e) => e.name === 'email')?.value}</div>
           </div>
         </Card>

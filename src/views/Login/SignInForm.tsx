@@ -34,7 +34,7 @@ export default function SignInForm({ handleSubmit }: Props) {
               </a>
             </div>
           </div>
-          <div className="space-y-3 ">
+          <div className="space-y-3">
             <div>
               <label className="relative block">
                 <span className="sr-only">Email address</span>

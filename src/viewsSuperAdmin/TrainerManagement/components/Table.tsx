@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Table, Button, Modal, Spin, Input, Space } from 'antd';
+import { Table, Button, Modal, Spin, Input, Space, Tag } from 'antd';
 import type { ColumnsType, TableProps, ColumnType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import type { InputRef } from 'antd';
@@ -150,35 +150,35 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource }) => {
       sortDirections: ['descend'],
       ...getColumnSearchProps('fullName'),
     },
-    {
-      title: 'CMND',
-      dataIndex: 'cmnd',
-      key: 'cmnd',
-      sorter: (a, b) => Number(a.cmnd) - Number(b.cmnd),
-      ...getColumnSearchProps('cmnd'),
-    },
     { title: 'Phone', dataIndex: 'phone', key: 'phone', ...getColumnSearchProps('phone') },
     { title: 'Email', dataIndex: 'email', key: 'email', ...getColumnSearchProps('email') },
-    { title: 'Address', dataIndex: 'address', key: 'address' },
     {
-      title: 'Join Date',
-      dataIndex: 'joindate',
-      key: 'joindate',
-      sorter: (a, b) => new Date(a.joindate).getTime() - new Date(b.joindate).getTime(),
-    },
-    {
-      title: 'Action',
-      dataIndex: '',
-      key: 'x',
-      render: () => {
+      title: 'Skill',
+      dataIndex: 'skills',
+      key: 'skills',
+      render: (value, record, index) => {
         return (
           <div>
-            <a onClick={showModal}>Detail</a>
-            {/* <a>Delete</a> */}
+            {value.map((e: any) => (
+              <Tag>{e}</Tag>
+            ))}
           </div>
         );
       },
     },
+    // {
+    //   title: 'Action',
+    //   dataIndex: '',
+    //   key: 'x',
+    //   render: () => {
+    //     return (
+    //       <div>
+    //         <a onClick={showModal}>Detail</a>
+    //         {/* <a>Delete</a> */}
+    //       </div>
+    //     );
+    //   },
+    // },
   ];
 
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
@@ -186,18 +186,7 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource }) => {
   };
   return (
     <>
-      <Table
-        columns={columns}
-        expandable={{
-          expandedRowRender: (record) => (
-            <p style={{ margin: 0 }}>{record.description || 'not info'}</p>
-          ),
-          rowExpandable: (record) => record.fullName !== 'Not Expandable',
-        }}
-        dataSource={dataSource}
-        scroll={{ y: 240 }}
-        onChange={onChange}
-      />
+      <Table columns={columns} dataSource={dataSource} scroll={{ y: 240 }} onChange={onChange} />
       <Modal
         title="Thông tin chi tiết PT"
         open={isModalOpen}

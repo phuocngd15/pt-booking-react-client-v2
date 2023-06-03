@@ -50,12 +50,23 @@ export default function AccountsManagement() {
   return (
     <Row gutter={[12, 12]}>
       <Col lg={8} sm={24} xs={24}>
+        <div className="w-72 mb-2">
+          <label className="relative block">
+            <span className="sr-only">Email address</span>
+            <input
+              id="email-address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+              placeholder="Username"
+              onChange={(e) => setSearchUserName(e.currentTarget.value)}
+            />
+          </label>
+        </div>
         <Card size="small" title="">
           <div>
-            <div>
-              <span>Username:</span>
-              <input onChange={(e) => setSearchUserName(e.currentTarget.value)} />
-            </div>
             <AccountsTable
               dataSource={
                 searchUserName ? data.filter((e) => e.username.includes(searchUserName)) : data

@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import type { InputRef } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { Space, Table, Tag } from 'antd';
-import type { Customer } from '@/api/user';
-import { getMyCustomers } from '@/api/user';
 import type { Programs } from '@/api/programs';
 import { getPrograms, updateMultiplePropPrograms, updatePrograms } from '@/api/programs';
 import EditProgramType from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgramType';
 import EditRowData from '@/viewsSuperAdmin/ProgramsManagement/components/EditRowData';
 import EditResponsibleEmployees from '@/viewsSuperAdmin/ProgramsManagement/components/EditResponsibleEmployees';
+import { AddNewServiceForm } from '@/views/ServicesManagement/AddNewService';
+import CustomerSelector from '@/components/UserSelector/CustomerSelector';
+import TrainerSelector from '@/components/UserSelector/TrainerSelector';
+
 const { Column, ColumnGroup } = Table;
 
 export default function ProgramsManagement() {
@@ -24,16 +25,18 @@ export default function ProgramsManagement() {
   }, []);
 
   return (
-    <DataTable
-      data={data}
-      refreshData={() => {
-        getPrograms().then((result) => {
-          if (result.code) {
-            setData(result.data);
-          }
-        });
-      }}
-    />
+    <div>
+      <DataTable
+        data={data}
+        refreshData={() => {
+          getPrograms().then((result) => {
+            if (result.code) {
+              setData(result.data);
+            }
+          });
+        }}
+      />
+    </div>
   );
 }
 
@@ -47,7 +50,7 @@ function DataTable({ data, refreshData }) {
         title="Image"
         dataIndex="avatar"
         key="avatar"
-        render={(image) => <div className="truncate w-36 hover:text-clip">{image}</div>}
+        render={(image) => <img className="truncate w-36 hover:text-clip" src={image} />}
       />
       <Column title="Description" dataIndex="description" key="description" />
       <Column title="State" dataIndex="state" key="state" />
@@ -56,7 +59,6 @@ function DataTable({ data, refreshData }) {
         dataIndex="responsibleEmployees"
         key="responsibleEmployees"
         render={(e: any[]) => {
-          console.log('employe', e);
           return <div>{e.map((i) => i.profile.fullName).join(',')}</div>;
         }}
       />
@@ -95,14 +97,6 @@ function DataTable({ data, refreshData }) {
               _id={record._id}
               tags={record.serviceType}
             />
-            {/*<EditResponsibleEmployees*/}
-            {/*  title={'Edit Responsible Employees'}*/}
-            {/*  _id={record._id}*/}
-            {/*  data={value.responsibleEmployees}*/}
-            {/*  updateFunction={updateMultiplePropPrograms}*/}
-            {/*  refreshData={refreshData}*/}
-            {/*  keyProperty={'responsibleEmployees'}*/}
-            {/*/>*/}
           </Space>
         )}
       />

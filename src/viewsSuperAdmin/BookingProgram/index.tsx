@@ -183,36 +183,62 @@ export default function BookingProgram() {
           <Card>
             <div hidden={selectStep !== 0}>
               <div className="text-amber-600 font-bold">CUSTOMER INFO</div>
-              <label>
-                Name:
-                <input
-                  placeholder="name"
-                  className="border ml-2"
-                  onChange={(e) =>
-                    handleOnchangeUserProfile({ ...userInfo, fullName: e.currentTarget.value })
-                  }
-                />
-              </label>
-              <label>
-                Mail:
-                <input
-                  placeholder="mail"
-                  className="border ml-2"
-                  onChange={(e) =>
-                    handleOnchangeUserProfile({ ...userInfo, email: e.currentTarget.value })
-                  }
-                />
-              </label>
-              <label>
-                Phone:
-                <input
-                  placeholder="phone"
-                  className="border ml-2"
-                  onChange={(e) =>
-                    handleOnchangeUserProfile({ ...userInfo, phone: e.currentTarget.value })
-                  }
-                />
-              </label>
+              <div className="space-y-3 w-96">
+                <div>
+                  <label className="relative block">
+                    Email address
+                    <span className="sr-only">Email address</span>
+                    <input
+                      id="cus-email-address"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      required
+                      className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                      placeholder="Email address"
+                      onChange={(e) =>
+                        handleOnchangeUserProfile({ ...userInfo, email: e.currentTarget.value })
+                      }
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label className="relative block">
+                    Phone
+                    <span className="sr-only">Phone</span>
+                    <input
+                      id="cus-phone"
+                      name="phone"
+                      type="number"
+                      autoComplete="email"
+                      required
+                      className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                      placeholder="Phone"
+                      onChange={(e) =>
+                        handleOnchangeUserProfile({ ...userInfo, phone: e.currentTarget.value })
+                      }
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label className="relative block">
+                    Name
+                    <span className="sr-only">Name</span>
+                    <input
+                      id="cus-name"
+                      name="name"
+                      type="text"
+                      autoComplete="text"
+                      required
+                      className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-2 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                      placeholder="Full Name"
+                      onChange={(e) =>
+                        handleOnchangeUserProfile({ ...userInfo, fullName: e.currentTarget.value })
+                      }
+                    />
+                  </label>
+                </div>
+              </div>
             </div>
             <div hidden={selectStep !== 1}>
               <div className="text-amber-600 font-bold">SELECT ClASS</div>
@@ -259,7 +285,7 @@ export default function BookingProgram() {
                 </div>
 
                 <Button type="default" loading={loadings[0]} onClick={onSubmit}>
-                  Xác nhận Booking
+                  Confirm Booking
                 </Button>
               </div>
             </div>

@@ -14,6 +14,18 @@ export const getTickets = (user?: string) => {
   );
 };
 
+export const getTicketsStatistics = () => {
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  return deffHttp.get<any[]>(
+    {
+      // url: '/mock_api/login',
+      url: `http://localhost:3000/api/sessions/ticketsStatistics`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+};
+
 export const getCusTickets = (cusId?: string) => {
   const userInfo = getStorage<UseInfoType>('userInfo');
   console.log('userInfo', userInfo);

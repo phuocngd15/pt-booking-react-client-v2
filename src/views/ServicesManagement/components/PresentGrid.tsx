@@ -22,7 +22,7 @@ const UIGrid = ({ dataSource }) => {
       children: [],
     },
     {
-      title: 'Thao tác',
+      title: 'Action',
       dataIndex: '',
       key: 'fullName',
       render: (value, record, _index) => {

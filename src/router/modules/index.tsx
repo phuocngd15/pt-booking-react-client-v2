@@ -2,9 +2,6 @@ import { HomeOutlined, BookOutlined, CalendarOutlined } from '@ant-design/icons'
 import { lazy } from 'react';
 import type { RouteList } from '@/router/route';
 import { FormattedMessage } from '@/locales';
-import TicketsManagement from '@/views/TicketsManagement';
-import ServicesManagement from '@/views/ServicesManagement';
-import TimeSlotManagement from '@/views/TimeSlotManagement';
 import WorkoutCounter from '@/views/DetectPuspup';
 import ProgramsManagement from '@/viewsSuperAdmin/ProgramsManagement';
 import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
@@ -12,7 +9,7 @@ import BookingProgram from '@/viewsSuperAdmin/BookingProgram';
 
 const Home = lazy(() => import('@/views/Home'));
 const CusManagement = lazy(() => import('@/views/CusManagement'));
-const PTManagement = lazy(() => import('@/views/PTManagement'));
+const PTManagement = lazy(() => import('@/viewsSuperAdmin/TrainerManagement'));
 const ProfilesView = lazy(() => import('@/views/Profile'));
 
 const LoggedInCustomerHome = lazy(() => import('@/viewsLoggedInCustomer/Home'));
@@ -21,11 +18,8 @@ const CusCalendar = lazy(() => import('@/viewsLoggedInCustomer/Calendar'));
 const TrainerCalendar = lazy(() => import('@/viewsTrainer/Calendar'));
 const MyCustomer = lazy(() => import('@/viewsTrainer/MyCustomer'));
 
-const AdminCalendar = lazy(() => import('@/viewsSuperAdmin/Calendar'));
 const AccountsManagement = lazy(() => import('@/viewsSuperAdmin/AccountsManagement'));
 const TicketManagement = lazy(() => import('@/viewsSuperAdmin/TicketManagement'));
-
-const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
 
 // after login have routes
 const defaultRoute: RouteList[] = [
@@ -53,12 +47,12 @@ const defaultRoute: RouteList[] = [
     element: <CusCalendar />,
     meta: { label: 'Calendar', icon: <CalendarOutlined /> },
   },
-  {
-    path: '/calendar',
-    id: 'AdminCalendar',
-    element: <AdminCalendar />,
-    meta: { label: 'AdminCalendar', icon: <CalendarOutlined /> },
-  },
+  // {
+  //   path: '/calendar',
+  //   id: 'AdminCalendar',
+  //   element: <AdminCalendar />,
+  //   meta: { label: 'AdminCalendar', icon: <CalendarOutlined /> },
+  // },
   {
     path: '/calendar',
     id: 'TrainerCalendar',
@@ -124,14 +118,14 @@ const defaultRoute: RouteList[] = [
       label: 'Programs',
     },
   },
-  {
-    path: '/timeSlot-management',
-    id: 'TimeSlot ',
-    element: <TimeSlotManagement />,
-    meta: {
-      label: FormattedMessage({ id: 'layout.memu.TimeSlotManagemen' }),
-    },
-  },
+  // {
+  //   path: '/timeSlot-management',
+  //   id: 'TimeSlot ',
+  //   element: <TimeSlotManagement />,
+  //   meta: {
+  //     label: FormattedMessage({ id: 'layout.memu.TimeSlotManagemen' }),
+  //   },
+  // },
 ];
 
 export default defaultRoute;

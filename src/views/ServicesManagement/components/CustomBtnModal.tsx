@@ -19,6 +19,7 @@ const CustomBtnModal: React.FC<CustomBtnModalProps> = ({ nameBtn, customForm, ic
       <Modal
         width={1000}
         open={isOpenModal}
+        okType={'default'}
         onOk={() => onCreate(setIsOpenModal)}
         onCancel={() => setIsOpenModal(false)}
       >

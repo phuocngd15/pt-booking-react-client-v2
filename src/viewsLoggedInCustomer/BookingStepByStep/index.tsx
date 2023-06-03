@@ -214,7 +214,7 @@ export default function BookingStepByStep() {
                 </div>
 
                 <Button type="default" loading={loadings[0]} onClick={onSubmit}>
-                  Xác nhận Booking
+                  Confirm Booking
                 </Button>
               </div>
             </div>

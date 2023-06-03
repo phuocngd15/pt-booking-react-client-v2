@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Card, Col, Progress, Row, theme } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import './index.less';
@@ -7,76 +7,35 @@ import AreaChart from './components/AreaChart';
 import RoseChart from './components/RoseChart';
 import Comment from './components/Comment';
 import WordCloudChart from './components/WordCloudChart';
+import { getTicketsStatistics } from '@/api/tickets';
+import { mapObjectToArray } from '@/views/Home/Helper';
 
 const Home = memo(() => {
-  console.log('home');
-  const thme = theme.useToken();
-
-  const speedList = [
-    {
-      title: 'task list',
-      online: 24,
-      total: 70,
-    },
-    {
-      title: 'pending task',
-      online: 39,
-      total: 100,
-    },
-    {
-      title: 'goal plan',
-      online: 5,
-      total: 10,
-    },
-    {
-      title: 'comment reply',
-      online: 10,
-      total: 40,
-    },
-  ];
-
-  const value = (online: number, total: number) => {
-    return Math.round((online / total) * 100);
-  };
+  const [dataAreaChart, setDataAreaChart] = useState<any>();
+  useEffect(() => {
+    getTicketsStatistics().then((e) => {
+      console.log('static tickets', e.data);
+      const container: any[] = [];
+      e.data.map((ticket) => mapObjectToArray(ticket, container));
+      console.log('mappedArray', container);
+      if (e.code === 1) {
+        setDataAreaChart(container);
+      }
+    });
+  }, []);
 
   return (
     <div className="">
       <Row gutter={[12, 12]}>
-        {speedList.map((i) => {
-          return (
-            <Col lg={6} sm={24} xs={24} key={i.title}>
-              <Card
-                size="small"
-                title={i.title}
-                extra={<RightOutlined onClick={() => alert('click')} />}
-              >
-                <div css={getNumericalValue(thme.token)}>
-                  <div className="numerical-value">
-                    <span className="number">
-                      {i.online}/{i.total}
-                    </span>
-                    <span>Online/Total</span>
-                  </div>
-                  <Progress
-                    percent={value(i.online, i.total)}
-                    strokeWidth={17}
-                    strokeColor={thme.token.colorPrimary}
-                  />
-                </div>
-              </Card>
-            </Col>
-          );
-        })}
-
         <Col lg={18} sm={24} xs={24}>
-          <Card size="small" title="task data">
-            <AreaChart />
+          <Card size="small" title="Tickets">
+            <AreaChart data={dataAreaChart} />
           </Card>
         </Col>
         <Col lg={6} sm={24} xs={24}>
-          <Card size="small" title="task data">
-            <RoseChart />
-          </Card>
+          {/*<Card size="small" title="task data">*/}
+          {/*  <RoseChart />*/}
+          {/*</Card>*/}
         </Col>
         <Col lg={18} sm={24} xs={24}>
           {/*<Card size="small" title="Comment List">*/}
