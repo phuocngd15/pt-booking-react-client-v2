@@ -19,7 +19,6 @@ export default function WorkoutCounter() {
     });
   };
   const onFinishWorkout = (e) => {
-    console.log('WorkoutCounter finish', e);
     success();
     completeActivity(workout._id, e.times, e.completeReps).then((r) => {
       console.log(r);

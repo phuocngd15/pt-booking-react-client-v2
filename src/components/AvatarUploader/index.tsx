@@ -54,7 +54,6 @@ const AvatarUploader = ({ avatar }) => {
       setPreviewSource(reader.result);
     };
   };
-  console.log('previewSource', previewSource);
   return (
     <div>
       {previewSource ? (

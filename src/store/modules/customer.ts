@@ -16,7 +16,6 @@ export const customerSlice = createSlice({
   initialState,
   reducers: {
     changeStateDetailCus: (state, action: PayloadAction<{}>) => {
-      console.log('changeStateDetailCus', action.payload);
       state.detailInfo = cloneDeep(action.payload);
     },
     updateWhoIsUsing: (state, action) => {

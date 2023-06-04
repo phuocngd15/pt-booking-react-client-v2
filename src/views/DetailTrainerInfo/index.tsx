@@ -8,7 +8,6 @@ export default function DetailTrainerInfo() {
   const trainer = useAppSelector((state) =>
     state.trainers.data.find((e) => e.uuid === trainerDetailUUID),
   );
-  console.log('trainer', trainer);
   return (
     <div className="mx-auto mt-16  w-full justify-between max-w-container md:flex-row px-4 sm:mt-20 sm:px-6 lg:px-8 xl:mt-24">
       <div className="grid grid-cols-2 ">

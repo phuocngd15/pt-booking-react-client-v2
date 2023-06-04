@@ -26,9 +26,8 @@ export const getTicketsStatistics = () => {
   );
 };
 
-export const getCusTickets = (cusId?: string,status=2) => {
+export const getCusTickets = (cusId?: string, status = 2) => {
   const userInfo = getStorage<UseInfoType>('userInfo');
-  console.log('userInfo', userInfo);
   return deffHttp.get<any[]>(
     {
       // url: '/mock_api/login',
@@ -41,7 +40,7 @@ export const getCusTickets = (cusId?: string,status=2) => {
 
 export const getTrainerTickets = (cusId?: string) => {
   const userInfo = getStorage<UseInfoType>('userInfo');
-  console.log('userInfo', userInfo);
+
   return deffHttp.get<any[]>(
     {
       // url: '/mock_api/login',

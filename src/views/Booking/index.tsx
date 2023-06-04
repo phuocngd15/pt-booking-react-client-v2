@@ -105,7 +105,6 @@ export const DetailCustomer = ({ customer }) => {
       { name: 'cmnd', value: `${customer.cmnd || ''}` },
     ]);
   }, [customer]);
-  console.log('valueInputCus', customer);
 
   return (
     <>
@@ -184,7 +183,6 @@ export const StaffList = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect');
     appendData();
     setSelectStaff([]);
   }, []);
@@ -195,9 +193,6 @@ export const StaffList = () => {
     }
   };
   const onChange = (e: CheckboxChangeEvent, item: UserItem) => {
-    console.log(`checked = ${e.target.checked}`);
-    console.log(`item = ${item}`, item);
-    console.log('selectStaff', selectStaff);
     const newVale = cloneDeep(selectStaff);
     newVale.push(item);
     e.target.checked && setSelectStaff(newVale);

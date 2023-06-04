@@ -5,7 +5,6 @@ import { setStorage } from '@/utils/storage';
 
 export async function loadServiceTypes() {
   const serviceTypes = await getServiceTypes();
-  console.log('callApi serviceTypes', serviceTypes);
   return { serviceTypes };
 }
 

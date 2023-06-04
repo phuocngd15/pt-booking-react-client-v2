@@ -40,7 +40,6 @@ export interface ServicePrototype {
 // };
 
 export const getAllPrograms = () => {
-  console.log('getAllPrograms');
   return deffHttp.get<ServicePrototype[]>(
     {
       url: 'http://localhost:3000/api/programs/',
@@ -53,7 +52,6 @@ export const getAllPrograms = () => {
 // uncategorized
 
 export const bookingSession = (params: any) => {
-  console.log('bookingSession');
   return deffHttp.post<any>(
     {
       url: 'http://localhost:3000/api/sessions/booking',

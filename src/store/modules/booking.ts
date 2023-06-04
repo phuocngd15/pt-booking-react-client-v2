@@ -73,7 +73,6 @@ export const fetchAvailableSession = createAsyncThunk(
 export const createBookingTicket = createAsyncThunk(
   'booking/createBookingTicket',
   async (params: any) => {
-    console.log('params', params);
     const res = await bookingSession(params);
     // // if (res.code === 1) {
     // //   //setData(res.data);
@@ -92,7 +91,6 @@ export const BookingSlice = createSlice({
   initialState,
   reducers: {
     saveStore: (state, action: PayloadAction<any[]>) => {
-      console.log('action', action.payload);
       state.myTickets = action.payload;
     },
   },
@@ -132,7 +130,6 @@ export const BookingSlice = createSlice({
       })
       .addCase(fetchAvailableSession.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded';
-        console.log('action.payload', action.payload);
         state.availableSession = action.payload;
       })
       .addCase(fetchAvailableSession.rejected, (state, action) => {
@@ -146,7 +143,6 @@ export const BookingSlice = createSlice({
       })
       .addCase(createBookingTicket.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'succeeded';
-        console.log('action.payload', action.payload);
         state.availableSession = action.payload;
       })
       .addCase(createBookingTicket.rejected, (state, action) => {

@@ -41,7 +41,6 @@ export const addNewProgram = (params: object) =>
   );
 
 export const getTrainerByServiceId = (uuid: string) => {
-  console.log('getTrainerByServiceId', uuid);
   return deffHttp.get<ITrainer[]>(
     {
       url: `${rootServer}/api/programs/${uuid}/trainers`,

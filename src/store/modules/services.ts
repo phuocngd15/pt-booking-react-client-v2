@@ -34,8 +34,6 @@ export const customerSlice = createSlice({
   reducers: {
     changeStateDetailServiceItem: (state, action: PayloadAction<ServiceItem>) => {
       // const { type, tabs } = action.payload;
-      console.log('state', state);
-      console.log('action.payload', action.payload);
       const { name } = cloneDeep(action.payload);
       state.serviceDetail.name = name;
     },

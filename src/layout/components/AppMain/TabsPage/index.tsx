@@ -17,7 +17,6 @@ const TabsPage = memo((_props: Props) => {
   const menuList = routeListToMenu(defaultRoute);
   const asyncRouter = useAppSelector((state) => state.route.asyncRouter);
   const multiTabs = useAppSelector((state) => state.route.multiTabs);
-  console.log('menuList', menuList);
   const tabsItem = useMemo(() => {
     return multiTabs.map((i) => {
       let routeBy = null;
@@ -28,7 +27,6 @@ const TabsPage = memo((_props: Props) => {
       };
     });
   }, [multiTabs]);
-  console.log('tabsItem', tabsItem);
 
   const handleTabsList = (pathName: string, type: 'add' | 'delete') => {
     dispatch(

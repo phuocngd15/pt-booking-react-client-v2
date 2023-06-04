@@ -13,7 +13,6 @@ const NavSidebar = memo(() => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { menuList } = useMenuList();
-  console.log('NavSidebar menuList', menuList);
   const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
     setOpenKeys(keys);
   };

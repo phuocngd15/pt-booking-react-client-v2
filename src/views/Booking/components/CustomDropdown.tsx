@@ -25,7 +25,6 @@ const items: MenuProps['items'] = [
 const CustomDropdown: React.FC = () => {
   const [selectedService, setSelectedService] = React.useState(items[0].mainLabel);
   const onClick: MenuProps['onClick'] = (props) => {
-    console.log(`Click on item`, props);
     setSelectedService(items[props.key].mainLabel);
   };
   return (

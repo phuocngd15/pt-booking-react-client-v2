@@ -31,7 +31,6 @@ export const customerSlice = createSlice({
   initialState,
   reducers: {
     saveStore: (state, action: PayloadAction<Trainer[]>) => {
-      console.log('action', action.payload);
       state.data = action.payload;
     },
   },

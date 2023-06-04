@@ -16,7 +16,6 @@ const ExtraMenu = () => {
 };
 
 const CusManagement = () => {
-  console.log('CusManagement');
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {

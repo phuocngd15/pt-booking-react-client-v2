@@ -54,7 +54,6 @@ const ImageUploader = ({ onClickImg }) => {
       setPreviewSource(reader.result);
     };
   };
-  console.log('previewSource', previewSource);
   return (
     <div>
       {previewSource ? (
