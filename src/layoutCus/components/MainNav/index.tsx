@@ -59,9 +59,9 @@ const Index = () => {
                   HEALTH CHECK
                 </button>
 
-                <button className="ml-8" onClick={() => onClick('/customer/booking')}>
-                  BOOKING
-                </button>
+                {/*<button className="ml-8" onClick={() => onClick('/customer/booking')}>*/}
+                {/*  BOOKING*/}
+                {/*</button>*/}
                 <div className="ml-2 hidden rounded-full bg-sky-500 px-1.5 py-0.5 text-xs text-white sm:block">
                   New
                 </div>

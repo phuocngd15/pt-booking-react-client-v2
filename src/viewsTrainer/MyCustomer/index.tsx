@@ -6,6 +6,8 @@ import './styleEditTag.less';
 import { getActivitiesUnComplete, IActivity } from '@/api/dailyActivitiesTask';
 import type { Customer } from '@/api/user';
 import { getMyCustomers, updateMyUserTags } from '@/api/user';
+import { CustomBtnModal } from '@/views/ServicesManagement/components/CustomBtnModal';
+import FormAddWorkout from '@/viewsTrainer/MyCustomer/components/FormAddWorkout';
 
 const { Column, ColumnGroup } = Table;
 
@@ -64,7 +66,19 @@ function DataTable({ data, refreshData }) {
         key="action"
         render={(_: any, record: DataType) => (
           <Space size="middle">
-            <a>Add workout activity</a>
+            <CustomBtnModal
+              width={400}
+              nameBtn={'Add workout activity'}
+              customForm={
+                <FormAddWorkout
+                  handleSubmit={() => {
+                    console.log(e);
+                  }}
+                />
+              }
+              icon={undefined}
+              onCreate={() => {}}
+            />
             <EditTag data={record} refreshData={refreshData} />
           </Space>
         )}

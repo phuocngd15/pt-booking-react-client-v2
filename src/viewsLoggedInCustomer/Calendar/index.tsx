@@ -72,11 +72,11 @@ export default function CusCalendar() {
             onCancel={() => setIsOpen(false)}
           >
             <Ticket
-              startTime={selectedEvent?._def.extendedProps.startTime}
-              endTime={selectedEvent?._def.extendedProps.endTime}
-              trainerName={selectedEvent?._def.extendedProps.trainerUUID.fullName}
-              customerName={selectedEvent?._def.extendedProps.customerUUID.fullName}
-              programName={selectedEvent?._def.extendedProps.programUUID.serviceName}
+              startTime={selectedEvent?._def.extendedProps?.startTime}
+              endTime={selectedEvent?._def.extendedProps?.endTime}
+              trainerName={selectedEvent?._def.extendedProps?.trainerUUID?.fullName}
+              customerName={selectedEvent?._def.extendedProps?.customerUUID?.fullName}
+              programName={selectedEvent?._def.extendedProps?.programUUID?.serviceName}
             />
           </Modal>
         </div>

@@ -26,13 +26,13 @@ export const getTicketsStatistics = () => {
   );
 };
 
-export const getCusTickets = (cusId?: string) => {
+export const getCusTickets = (cusId?: string,status=2) => {
   const userInfo = getStorage<UseInfoType>('userInfo');
   console.log('userInfo', userInfo);
   return deffHttp.get<any[]>(
     {
       // url: '/mock_api/login',
-      url: `http://localhost:3000/api/sessions/tickets/cus/${userInfo?.profile._id}`,
+      url: `http://localhost:3000/api/sessions/tickets/cus/${userInfo?.profile._id}/${status}`,
       data: { cusId: cusId },
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },

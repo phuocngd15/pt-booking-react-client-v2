@@ -4,25 +4,25 @@ import { getAccounts } from '@/api/accounts';
 
 export default function TrainerSelector({
   isMulti = false,
-  onTrainerId,
+  onChangeOption,
+  width,
+  defaultValue,
 }: {
   isMulti?: boolean;
-  onTrainerId: Function;
+  onChangeOption: Function;
+  width: number;
+  defaultValue?: any;
 }) {
-  const options = [
-    { value: 0, label: 'Total' },
-    { value: 1, label: 'Waiting Confirm' },
-    { value: 2, label: 'Confirmed' },
-    { value: 3, label: 'Done' },
-    { value: 4, label: 'Cancelled' },
-  ];
   const [data, setData] = useState<any[]>([]);
   useEffect(() => {
     (async () => {
       const result = await getAccounts();
       if (result.code) {
         result.data.forEach((e, i) => (e.key = (i + 1).toString()));
-        const options: any[] = [{ value: '', label: 'None' }];
+        const options: any[] = [];
+        if (!isMulti) {
+          options.push({ value: '-1', label: 'None' });
+        }
         result.data.forEach((e) => {
           if (e.power === 'trainer') {
             options.push({
@@ -31,7 +31,6 @@ export default function TrainerSelector({
             });
           }
         });
-        console.log('mappingdata', options);
         setData(options);
       }
     })();
@@ -40,43 +39,43 @@ export default function TrainerSelector({
 
   function handleOnChangeSelect(optionValue: any) {
     console.log(optionValue);
-    onTrainerId(optionValue);
+    onChangeOption(optionValue);
   }
 
   return (
     <>
       {isMulti ? (
-        <MultiSelector onChangeSelect={handleOnChangeSelect} options={data} />
+        <MultiSelector onChangeSelect={handleOnChangeSelect} options={data} width={width} defaultValue={defaultValue}  />
       ) : (
-        <Selector onChangeSelect={handleOnChangeSelect} options={data} />
+        <Selector onChangeSelect={handleOnChangeSelect} options={data} defaultValue={defaultValue} />
       )}
     </>
   );
 }
-function Selector({ onChangeSelect, options }) {
+function Selector({ onChangeSelect, options ,defaultValue}) {
   function handleOnChangeSelect(optionValue: any) {
     onChangeSelect(optionValue);
   }
   return (
     <div className="relative block">
       <span className="mr-1">Status</span>
-      <Select style={{ width: 120 }} onChange={handleOnChangeSelect} options={options} />
+      <Select style={{ width: 120 }} defaultValue={defaultValue} onChange={handleOnChangeSelect} options={options} />
     </div>
   );
 }
 
-function MultiSelector({ onChangeSelect, options }) {
+function MultiSelector({ onChangeSelect, options, width = 100, defaultValue }) {
   function handleOnChangeSelect(optionValue: any) {
     onChangeSelect(optionValue);
   }
   return (
     <div className="relative block">
-      <span className="mr-1">Status</span>
-
+      <span className="mr-1">Employees</span>
       <Select
         mode="multiple"
+        defaultValue={defaultValue}
         allowClear
-        style={{ width: 120 }}
+        style={{ width: width }}
         placeholder="Please select"
         onChange={handleOnChangeSelect}
         options={options}

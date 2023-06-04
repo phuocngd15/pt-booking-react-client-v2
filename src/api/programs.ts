@@ -4,6 +4,7 @@ import { getStorage } from '@/utils/storage';
 import type { UseInfoType } from '@/api/auth';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 const userInfo = getStorage<UseInfoType>('userInfo');
+
 export interface Programs {
   key?: string;
   serviceName: string;
@@ -20,7 +21,7 @@ export interface Programs {
   state?: string;
   responsibleEmployees?: any[];
 }
-// hang chuan, folder server la si da
+
 export const getPrograms = () =>
   deffHttp.get<Programs[]>(
     {
@@ -29,6 +30,16 @@ export const getPrograms = () =>
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );
+
+export const addNewProgram = (params: object) =>
+  deffHttp.post<Programs[]>(
+    {
+      url: `${rootServer}/api/programs/new`,
+      data: { ...params },
+    },
+    { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
+  );
+
 export const getTrainerByServiceId = (uuid: string) => {
   console.log('getTrainerByServiceId', uuid);
   return deffHttp.get<ITrainer[]>(
@@ -39,14 +50,12 @@ export const getTrainerByServiceId = (uuid: string) => {
     { errorMessageMode: 'modal', withToken: false },
   );
 };
-export const updatePrograms = (id: string, payload: { newValue: any; keyProperty: string }) => {
-  const newObj = {
-    [payload.keyProperty]: payload.newValue,
-  };
+
+export const updatePrograms = (id: string, params: object) => {
   return deffHttp.put<any>(
     {
       url: `${rootServer}/api/programs/${id}`,
-      data: { ...newObj },
+      data: { ...params },
     },
     { errorMessageMode: 'modal', useBearerToken: true, bearerToken: userInfo?.token },
   );

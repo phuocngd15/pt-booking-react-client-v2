@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Table, Tag } from 'antd';
 import type { Programs } from '@/api/programs';
-import { getPrograms, updateMultiplePropPrograms, updatePrograms } from '@/api/programs';
-import EditProgramType from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgramType';
-import EditRowData from '@/viewsSuperAdmin/ProgramsManagement/components/EditRowData';
-import EditResponsibleEmployees from '@/viewsSuperAdmin/ProgramsManagement/components/EditResponsibleEmployees';
-import { AddNewServiceForm } from '@/views/ServicesManagement/AddNewService';
-import CustomerSelector from '@/components/UserSelector/CustomerSelector';
-import TrainerSelector from '@/components/UserSelector/TrainerSelector';
+import { getPrograms } from '@/api/programs';
+import AddProgram from '@/viewsSuperAdmin/ProgramsManagement/components/AddProgram';
+import EditProgram from '@/viewsSuperAdmin/ProgramsManagement/components/EditProgram';
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 export default function ProgramsManagement() {
   const [data, setData] = useState<Programs[]>([]);
@@ -26,6 +22,7 @@ export default function ProgramsManagement() {
 
   return (
     <div>
+      <AddProgram />
       <DataTable
         data={data}
         refreshData={() => {
@@ -52,8 +49,8 @@ function DataTable({ data, refreshData }) {
         key="avatar"
         render={(image) => <img className="truncate w-36 hover:text-clip" src={image} />}
       />
-      <Column title="Description" dataIndex="description" key="description" />
-      <Column title="State" dataIndex="state" key="state" />
+      <Column title="Level" dataIndex="programLevel" key="programLevel" />
+      <Column title="Status" dataIndex="status" key="status" />
       <Column
         title="Employess"
         dataIndex="responsibleEmployees"
@@ -64,8 +61,8 @@ function DataTable({ data, refreshData }) {
       />
       <Column
         title="Type"
-        dataIndex="serviceType"
-        key="serviceType"
+        dataIndex="category"
+        key="category"
         render={(tags: string[]) => (
           <>
             {tags?.map((tag) => (
@@ -81,22 +78,23 @@ function DataTable({ data, refreshData }) {
         key="action"
         render={(value: any, record: any) => (
           <Space size="middle">
-            <EditRowData
-              title={'Edit Program'}
-              _id={record._id}
-              data={value}
-              updateFunction={updateMultiplePropPrograms}
-              refreshData={refreshData}
-            />
-            <EditProgramType
-              title="Edit Type Program"
-              keyProperty={'serviceType'}
-              updateFunction={updatePrograms}
-              data={record.serviceType}
-              refreshData={refreshData}
-              _id={record._id}
-              tags={record.serviceType}
-            />
+            <EditProgram id={record._id} objectData={value} callBack={refreshData} />
+            {/*<EditRowData*/}
+            {/*  title={'Edit Program'}*/}
+            {/*  _id={record._id}*/}
+            {/*  data={value}*/}
+            {/*  updateFunction={updateMultiplePropPrograms}*/}
+            {/*  refreshData={refreshData}*/}
+            {/*/>*/}
+            {/*<EditProgramType*/}
+            {/*  title="Edit Type Program"*/}
+            {/*  keyProperty={'category'}*/}
+            {/*  updateFunction={updatePrograms}*/}
+            {/*  data={record.category}*/}
+            {/*  refreshData={refreshData}*/}
+            {/*  _id={record._id}*/}
+            {/*  tags={record.category}*/}
+            {/*/>*/}
           </Space>
         )}
       />

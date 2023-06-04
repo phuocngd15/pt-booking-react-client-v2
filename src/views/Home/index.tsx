@@ -28,7 +28,7 @@ const Home = memo(() => {
     <div className="">
       <Row gutter={[12, 12]}>
         <Col lg={18} sm={24} xs={24}>
-          <Card size="small" title="Tickets">
+          <Card size="small" title="Tickets Analyst">
             <AreaChart data={dataAreaChart} />
           </Card>
         </Col>

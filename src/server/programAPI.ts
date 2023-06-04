@@ -72,3 +72,13 @@ export const getDetailTicketBooking = (ticketCode: string) => {
     { errorMessageMode: 'modal', withToken: false },
   );
 };
+
+export const getTicketsByState = (email, state) => {
+  return deffHttp.get<any>(
+    {
+      url: `http://localhost:3000/api/sessions/tickets/cus/${email}/${state}`,
+      data: {},
+    },
+    { errorMessageMode: 'modal', withToken: false },
+  );
+};
