@@ -8,6 +8,7 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 // @ts-expect-error
 import Highlighter from 'react-highlight-words';
 import { getDetailPt } from '@/server/getPTList';
+import EditTrainer from "@/viewsSuperAdmin/TrainerManagement/components/EditTrainer";
 
 interface DataType {
   key: React.Key;
@@ -23,9 +24,10 @@ interface DataType {
 
 export interface CustomTableProps {
   dataSource: any;
+  refreshData: Function;
 }
 
-const CustomTable: React.FC<CustomTableProps> = ({ dataSource }) => {
+const CustomTable: React.FC<CustomTableProps> = ({ dataSource, refreshData }) => {
   const [dataModal, setDataModal] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -166,19 +168,20 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource }) => {
         );
       },
     },
-    // {
-    //   title: 'Action',
-    //   dataIndex: '',
-    //   key: 'x',
-    //   render: () => {
-    //     return (
-    //       <div>
-    //         <a onClick={showModal}>Detail</a>
-    //         {/* <a>Delete</a> */}
-    //       </div>
-    //     );
-    //   },
-    // },
+    {
+      title: 'Action',
+      dataIndex: '',
+      key: 'x',
+      render: (value: any, record: any) => {
+        return (
+          <div>
+            <a onClick={showModal}>Detail</a>
+            {/* <a>Delete</a> */}
+            <EditTrainer id={record._id} objectData={value} callBack={refreshData} />
+          </div>
+        );
+      },
+    },
   ];
 
   const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {

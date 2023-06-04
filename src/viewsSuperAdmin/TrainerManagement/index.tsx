@@ -1,13 +1,10 @@
 import { memo, useEffect, useState } from 'react';
-
 import { Card, Spin } from 'antd';
 import Table from './components/Table';
-
-import { getPts } from '@/server/getPTList';
 import { getTrainers } from '@/api/trainer';
+import AddNewTrainer from '@/viewsSuperAdmin/TrainerManagement/components/AddNewTrainer';
 
 const PTManagement = memo(() => {
-  console.log('PTManagament');
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
@@ -16,17 +13,26 @@ const PTManagement = memo(() => {
         setData(res.data);
       }
     })();
-    return () => {
-      // cleanup logic here
-    };
+    return () => {};
   }, []);
 
   const renderTable = () => {
     if (!data.length) return <Spin />;
-    return <Table dataSource={data} />;
+    return (
+      <Table
+        refreshData={async () => {
+          const res = await getTrainers();
+          if (res.code === 1) {
+            setData(res.data);
+          }
+        }}
+        dataSource={data}
+      />
+    );
   };
   return (
     <div>
+      <AddNewTrainer />
       <Card title={<div className="text-2xl">Trainers</div>}>{renderTable()}</Card>
     </div>
   );
