@@ -2,7 +2,7 @@ import { Select } from 'antd';
 import React, { useState } from 'react';
 import { updateTrainerProfile } from '@/api/trainer';
 import { CustomBtnModal } from '@/views/ServicesManagement/components/CustomBtnModal';
-export default function EditTrainer({ id, objectData, callBack }) {
+export default function EditTrainer({ id, objectData, callBack }: any) {
   const [formData, setFormData] = useState<any>();
 
   //call API

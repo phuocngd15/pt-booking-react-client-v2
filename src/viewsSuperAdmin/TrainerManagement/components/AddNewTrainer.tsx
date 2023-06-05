@@ -199,7 +199,7 @@ function NewAccount({ onDataFormChange }: { onDataFormChange: Function }) {
 function FormAddNewProgramContainer({ onDataChange }: { onDataChange: Function }) {
   return (
     <div>
-      <div className="text-2xl mb-2">New Program Information</div>
+      <div className="text-2xl mb-2">New Trainer</div>
       <MultipleForm
         tabs={[
           {
