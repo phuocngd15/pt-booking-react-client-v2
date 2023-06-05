@@ -8,7 +8,7 @@ import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
 import BookingProgram from '@/viewsSuperAdmin/BookingProgram';
 
 const Home = lazy(() => import('@/views/Home'));
-const CusManagement = lazy(() => import('@/views/CusManagement'));
+const CusManagement = lazy(() => import('@/viewsSuperAdmin/CustomerManagement'));
 const PTManagement = lazy(() => import('@/viewsSuperAdmin/TrainerManagement'));
 const ProfilesView = lazy(() => import('@/views/Profile'));
 

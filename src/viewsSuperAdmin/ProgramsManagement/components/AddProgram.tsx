@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
-import { CustomBtnModal } from '@/views/ServicesManagement/components/CustomBtnModal';
+import { CustomBtnModal } from '@/components/CustomBtnModal';
 import TrainerSelector from '@/components/UserSelector/TrainerSelector';
 import { addNewProgram } from '@/api/programs';
 

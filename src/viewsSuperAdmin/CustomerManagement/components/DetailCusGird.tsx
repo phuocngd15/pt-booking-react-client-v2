@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Modal, Row } from 'antd';
 import { useAppSelector } from '@/store/hooks';
-import type { FieldData } from '@/views/CusManagement/components/EditCusForm';
-import { CustomizedForm } from '@/views/CusManagement/components/EditCusForm';
+import type { FieldData } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
+import { CustomizedForm } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
 import { GeneralSession } from '@/components/Uncategorized/GeneralSession';
 import { BookingIndex } from '@/views/Booking';
 import dayjs from 'dayjs';

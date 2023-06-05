@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
-import { MultipleForm } from '../components/MultipleForm';
-import { CustomBtnModal } from '@/views/ServicesManagement/components/CustomBtnModal';
+import { MultipleForm } from '../../../components/MultipleForm';
+import { CustomBtnModal } from '@/components/CustomBtnModal';
 import { ServiceForm1 } from '@/views/ServicesManagement/components/Forms';
-import type { FieldData } from '@/views/CusManagement/components/EditCusForm';
+import type { FieldData } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
 import { addNewService } from '@/server/serviceAPI';
 
 const { Title } = Typography;

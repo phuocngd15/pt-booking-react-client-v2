@@ -22,8 +22,8 @@ import { UserOutlined } from '@ant-design/icons';
 import CustomDropdown from '@/views/Booking/components/CustomDropdown';
 import { getPts } from '@/server/getPTList';
 import './styles/index.less';
-import type { FieldData } from '@/views/CusManagement/components/EditCusForm';
-import { CustomizedForm } from '@/views/CusManagement/components/EditCusForm';
+import type { FieldData } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
+import { CustomizedForm } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
 
 const { Footer, Content } = Layout;
 const format = 'HH:mm';

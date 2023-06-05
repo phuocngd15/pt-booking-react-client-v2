@@ -11,7 +11,7 @@ export default function TicketManagement() {
       const result = await getAllTickets();
       if (result.code) {
         console.log('tickets', result.data);
-        result.data.forEach((e, i) => (e.key = (i + 1).toString()));
+        result.data.forEach((e: any, i: number) => (e['key'] = (i + 1).toString()));
         setData(result.data);
       }
     })();
@@ -21,16 +21,16 @@ export default function TicketManagement() {
   const refreshData = () => {
     getAllTickets().then((result) => {
       if (result.code) {
-        result.data.forEach((e, i) => (e.key = (i + 1).toString()));
+        result.data.forEach((e: any, i: number) => (e['key'] = (i + 1).toString()));
         setData(result.data);
       }
     });
   };
 
-  const handleConfirmTicket = async (id) => {
+  const handleConfirmTicket = async (id: any) => {
     confirmTicket(id).then(refreshData);
   };
-  const handleVoidTicket = async (id) => {
+  const handleVoidTicket = async (id: any) => {
     cancelTicket(id).then(refreshData);
   };
   const handleFilterTicketByState = (state: number) => {

@@ -27,6 +27,8 @@
     "@fullcalendar/interaction": "^6.1.4",
     "@fullcalendar/react": "^6.1.4",
     "@fullcalendar/timegrid": "^6.1.4",
+    "@googlemaps/js-api-loader": "^1.15.2",
+    "@googlemaps/markerclusterer": "^2.2.1",
     "@headlessui/react": "^1.7.13",
     "@mediapipe/tasks-vision": "^0.10.0",
     "@reduxjs/toolkit": "^1.9.2",

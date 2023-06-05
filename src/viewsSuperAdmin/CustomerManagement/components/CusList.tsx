@@ -8,7 +8,7 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 import { changeStateDetailCus } from '@/store/modules/customer';
 import { useAppDispatch } from '@/store/hooks';
 import { CustomTable } from '@/components/TableAnt';
-import { DetailCusGrid } from '@/views/CusManagement/components/DetailCusGird';
+import { DetailCusGrid } from '@/viewsSuperAdmin/CustomerManagement/components/DetailCusGird';
 
 interface DataType {
   key: React.Key;

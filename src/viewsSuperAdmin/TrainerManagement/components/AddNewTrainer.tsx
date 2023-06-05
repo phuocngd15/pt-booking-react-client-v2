@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
-import { CustomBtnModal } from '@/views/ServicesManagement/components/CustomBtnModal';
-import { MultipleForm } from '@/views/ServicesManagement/components/MultipleForm';
+import { CustomBtnModal } from '@/components/CustomBtnModal';
+import { MultipleForm } from '@/components/MultipleForm';
 import { addNewTrainer } from '@/api/trainer';
 
 export default function AddNewTrainer() {

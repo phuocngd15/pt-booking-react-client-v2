@@ -8,7 +8,7 @@ import type { FilterConfirmProps } from 'antd/es/table/interface';
 // @ts-expect-error
 import Highlighter from 'react-highlight-words';
 import { getDetailPt } from '@/server/getPTList';
-import EditTrainer from "@/viewsSuperAdmin/TrainerManagement/components/EditTrainer";
+import EditTrainer from '@/viewsSuperAdmin/TrainerManagement/components/EditTrainer';
 
 interface DataType {
   key: React.Key;
