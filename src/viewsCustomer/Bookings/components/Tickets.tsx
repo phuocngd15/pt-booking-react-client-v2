@@ -46,6 +46,8 @@ interface TicketProps {
   programName?: string;
   trainerName?: string;
   customerName?: string;
+  locationName?: string;
+  ticketId?: string;
 }
 export function Ticket({
   startTime,
@@ -55,6 +57,7 @@ export function Ticket({
   trainerName,
   programName,
   customerName,
+  locationName,ticketId
 }: TicketProps) {
   const ticketRef = React.useRef();
   //const { startTime, endTime } = data ?? { startTime: '9:00 AM', endTime: '12:00 PM' };
@@ -99,13 +102,15 @@ export function Ticket({
       </button>
       <div
         ref={ticketRef}
-        className="flex flex-col items-center border bg-white rounded-lg overflow-hidden shadow-lg p-7  "
+        className="flex flex-col items-center border bg-white rounded-lg overflow-hidden shadow-lg p-7 space-y-2 "
       >
-        <div className="text-xl font-semibold mb-4">{programName}</div>
-        <div className="text-gray-500 mb-2 font-medium">
+        <div className="text-xl font-semibold ">{programName}</div>
+        <div className="font-semibold">{locationName}</div>
+
+        <div className="text-gray-500  font-medium">
           {dayjs(startTime).tz('Asia/Ho_Chi_Minh').format('dddd DD-MM-YYYY')}
         </div>
-        <div className="text-gray-500 mb-2">
+        <div className="text-gray-500 ">
           <span className="font-medium">Time: </span>
           {dayjs(startTime).tz('Asia/Ho_Chi_Minh').format('h:mm')}
           <span className="font-medium"> - </span>
@@ -114,20 +119,10 @@ export function Ticket({
         <div className="text-gray-500">
           <span className="font-medium">Trainer: {trainerName}</span>
         </div>{' '}
-        <div className="text-gray-500 mb-4">
+        <div className="text-gray-500">
           <span className="font-medium">Customer: {customerName}</span>
         </div>
-        <QRCode
-          value={JSON.stringify({
-            startTime,
-            endTime,
-            createdAt,
-            status,
-            trainerName,
-            programName,
-            customerName,
-          })}
-        />
+        <QRCode value={JSON.stringify(ticketId)} />
       </div>
     </div>
   );

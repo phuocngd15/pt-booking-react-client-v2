@@ -17,11 +17,15 @@ import { bookingSession } from '@/server/programAPI';
 import { getStorage } from '@/utils/storage';
 import type { UseInfoType } from '@/api/auth';
 import { Ticket } from '@/viewsCustomer/Bookings/components/Tickets';
+import SelectLocationStep from '@/viewsLoggedInCustomer/BookingStepByStep/component/SelectLocationStep';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const stepItems = [
   { title: 'SELECT ClASS' },
+  {
+    title: 'SELECT LOCATION',
+  },
   {
     title: 'SELECT TRAINER',
   },
@@ -38,6 +42,7 @@ const stepItems = [
 export default function BookingStepByStep() {
   const [selectStep, setSelectStep] = useState(0);
   const [selectedProgram, setSelectedProgram] = useState<Programs>();
+  const [selectedLocation, setSelectedLocation] = useState<any>();
   const [selectedTrainer, setSelectedTrainer] = useState<ITrainer>();
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs().add(1, 'day'));
   const [selectedTime, setSelectedTime] = useState<Dayjs>();
@@ -127,9 +132,6 @@ export default function BookingStepByStep() {
   const onSubmit = async () => {
     enterLoading(0);
     const userInfo = getStorage<UseInfoType>('userInfo');
-    console.log('userInfo', userInfo);
-    console.log('selectedTrainer', selectedTrainer);
-
     const params = {
       programsUUID: selectedProgram?._id,
       trainerUUID: selectedTrainer?._id,
@@ -138,6 +140,7 @@ export default function BookingStepByStep() {
       cusName: userInfo?.profile.fullName,
       cusPhone: userInfo?.profile.phone,
       cusEmail: userInfo?.profile.email,
+      gymCenterUUID: selectedLocation?._id,
     };
     if (!params.programsUUID) {
       warning('please chose programs');
@@ -178,6 +181,13 @@ export default function BookingStepByStep() {
               />
             </div>
             <div hidden={selectStep !== 1}>
+              <div className="text-amber-600 font-bold">SELECT LOCATION</div>
+              <SelectLocationStep
+                onSelect={(e) => setSelectedLocation(e)}
+                selectedLocations={selectedLocation}
+              />
+            </div>
+            <div hidden={selectStep !== 2}>
               <div className="text-amber-600 font-bold">SELECT TRAINER (optional)</div>
               <TrainerCarousel
                 trainers={selectedProgram?.responsibleEmployees}
@@ -185,7 +195,7 @@ export default function BookingStepByStep() {
                 selectedTrainer={selectedTrainer}
               />
             </div>
-            <div hidden={selectStep !== 2}>
+            <div hidden={selectStep !== 3}>
               <div className="grid grid-cols-2 gap-5">
                 <div>
                   <div className="text-amber-600 font-bold">DATE</div>
@@ -200,12 +210,13 @@ export default function BookingStepByStep() {
                 </div>
               </div>
             </div>
-            <div hidden={selectStep !== 3}>
+            <div hidden={selectStep !== 4}>
               <div>
                 {contextHolder}
                 <div className="text-xl font-bold">REVIEW INFORMATION BOOKING</div>
                 <div className="text-lg ">Class: {selectedProgram?.serviceName}</div>
                 <div className="text-lg ">Trainer: {selectedTrainer?.fullName}</div>
+                <div className="text-lg ">Location: {selectedLocation?.centerName}</div>
                 <div className="text-lg ">
                   Date: {dayjs(selectedTime).tz('Asia/Ho_Chi_Minh').format('DD-MM-YYYY')}
                 </div>
@@ -218,7 +229,7 @@ export default function BookingStepByStep() {
                 </Button>
               </div>
             </div>
-            <div hidden={selectStep !== 4 || ticketBookingResult === undefined}>
+            <div hidden={selectStep !== 5 || ticketBookingResult === undefined}>
               <div>
                 <div>Thanks for booking, this is your ticket</div>
                 <div>

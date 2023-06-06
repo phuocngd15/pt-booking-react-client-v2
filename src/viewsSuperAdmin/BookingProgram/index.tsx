@@ -1,10 +1,9 @@
-import { Button, Card, Col, Row, message, Steps, Input } from 'antd';
+import { Button, Card, Col, Row, message, Steps } from 'antd';
 import React, { useEffect, useState } from 'react';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { UserOutlined } from '@ant-design/icons';
 import type { ServicePrototype } from '@/server/programAPI';
 import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 import DateSelection from '@/viewsCustomer/Bookings/components/DateSelection';
@@ -15,9 +14,8 @@ import { getAllSessionAvailableOfTrainerByDate } from '@/api/tickets';
 import { getPrograms } from '@/api/programs';
 import TrainerCarousel from '@/viewsLoggedInCustomer/BookingStepByStep/component/TrainerCarousel';
 import { bookingSession } from '@/server/programAPI';
-import { getStorage } from '@/utils/storage';
-import type { UseInfoType } from '@/api/auth';
 import { Ticket } from '@/viewsCustomer/Bookings/components/Tickets';
+import SelectLocationStep from '@/viewsLoggedInCustomer/BookingStepByStep/component/SelectLocationStep';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -49,6 +47,7 @@ export default function BookingProgram() {
   const [selectedTrainer, setSelectedTrainer] = useState<ITrainer>();
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs().add(1, 'day'));
   const [selectedTime, setSelectedTime] = useState<Dayjs>();
+  const [selectedLocation, setSelectedLocation] = useState<any>();
 
   const [programs, setPrograms] = useState<Programs[]>();
   const [availableSession, setAvailableSession] = useState<Dayjs[]>();
@@ -60,14 +59,14 @@ export default function BookingProgram() {
 
   const [ticketBookingResult, setTicketBookingResult] = useState<any>(undefined);
 
-  const warning = (content) => {
+  const warning = (content: any) => {
     messageApi.open({
       type: 'warning',
       content: content,
     });
   };
   //select programf
-  const onSelectProgram = async (e: ServicePrototype) => {
+  const onSelectProgram = async (e: Programs) => {
     console.log('onSelectService', e);
     setSelectedProgram(e);
   };
@@ -135,9 +134,6 @@ export default function BookingProgram() {
 
   const onSubmit = async () => {
     enterLoading(0);
-    console.log('userInfo', userInfo);
-    console.log('selectedTrainer', selectedTrainer);
-
     const params = {
       programsUUID: selectedProgram?._id,
       trainerUUID: selectedTrainer?._id,
@@ -146,6 +142,7 @@ export default function BookingProgram() {
       cusName: userInfo?.fullName,
       cusPhone: userInfo?.phone,
       cusEmail: userInfo?.email,
+      gymCenterUUID: selectedLocation?._id,
     };
     if (!params.programsUUID) {
       warning('please chose programs');
@@ -161,7 +158,7 @@ export default function BookingProgram() {
     //dispatch(createBookingTicket(params));
   };
 
-  const handleOnchangeUserProfile = (newProfile) => {
+  const handleOnchangeUserProfile = (newProfile: any) => {
     setUserInfo(newProfile);
   };
 
@@ -249,6 +246,13 @@ export default function BookingProgram() {
               />
             </div>
             <div hidden={selectStep !== 2}>
+              <div className="text-amber-600 font-bold">SELECT ClASS</div>
+              <SelectLocationStep
+                onSelect={(e) => setSelectedLocation(e)}
+                selectedLocations={selectedLocation}
+              />
+            </div>
+            <div hidden={selectStep !== 3}>
               <div className="text-amber-600 font-bold">SELECT TRAINER (optional)</div>
               <TrainerCarousel
                 trainers={selectedProgram?.responsibleEmployees}
@@ -256,7 +260,7 @@ export default function BookingProgram() {
                 selectedTrainer={selectedTrainer}
               />
             </div>
-            <div hidden={selectStep !== 3}>
+            <div hidden={selectStep !== 4}>
               <div className="grid grid-cols-2 gap-5">
                 <div>
                   <div className="text-amber-600 font-bold">DATE</div>
@@ -271,7 +275,7 @@ export default function BookingProgram() {
                 </div>
               </div>
             </div>
-            <div hidden={selectStep !== 4}>
+            <div hidden={selectStep !== 5}>
               <div>
                 {contextHolder}
                 <div className="text-xl font-bold">REVIEW INFORMATION BOOKING</div>
@@ -289,7 +293,7 @@ export default function BookingProgram() {
                 </Button>
               </div>
             </div>
-            <div hidden={selectStep !== 5 || ticketBookingResult === undefined}>
+            <div hidden={selectStep !== 6 || ticketBookingResult === undefined}>
               <div>
                 <div>Thanks for booking, this is your ticket</div>
                 <div>

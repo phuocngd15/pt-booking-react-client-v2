@@ -1,13 +1,14 @@
 import React from 'react';
 import type { Settings } from 'react-slick';
 import Slider from 'react-slick';
+import { Card } from 'antd';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Card } from 'antd';
-const { Meta } = Card;
+import useGymCenters from '@/hooks/useGymCenters';
 
-export default function ProgramsCarousel({ programs, onSelect, selectedProgram }: {programs :any, onSelect:any, selectedProgram:any}) {
-  console.log('propgrams prps', programs);
+const { Meta } = Card;
+export default function SelectLocationStep({ onSelect, selectedLocations }) {
+  const [gymCenters] = useGymCenters({ isDefaultGet: true });
   const settings: Settings = {
     dots: true,
     infinite: false,
@@ -47,17 +48,17 @@ export default function ProgramsCarousel({ programs, onSelect, selectedProgram }
   return (
     <div style={{ width: 'auto', height: 300 }}>
       <Slider {...settings}>
-        {programs?.map((e) => {
-          const selected = e._id === selectedProgram?._id;
+        {gymCenters?.map((e) => {
+          const selected = e._id === selectedLocations?._id;
           const styleBtn = selected ? { color: 'red', fontSize: 15, fontWeight: 500 } : {};
           return (
             <Card
-              key={e.serviceName}
+              key={e.centerName}
               style={{ width: 240, height: 100, borderColor: 'red' }}
               cover={
                 <img
-                  alt="yoga class"
-                  src={e.avatar}
+                  alt="location"
+                  src={e.centerImageMain}
                   style={{ width: '-webkit-fill-available', maxHeight: 100 }}
                 />
               }
@@ -67,7 +68,7 @@ export default function ProgramsCarousel({ programs, onSelect, selectedProgram }
                 </div>,
               ]}
             >
-              <Meta title={e.serviceName} description={e.description} />
+              <Meta title={e.centerName} description={e.centerAddressStr} />
             </Card>
           );
         })}

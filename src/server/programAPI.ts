@@ -4,14 +4,6 @@ import type { ITrainer } from '@/server/InterfaceMappingDataServer';
 import { rootServer } from '@/api/rootServer';
 export type serviceState = 'active' | 'pending' | 'planing';
 
-// export interface ServicePrototype {
-//   duration: string;
-//   serviceName: string;
-//   staffs?: [];
-//   canBookBefore?: boolean;
-//   serviceType?: string[];
-//   state?: serviceState;
-// }
 
 export interface ServicePrototype {
   serviceName: string;

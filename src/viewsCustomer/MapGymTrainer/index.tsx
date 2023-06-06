@@ -33,6 +33,7 @@ export default function MapGymTrainer() {
       const gymCenters: GymCenterInfo[] = [];
       if (result.code === 1) {
         result.data?.forEach((e: any) => {
+          if (e.centerName === 'Online') return;
           const location: GeneralLocationInfo = {
             label: e?.centerGGLabelMaker,
             contentString: e?.centerGGContent,

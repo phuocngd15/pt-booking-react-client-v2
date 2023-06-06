@@ -77,6 +77,8 @@ export default function CusCalendar() {
               trainerName={selectedEvent?._def.extendedProps?.trainerUUID?.fullName}
               customerName={selectedEvent?._def.extendedProps?.customerUUID?.fullName}
               programName={selectedEvent?._def.extendedProps?.programUUID?.serviceName}
+              locationName={selectedEvent?._def.extendedProps?.gymCenterUUID?.centerName}
+              ticketId={selectedEvent?._def.extendedProps?._id}
             />
           </Modal>
         </div>
