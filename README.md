@@ -4,8 +4,6 @@
 </a>
 </div>
 
-**English** | [中文](./README.CN.md)
-
 ## Brief Introduction
 
 The out of the box background template developed based on mainstream technologies such as `React18`,`And Design`,`Vite4`, and the built-in internationalization, routing permission control and other solutions can meet the needs of most enterprise management systems!
@@ -20,7 +18,7 @@ The out of the box background template developed based on mainstream technologie
 
 - **Permission**: Permission Routing
 
-## 预览
+##
 
 <img src="https://www.jsxiaosi.com/image/react-xs-admin1.png?max=xiaosi" width="100%">
 

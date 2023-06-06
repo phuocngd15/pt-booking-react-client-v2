@@ -47,8 +47,10 @@ const Index = () => {
                 className="mr-auto flex-none text-slate-900"
                 onClick={() => onClick('/customer/home')}
               >
-                <span className="sr-only">Booking PT</span>
-                <AppLogo />
+                <div className="flex align-baseline space-x-3">
+                  <AppLogo />
+                  <span className="text-2xl">PT-Booking</span>
+                </div>
               </button>
               <div className="hidden md:flex md:items-center">
                 <button onClick={() => onClick('/customer/home')}>HOME</button>
