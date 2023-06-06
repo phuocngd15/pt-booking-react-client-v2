@@ -1,87 +1,109 @@
 import React, { useEffect } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
 import { stylesSilver } from '@/viewsCustomer/MapGymTrainer/constant';
+//reference https://jsfiddle.net/pw9kt2sg/1/
+//https://console.cloud.google.com/apis/credentials?project=pt-booking-001
+//https://jsfiddle.net/geocodezip/kwxazdgp/7/
+export interface GeneralLocationInfo {
+  position: {};
+  contentString: string;
+  label: string;
+}
 
-const GoogleMap = ({ userLocation }: { userLocation: any }) => {
-  useEffect(() => {
-    if (!userLocation) return;
+const GoogleMap = ({ locations }: { locations: GeneralLocationInfo[] }) => {
+  let map: any;
+  let marker: any;
+  let infowindow: any;
 
-    const locations = [
-      userLocation,
-      {
-        position: { lat: 10.984571001127811, lng: 106.66716863206851 },
-        contentString: 'Location 1',
-        label: 'A',
-      },
-      {
-        position: { lat: 10.980915601259877, lng: 106.67333310905951 },
-        contentString: 'Location 2',
-        label: 'B',
-      },
-      // Add more locations as needed...
-    ];
-    const loadMap = () => {
-      const center = locations[0].position;
-      const defaultZoom = 15;
-      const loader = new Loader({
-        apiKey: '',
-        version: 'weekly',
+  const VIETNAM_BOUNDS = {
+    north: 23.4,
+    south: 8.18,
+    west: 102.14,
+    east: 109.46,
+  };
+  const mapOptions = {
+    zoom: 15,
+    styles: stylesSilver,
+    streetViewControl: false,
+    mapTypeControl: false,
+    restriction: {
+      latLngBounds: VIETNAM_BOUNDS,
+      strictBounds: false,
+    },
+  };
+
+  // re pan when have new location //3.1656120,101.6504025, ;
+  function pan(latlon: {}) {
+    // const coords = latlon.split(",");
+    // const panPoint = new window?.google?.maps?.LatLng(coords[0], coords[1]);
+    // marker?.setPosition(panPoint);
+    // // shadow.setPosition(panPoint);
+    // map?.panTo(panPoint);
+    // map?.setZoom(15);
+  }
+
+  function initMap() {
+    console.log('locations', locations);
+    console.log('window.google.maps', window.google.maps);
+    const { Map, InfoWindow, Marker } = window.google.maps;
+    //const { AdvancedMarkerElement, PinElement } = window.google.maps.Marker;
+
+    map = new Map(document.getElementById('map'), mapOptions);
+
+    const markers: any[] = [];
+
+    locations.forEach((location) => {
+      const { position, contentString, label } = location;
+
+      const infoWindow = new InfoWindow({
+        content: contentString,
+        ariaLabel: label,
       });
 
+      const marker = new Marker({
+        position,
+        label,
+        map,
+      });
+
+      marker.addListener('click', () => {
+        infoWindow.open({
+          anchor: marker,
+          map,
+        });
+      });
+      markers.push(marker);
+    });
+
+    // Ẩn tất cả các nhãn trên bản đồ
+    // Hide markers for locations not in the locations array
+    // bound nay de thay toan canh cac dia diem gan nhau.
+
+    const bounds = new window.google.maps.LatLngBounds();
+    markers?.forEach((marker) => {
+      bounds.extend(marker.getPosition());
+    });
+    map.fitBounds(bounds);
+    map.setZoom(Math.min(map.getZoom(), 15));
+  }
+
+  useEffect(() => {
+    const loadGoogleMap = () => {
+      const configLoader = {
+        apiKey: '',
+        version: 'weekly',
+      };
+      const loader = new Loader(configLoader);
+
       loader.load().then((e) => {
-        console.log("window.google.maps",window.google.maps)
-        const { Map, InfoWindow, Marker } = window.google.maps;
-        //const { AdvancedMarkerElement, PinElement } = window.google.maps.Marker;
+        if (!window.google?.maps) return;
 
-        console.log('e', e);
-        const map = new Map(document.getElementById('map'), {
-          zoom: defaultZoom,
-          center,
-          streetViewControl: false,
-          mapTypeControl: false,
-        });
-        map.setOptions({ styles: stylesSilver });
-
-        const markers = [];
-
-        locations.forEach((location) => {
-          const { position, contentString, label } = location;
-
-          const infoWindow = new InfoWindow({
-            content: contentString,
-            ariaLabel: label,
-          });
-
-          const marker = new Marker({
-            position,
-            label,
-            map,
-          });
-
-          marker.addListener('click', () => {
-            infoWindow.open({
-              anchor: marker,
-              map,
-            });
-          });
-          // markers.push(marker);
-        });
-
-        // Ẩn tất cả các nhãn trên bản đồ
-        // Hide markers for locations not in the locations array
-        // const bounds = new window.google.maps.LatLngBounds();
-        // markers?.forEach((marker) => {
-        //   bounds.extend(marker.getPosition());
-        // });
-        // map.fitBounds(bounds);
-        // map.setZoom(Math.min(map.getZoom(), defaultZoom));
+        initMap();
       });
     };
 
-    loadMap();
-  }, [userLocation]);
-  console.log("window.google.maps after load",window.google.maps)
+    loadGoogleMap();
+  }, [locations]);
 
   return <div id="map" style={{ height: '400px' }} />;
 };
