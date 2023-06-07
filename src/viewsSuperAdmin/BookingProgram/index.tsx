@@ -21,15 +21,16 @@ dayjs.extend(timezone);
 
 const stepItems = [
   { title: 'CUSTOMER INFO' },
-  { title: 'SELECT ClASS' },
+  { title: 'ClASS' },
+  { title: 'LOCATION' },
   {
-    title: 'SELECT TRAINER',
+    title: 'TRAINER',
   },
   {
-    title: 'SELECT TIME',
+    title: 'TIME',
   },
   {
-    title: 'REVIEW BOOKING',
+    title: 'REVIEW',
   },
   {
     title: 'Done',
@@ -177,7 +178,7 @@ export default function BookingProgram() {
           </Card>
         </Col>
         <Col lg={20} sm={24} xs={24}>
-          <Card>
+          <Card style={{ height: 450 }}>
             <div hidden={selectStep !== 0}>
               <div className="text-amber-600 font-bold">CUSTOMER INFO</div>
               <div className="space-y-3 w-96">
@@ -246,7 +247,7 @@ export default function BookingProgram() {
               />
             </div>
             <div hidden={selectStep !== 2}>
-              <div className="text-amber-600 font-bold">SELECT ClASS</div>
+              <div className="text-amber-600 font-bold">SELECT LOCATION</div>
               <SelectLocationStep
                 onSelect={(e) => setSelectedLocation(e)}
                 selectedLocations={selectedLocation}
@@ -281,6 +282,7 @@ export default function BookingProgram() {
                 <div className="text-xl font-bold">REVIEW INFORMATION BOOKING</div>
                 <div className="text-lg ">Class: {selectedProgram?.serviceName}</div>
                 <div className="text-lg ">Trainer: {selectedTrainer?.fullName}</div>
+                <div className="text-lg ">Location: {selectedLocation?.centerName}</div>
                 <div className="text-lg ">
                   Date: {dayjs(selectedTime).tz('Asia/Ho_Chi_Minh').format('DD-MM-YYYY')}
                 </div>
@@ -306,6 +308,8 @@ export default function BookingProgram() {
                     startTime={ticketBookingResult?.startTime}
                     endTime={ticketBookingResult?.endTime}
                     programName={ticketBookingResult?.programUUID?.serviceName}
+                    locationName={ticketBookingResult?.gymCenterUUID?.centerName}
+                    ticketId={ticketBookingResult?._id}
                   />
                 </div>
               </div>

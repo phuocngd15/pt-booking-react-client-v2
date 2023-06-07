@@ -159,9 +159,7 @@ function FormAddNewProgram({
               }}
               options={[
                 { value: 'Online-1-1', label: 'Online-1-1' },
-                { value: 'Online-1-N', label: 'Online-1-N' },
                 { value: 'Offline-1-1', label: 'Offline-1-1' },
-                { value: 'Offline-1-N', label: 'Offline-1-N' },
               ]}
             />
           </label>

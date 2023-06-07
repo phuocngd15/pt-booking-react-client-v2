@@ -2,12 +2,50 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { cloneDeep } from 'lodash-es';
 import { Disclosure } from '@headlessui/react';
-
+import type { MenuProps } from 'antd';
+import { Dropdown, Space } from 'antd';
+import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { AppLogo } from '@/components/AppLogo';
 import { useAppSelector } from '@/store/hooks';
+
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(' ');
 };
+
+function PropGramDropdown() {
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="http://localhost:5174/customer/strengthProgram">
+          Strength Training
+        </a>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="http://localhost:5174/customer/YogaProgram"
+        >
+          Yoga
+        </a>
+      ),
+    }
+  ];
+  return (
+    <Dropdown menu={{ items }}>
+      <button onClick={(e) => e.preventDefault()}>
+        <Space>
+          PROGRAMS
+          <DownOutlined />
+        </Space>
+      </button>
+    </Dropdown>
+  );
+}
 
 const Index = () => {
   const navigate = useNavigate();
@@ -53,7 +91,8 @@ const Index = () => {
                 </div>
               </button>
               <div className="hidden md:flex md:items-center">
-                <button onClick={() => onClick('/customer/home')}>HOME</button>
+                {/*<button onClick={() => onClick('/customer/home')}>PROGRAMS</button>*/}
+                <PropGramDropdown />
                 <button className="ml-8" onClick={() => onClick('/customer/trainers')}>
                   TRAINERS
                 </button>

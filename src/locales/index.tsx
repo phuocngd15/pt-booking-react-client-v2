@@ -2,9 +2,11 @@ import type { IntlShape, MessageDescriptor } from 'react-intl';
 import { createIntl, useIntl, FormattedMessage as IntFormattedMessage } from 'react-intl';
 import en_US from './en_US';
 import zh_CN from './zh_CN';
+import vi_VN from './vi_VN';
 
 export const localeConfig = {
   'en-US': en_US,
+  'vi-VN': vi_VN,
   'zh-CN': zh_CN,
 };
 

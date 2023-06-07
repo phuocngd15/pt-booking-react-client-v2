@@ -168,9 +168,8 @@ export const CusList: React.FC<CusListProps> = memo(({ dataSource }) => {
           </Card>
         </Col>
         <Col lg={16} sm={24} xs={24}>
-          <Card size="small" title="">
+
             <DetailCusGrid />
-          </Card>
         </Col>
       </Row>
     </>

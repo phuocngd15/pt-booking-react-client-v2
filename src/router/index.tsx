@@ -8,6 +8,8 @@ import ChangePwdForm from '@/views/Login/ChangePwdForm';
 import HealthCheck from '@/viewsCustomer/HealthCheck';
 import DetailTrainerInfo from '@/views/DetailTrainerInfo';
 import MapGymTrainer from '@/viewsCustomer/MapGymTrainer';
+import StrengthProgram from "@/viewsCustomer/ProgramIntro/StrengthProgram";
+import YogaProgram from "@/viewsCustomer/ProgramIntro/YogaProgram";
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
@@ -83,6 +85,14 @@ export const baseRouter: RouteObject[] = [
       {
         path: '/customer/mapGymRoom',
         element: <MapGymTrainer />,
+      },
+      {
+        path: '/customer/strengthProgram',
+        element: <StrengthProgram />,
+      },
+      {
+        path: '/customer/yogaProgram',
+        element: <YogaProgram />,
       },
       {
         path: '/customer/ticketSearching',

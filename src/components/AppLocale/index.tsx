@@ -13,6 +13,7 @@ const Locale = memo(() => {
   const menuItems: MenuProps['items'] = useMemo(() => {
     return [
       { label: 'English', key: 'en-US', disabled: locale === 'en-US' },
+      { label: 'VietName', key: 'vi-VN', disabled: locale === 'vi-VN' },
       { label: '中文', key: 'zh-CN', disabled: locale === 'zh-CN' },
     ];
   }, [locale]);

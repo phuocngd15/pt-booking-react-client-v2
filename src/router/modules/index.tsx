@@ -6,6 +6,7 @@ import WorkoutCounter from '@/views/DetectPuspup';
 import ProgramsManagement from '@/viewsSuperAdmin/ProgramsManagement';
 import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
 import BookingProgram from '@/viewsSuperAdmin/BookingProgram';
+import GymCenterManagement from "@/viewsSuperAdmin/GymCenterManagement";
 
 const Home = lazy(() => import('@/views/Home'));
 const CusManagement = lazy(() => import('@/viewsSuperAdmin/CustomerManagement'));
@@ -47,12 +48,6 @@ const defaultRoute: RouteList[] = [
     element: <CusCalendar />,
     meta: { label: 'Calendar', icon: <CalendarOutlined /> },
   },
-  // {
-  //   path: '/calendar',
-  //   id: 'AdminCalendar',
-  //   element: <AdminCalendar />,
-  //   meta: { label: 'AdminCalendar', icon: <CalendarOutlined /> },
-  // },
   {
     path: '/calendar',
     id: 'TrainerCalendar',
@@ -75,19 +70,19 @@ const defaultRoute: RouteList[] = [
     path: '/booking',
     id: 'BookingsView',
     element: <BookingStepByStep />,
-    meta: { label: 'Booking', icon: <BookOutlined /> },
+    meta: { label: FormattedMessage({ id: 'layout.memu.Booking' }), icon: <BookOutlined /> },
   },
   {
     path: '/adBooking',
     id: 'adBookingsView',
     element: <BookingProgram />,
-    meta: { label: 'Booking', icon: <BookOutlined /> },
+    meta: { label: FormattedMessage({ id: 'layout.memu.Booking' }), icon: <BookOutlined /> },
   },
   {
     path: '/accounts-management',
     id: 'AccountsManagement',
     element: <AccountsManagement />,
-    meta: { label: 'Accounts' },
+    meta: { label: FormattedMessage({ id: 'layout.memu.Accounts' }) },
   },
   {
     path: '/cus-management',
@@ -112,20 +107,19 @@ const defaultRoute: RouteList[] = [
   {
     path: '/classRooms-management',
     id: 'ClassRoomsManagemen',
-    //  element: <ServicesManagement />,
     element: <ProgramsManagement />,
     meta: {
-      label: 'Programs',
+      label: FormattedMessage({ id: 'layout.memu.Programs' }),
     },
   },
-  // {
-  //   path: '/timeSlot-management',
-  //   id: 'TimeSlot ',
-  //   element: <TimeSlotManagement />,
-  //   meta: {
-  //     label: FormattedMessage({ id: 'layout.memu.TimeSlotManagemen' }),
-  //   },
-  // },
+  {
+    path: '/gymCenter-Management',
+    id: 'GymCenterManagement',
+    element: <GymCenterManagement />,
+    meta: {
+      label: FormattedMessage({ id: 'layout.memu.GymCenter' }),
+    },
+  },
 ];
 
 export default defaultRoute;

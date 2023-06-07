@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Modal, Row } from 'antd';
+import dayjs from 'dayjs';
 import { useAppSelector } from '@/store/hooks';
 import type { FieldData } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
 import { CustomizedForm } from '@/viewsSuperAdmin/CustomerManagement/components/EditCusForm';
 import { GeneralSession } from '@/components/Uncategorized/GeneralSession';
 import { BookingIndex } from '@/views/Booking';
-import dayjs from 'dayjs';
 
 export const DetailCusGrid = () => {
   const customerDetail = useAppSelector((state) => state.customer.detailInfo);
   console.log('customerDetail', customerDetail);
+
   const [fields, setFields] = useState<FieldData[]>([]);
   useEffect(() => {
     setFields([
@@ -38,50 +39,54 @@ export const DetailCusGrid = () => {
         setIsOpenModal2(false);
     }
   };
+  // console.log("customerDetail",customerDetail)
+  if (!customerDetail.fullName) return <div />;
   return (
-    <Row gutter={[12, 12]}>
-      <Col lg={24} sm={24} xs={24}>
-        <GeneralSession
-          OpenModalFunc={handleOpenForm}
-          Name={customerDetail.fullName}
-          RoleName={'khach hang'}
-          formEdit={
-            <Modal
-              open={isOpenModal}
-              onOk={() => setIsOpenModal(false)}
-              okType={'default'}
-              onCancel={() => setIsOpenModal(false)}
-            >
-              <CustomizedForm
-                fields={fields}
-                onChange={(newFields) => {
-                  setFields(newFields);
-                }}
-              />
-            </Modal>
-          }
-          formBooking={
-            <Modal
-              title=""
-              open={isOpenModal2}
-              onOk={() => setIsOpenModal2(false)}
-              onCancel={() => setIsOpenModal2(false)}
-              width={1000}
-            >
-              <BookingIndex customer={customerDetail} />
-            </Modal>
-          }
-        />
-      </Col>
-      <Col lg={24} sm={24} xs={24}>
-        <Card title={'Contact Information'}>
-          <div>
-            <div>Phone: {fields.find((e) => e.name === 'phone')?.value}</div>
-            <div>Gender: {fields.find((e) => e.name === 'gender')?.value}</div>
-            <div>Email: {fields.find((e) => e.name === 'email')?.value}</div>
-          </div>
-        </Card>
-      </Col>
-    </Row>
+    <Card size="small" title="">
+      <Row gutter={[12, 12]}>
+        <Col lg={24} sm={24} xs={24}>
+          <GeneralSession
+            OpenModalFunc={handleOpenForm}
+            Name={customerDetail.fullName}
+            RoleName={'khach hang'}
+            formEdit={
+              <Modal
+                open={isOpenModal}
+                onOk={() => setIsOpenModal(false)}
+                okType={'default'}
+                onCancel={() => setIsOpenModal(false)}
+              >
+                <CustomizedForm
+                  fields={fields}
+                  onChange={(newFields) => {
+                    setFields(newFields);
+                  }}
+                />
+              </Modal>
+            }
+            formBooking={
+              <Modal
+                title=""
+                open={isOpenModal2}
+                onOk={() => setIsOpenModal2(false)}
+                onCancel={() => setIsOpenModal2(false)}
+                width={1000}
+              >
+                <BookingIndex customer={customerDetail} />
+              </Modal>
+            }
+          />
+        </Col>
+        <Col lg={24} sm={24} xs={24}>
+          <Card title={'Contact Information'}>
+            <div>
+              <div>Phone: {fields.find((e) => e.name === 'phone')?.value}</div>
+              <div>Gender: {fields.find((e) => e.name === 'gender')?.value}</div>
+              <div>Email: {fields.find((e) => e.name === 'email')?.value}</div>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </Card>
   );
 };

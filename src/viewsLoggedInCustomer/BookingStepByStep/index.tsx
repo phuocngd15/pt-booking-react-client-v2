@@ -242,6 +242,8 @@ export default function BookingStepByStep() {
                     startTime={ticketBookingResult?.startTime}
                     endTime={ticketBookingResult?.endTime}
                     programName={ticketBookingResult?.programUUID?.serviceName}
+                    locationName={ticketBookingResult?.gymCenterUUID?.centerName}
+                    ticketId={ticketBookingResult?._id}
                   />
                 </div>
               </div>

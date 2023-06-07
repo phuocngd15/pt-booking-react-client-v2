@@ -9,14 +9,12 @@ export default function AddNewTrainer() {
 
   //call API
   const handleAdd = async () => {
-    console.log('formData', formData);
     addNewTrainer(formData).then((result) => {
       console.log('result', result);
     });
   };
   //update local state
   const onDataFormChange = (data: any) => {
-    console.log('data', data);
     setFormData({ ...formData, ...data });
   };
   return (
