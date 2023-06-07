@@ -1,11 +1,9 @@
-import React from 'react';
-import { DatePicker, Calendar, Space, theme } from 'antd';
-import type { DatePickerProps } from 'antd';
+import React, {useEffect} from 'react';
+import { Calendar, Space, theme } from 'antd';
 // import locale from 'antd/es/date-picker/locale/vi_VN';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import type { RangePickerProps } from 'antd/es/date-picker';
-import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
 
 import utc from 'dayjs/plugin/utc';
 
@@ -36,11 +34,9 @@ const DateSelection: React.FC<TimeSelectionProps> = (props) => {
     borderRadius: token.borderRadiusLG,
   };
 
-  // const dateCellRender = (value) => {
-  //   const date = dayjs.utc(value.format('dd')).format();
-  //   // Your logic for rendering each date cell here
-  //   return <div>{date}</div>;
-  // };
+  useEffect(() => {
+    onChange(dayjs().add(1, 'day'));
+  }, []);
 
   return (
     <Space wrap>

@@ -13,6 +13,7 @@ export default {
   'layout.memu.GymCenter': 'GymCenter',
   'layout.memu.Accounts': 'Accounts',
   'layout.memu.Booking': 'Booking',
+  'layout.memu.Exercise': 'Exercise',
   'layout.memu.ClassRoomsManagemen': 'Services',
   'layout.memu.TimeSlotManagemen': 'TimeSlot-Management',
   'layout.memu.nesting': 'Nesting',

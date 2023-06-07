@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { IActivity } from '@/api/dailyActivitiesTask';
 import { getActivitiesUnComplete } from '@/api/dailyActivitiesTask';
+import dayjs from "dayjs";
 
 export default function PhysicalActivity() {
   const navigate = useNavigate();
@@ -39,11 +40,14 @@ export default function PhysicalActivity() {
           >
             <List.Item.Meta
               avatar={<Avatar src={`https://freesvg.org/img/Squats.png`} />}
-              title={<a href="https://ant.design">{item.name.toUpperCase()}</a>}
+              title={
+                <a href="https://ant.design">{item?.activityInfo?.activityName.toUpperCase()}</a>
+              }
               description={
                 <div>
-                  <div>{item.des}</div>
-                  <div>Reps: {item.reps}</div>
+                  <div>{item?.activityInfo?.activityDes}</div>
+                  <div>Reps: {item?.activityInfo?.activityReps}</div>
+                  <div>Deadline: {dayjs(item?.deadlineDay).format('DD/MM/YYYY')}</div>
                 </div>
               }
             />

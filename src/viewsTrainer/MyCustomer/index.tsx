@@ -3,13 +3,11 @@ import { Space, Table, Tag, Button, Modal, Form, Input, Popconfirm } from 'antd'
 import type { FormInstance } from 'antd/es/form';
 import type { InputRef } from 'antd';
 import './styleEditTag.less';
-import { getActivitiesUnComplete, IActivity } from '@/api/dailyActivitiesTask';
 import type { Customer } from '@/api/user';
 import { getMyCustomers, updateMyUserTags } from '@/api/user';
-import { CustomBtnModal } from '@/components/CustomBtnModal';
-import FormAddWorkout from '@/viewsTrainer/MyCustomer/components/FormAddWorkout';
+import AssignWorkout from '@/viewsTrainer/MyCustomer/components/AssignWorkout';
 
-const { Column, ColumnGroup } = Table;
+const { Column } = Table;
 
 export default function MyCustomer() {
   const [data, setData] = useState<Customer[]>([]);
@@ -64,21 +62,9 @@ function DataTable({ data, refreshData }) {
       <Column
         title="Action"
         key="action"
-        render={(_: any, record: DataType) => (
+        render={(_: any, record: any) => (
           <Space size="middle">
-            <CustomBtnModal
-              width={400}
-              nameBtn={'Add workout activity'}
-              customForm={
-                <FormAddWorkout
-                  handleSubmit={() => {
-                    console.log(e);
-                  }}
-                />
-              }
-              icon={undefined}
-              onCreate={() => {}}
-            />
+            <AssignWorkout customerId={record._id} />
             <EditTag data={record} refreshData={refreshData} />
           </Space>
         )}
@@ -92,7 +78,6 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
   const [confirmLoading, setConfirmLoading] = useState(false);
   // const [modalText, setModalText] = useState('Content of the modal');
   const [newTags, setNewTags] = useState();
-  console.log('data', data);
   const showModal = () => {
     setOpen(true);
   };
@@ -100,7 +85,6 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
   const handleOk = () => {
     // setModalText('The modal will be closed after two seconds');
     setConfirmLoading(true);
-    console.log('newTags', newTags);
     updateMyUserTags({ tags: newTags }, data._id).then((e) => {
       setOpen(false);
       setConfirmLoading(false);
@@ -109,12 +93,10 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setOpen(false);
   };
 
   const handleChangeTags = (tags) => {
-    console.log('handleChangeTags', tags);
     setNewTags(tags.map((e) => e.name));
   };
 
@@ -130,14 +112,6 @@ function EditTag({ data, refreshData }: { data: any; refreshData: Function }) {
         okType={'default'}
         okText={'Save'}
       >
-        {/*<p>{modalText}</p>*/}
-        {/*<div>*/}
-        {/*  {data?.tags.map((tag) => (*/}
-        {/*    <Tag color="blue" key={tag}>*/}
-        {/*      {tag}*/}
-        {/*    </Tag>*/}
-        {/*  ))}*/}
-        {/*</div>*/}
         <TableTags
           Tags={data?.tags.map((e, i) => {
             const item: TagType = { name: e, key: i.toString() };

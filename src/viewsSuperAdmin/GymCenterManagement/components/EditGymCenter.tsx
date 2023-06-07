@@ -60,7 +60,7 @@ function FormAddNewGymCenter({
   };
   return (
     <div>
-      <div className="text-2xl mb-2">New Program Information</div>
+      <div className="text-2xl mb-2">Edit GymCenter Information</div>
       <div className="space-y-3">
         <div>
           <label className="relative block">

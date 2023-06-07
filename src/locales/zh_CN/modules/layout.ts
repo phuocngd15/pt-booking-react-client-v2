@@ -11,6 +11,7 @@ export default {
   'layout.memu.ticketsmanagement': 'Ticket',
   'layout.memu.Programs': 'Programs',
   'layout.memu.GymCenter': 'GymCenter',
+  'layout.memu.Exercise': 'Exercise',
   'layout.memu.Accounts': 'Accounts',
   'layout.memu.Booking': 'Booking',
   'layout.memu.ClassRoomsManagemen': 'Services',

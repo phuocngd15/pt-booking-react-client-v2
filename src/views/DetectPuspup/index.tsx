@@ -203,13 +203,13 @@ function DetectPose({ workout, handleWorkoutDone }) {
       <div>
         <div id="demos" className="flex">
           <div className=" ">
-            {workout?.imageDemo && (
-              <img src={workout?.imageDemo} style={{ width: 300, height: 300 }} />
+            {workout?.activityInfo.imageDemo && (
+              <img src={workout?.activityInfo.imageDemo} style={{ width: 300, height: 300 }} />
             )}
             <Timer
-              title={workout.name.toUpperCase()}
+              title={workout?.activityInfo.activityName.toUpperCase()}
               reps={squatCount}
-              repsGoal={workout.reps}
+              repsGoal={workout?.activityInfo.activityReps}
               startPreDict={startPredict}
               resetPredict={() => {
                 stopPredict(video, canvasCtx);

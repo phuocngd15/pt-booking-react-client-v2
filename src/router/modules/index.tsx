@@ -7,6 +7,7 @@ import ProgramsManagement from '@/viewsSuperAdmin/ProgramsManagement';
 import BookingStepByStep from '@/viewsLoggedInCustomer/BookingStepByStep';
 import BookingProgram from '@/viewsSuperAdmin/BookingProgram';
 import GymCenterManagement from "@/viewsSuperAdmin/GymCenterManagement";
+import ExerciseManagement from "@/viewsSuperAdmin/ExerciseManagement";
 
 const Home = lazy(() => import('@/views/Home'));
 const CusManagement = lazy(() => import('@/viewsSuperAdmin/CustomerManagement'));
@@ -118,6 +119,14 @@ const defaultRoute: RouteList[] = [
     element: <GymCenterManagement />,
     meta: {
       label: FormattedMessage({ id: 'layout.memu.GymCenter' }),
+    },
+  },
+  {
+    path: '/exercise-Management',
+    id: 'ExerciseManagement',
+    element: <ExerciseManagement />,
+    meta: {
+      label: FormattedMessage({ id: 'layout.memu.Exercise' }),
     },
   },
 ];
