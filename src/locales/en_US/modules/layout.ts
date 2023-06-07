@@ -14,6 +14,7 @@ export default {
   'layout.memu.Accounts': 'Accounts',
   'layout.memu.Booking': 'Booking',
   'layout.memu.Exercise': 'Exercise',
+  'layout.memu.Calendar': 'Calendar',
   'layout.memu.ClassRoomsManagemen': 'Services',
   'layout.memu.TimeSlotManagemen': 'TimeSlot-Management',
   'layout.memu.nesting': 'Nesting',

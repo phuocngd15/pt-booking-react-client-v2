@@ -25,12 +25,20 @@ interface TicketsProps {
 }
 
 const Tickets: React.FC<TicketsProps> = (props) => {
-  // const tickets = Array.isArray(props.data) ? props.data : [props.data];
-
   return (
     <div className="grid grid-cols-4 gap-2">
       {props.data?.tickets?.map((e) => {
-        return <Ticket data={e} />;
+        return (
+          <Ticket
+            startTime={e?.startTime}
+            endTime={e?.endTime}
+            trainerName={e?.trainerUUID?.fullName}
+            customerName={e?.customerUUID?.fullName}
+            programName={e?.programUUID?.serviceName}
+            locationName={e?.gymCenterUUID?.centerName}
+            ticketId={e?._id}
+          />
+        );
       })}
     </div>
   );

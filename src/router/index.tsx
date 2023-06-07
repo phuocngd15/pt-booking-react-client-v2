@@ -8,15 +8,14 @@ import ChangePwdForm from '@/views/Login/ChangePwdForm';
 import HealthCheck from '@/viewsCustomer/HealthCheck';
 import DetailTrainerInfo from '@/views/DetailTrainerInfo';
 import MapGymTrainer from '@/viewsCustomer/MapGymTrainer';
-import StrengthProgram from "@/viewsCustomer/ProgramIntro/StrengthProgram";
-import YogaProgram from "@/viewsCustomer/ProgramIntro/YogaProgram";
+import StrengthProgram from '@/viewsCustomer/ProgramIntro/StrengthProgram';
+import YogaProgram from '@/viewsCustomer/ProgramIntro/YogaProgram';
 
 const ErrorPage403 = lazy(() => import('@/views/core/error/403'));
 const ErrorElement = lazy(() => import('@/views/core/error/ErrorElement'));
 const Home = lazy(() => import('@/viewsCustomer/Home'));
 const ServicesView = lazy(() => import('@/viewsCustomer/Services'));
 const TrainersView = lazy(() => import('@/viewsCustomer/Trainers'));
-const BookingsView = lazy(() => import('@/viewsCustomer/Bookings'));
 const TicketSearchingPage = lazy(() => import('@/viewsCustomer/Bookings/TicketSearchingPage'));
 const Login = lazy(() => import('@/views/Login'));
 const SignUpForm = lazy(() => import('@/views/Login/SignUpForm'));

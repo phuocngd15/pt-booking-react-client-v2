@@ -3,15 +3,17 @@ import { Dropdown } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { getAccountStyle } from './style';
 import avatar from '@/assets/avatar.png';
-import { removeStorage } from '@/utils/storage';
+import {getStorage, removeStorage} from '@/utils/storage';
 import { useAppDispatch } from '@/store/hooks';
 import { updateWhoIsUsing } from '@/store/modules/customer';
+import {UseInfoType} from "@/api/auth";
 
 const AppAccount = () => {
   const { AccountDiv } = getAccountStyle();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const userInfo = getStorage<UseInfoType>('userInfo');
+  console.log("userInfo",userInfo)
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -50,8 +52,7 @@ const AppAccount = () => {
         placement="bottom"
         arrow
       >
-        {/*<img src={avatar} className="wave" />*/}
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="wave" />
+        <img src={userInfo?.profile?.avatar} className="wave" />
       </Dropdown>
     </AccountDiv>
   );

@@ -175,8 +175,6 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource, refreshData }) =>
       render: (value: any, record: any) => {
         return (
           <div>
-            <a onClick={showModal}>Detail</a>
-            {/* <a>Delete</a> */}
             <EditTrainer id={record._id} objectData={value} callBack={refreshData} />
           </div>
         );
@@ -189,7 +187,24 @@ const CustomTable: React.FC<CustomTableProps> = ({ dataSource, refreshData }) =>
   };
   return (
     <>
-      <Table columns={columns} dataSource={dataSource} scroll={{ y: 240 }} onChange={onChange} />
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        scroll={{ y: 240 }}
+        onChange={onChange}
+        expandable={{
+          expandedRowRender: (record) => {
+            return (
+              <div className="space-y-2">
+                <div>Introduction: {record.introduction}</div>
+                <div>YearExperience: {record?.yearExperience}</div>
+                <div>Certificates: {record?.certificates?.join(',')}</div>
+              </div>
+            );
+          },
+          rowExpandable: (record) => record.certificates !== '',
+        }}
+      />
       <Modal
         title="Thông tin chi tiết PT"
         open={isModalOpen}

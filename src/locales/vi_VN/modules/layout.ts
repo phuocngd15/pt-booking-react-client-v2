@@ -12,6 +12,7 @@ export default {
   'layout.memu.Accounts': 'Quản lý tài khoản',
   'layout.memu.Booking': 'Đặt lịch tập',
   'layout.memu.Exercise': 'Quản lý bài tập luyện',
+  'layout.memu.Calendar': 'Lịch tập luyện',
   'layout.memu.ClassRoomsManagemen': 'Quản lý dịch vụ',
   'layout.memu.TimeSlotManagemen': 'Quản lý khung giờ',
   'layout.memu.nesting': 'Cấu trúc trang lồng nhau',

@@ -49,7 +49,7 @@ export default function AccountsManagement() {
   };
   return (
     <Row gutter={[12, 12]}>
-      <Col lg={8} sm={24} xs={24}>
+      <Col lg={24} sm={24} xs={24}>
         <div className="w-72 mb-2">
           <label className="relative block">
             <span className="sr-only">Email address</span>

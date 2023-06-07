@@ -229,7 +229,7 @@ export const StaffList = () => {
               <Checkbox key={item.email} onChange={(e) => onChange(e, item)} />
               <List.Item.Meta
                 avatar={<Avatar src={item.picture.large} />}
-                title={<a href="https://ant.design">{item.name.last}</a>}
+                title={<a href="">{item.name.last}</a>}
                 description={item.email}
               />
 

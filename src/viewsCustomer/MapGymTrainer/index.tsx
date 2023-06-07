@@ -106,7 +106,6 @@ interface GymCenterInfo {
 }
 
 function DetailGymCenter({ gymCenter }: { gymCenter?: GymCenterInfo }) {
-  console.log('DetailGymCenter', gymCenter);
   if (!gymCenter) return <div />;
   return (
     <div className="space-y-3">
@@ -147,7 +146,7 @@ function DetailGymCenter({ gymCenter }: { gymCenter?: GymCenterInfo }) {
         <div>
           <Carousel autoplay>
             {gymCenter?.centerImages.map((src) => (
-              <div>
+              <div key={src}>
                 <img src={src} alt={'image-gym'} />
               </div>
             ))}

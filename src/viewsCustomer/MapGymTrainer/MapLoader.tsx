@@ -43,8 +43,6 @@ const GoogleMap = ({ locations }: { locations: GeneralLocationInfo[] }) => {
   }
 
   function initMap() {
-    console.log('locations', locations);
-    console.log('window.google.maps', window.google.maps);
     const { Map, InfoWindow, Marker } = window.google.maps;
     //const { AdvancedMarkerElement, PinElement } = window.google.maps.Marker;
 
@@ -54,7 +52,7 @@ const GoogleMap = ({ locations }: { locations: GeneralLocationInfo[] }) => {
 
     locations.forEach((location) => {
       const { position, contentString, label } = location;
-
+      console.log("position",position)
       const infoWindow = new InfoWindow({
         content: contentString,
         ariaLabel: label,
@@ -75,10 +73,6 @@ const GoogleMap = ({ locations }: { locations: GeneralLocationInfo[] }) => {
       markers.push(marker);
     });
 
-    // Ẩn tất cả các nhãn trên bản đồ
-    // Hide markers for locations not in the locations array
-    // bound nay de thay toan canh cac dia diem gan nhau.
-
     const bounds = new window.google.maps.LatLngBounds();
     markers?.forEach((marker) => {
       bounds.extend(marker.getPosition());
@@ -90,7 +84,7 @@ const GoogleMap = ({ locations }: { locations: GeneralLocationInfo[] }) => {
   useEffect(() => {
     const loadGoogleMap = () => {
       const configLoader = {
-        apiKey: '',
+        apiKey: 'AIzaSyDR9VfH6Vb_s5n76UE6mq-4dfrWOyjQKxU',
         version: 'weekly',
       };
       const loader = new Loader(configLoader);

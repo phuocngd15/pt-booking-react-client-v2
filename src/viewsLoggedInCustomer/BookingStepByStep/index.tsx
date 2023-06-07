@@ -22,15 +22,15 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const stepItems = [
-  { title: 'SELECT ClASS' },
+  { title: 'ClASS' },
   {
-    title: 'SELECT LOCATION',
+    title: 'LOCATION',
   },
   {
-    title: 'SELECT TRAINER',
+    title: 'TRAINER',
   },
   {
-    title: 'SELECT TIME',
+    title: 'TIME',
   },
   {
     title: 'REVIEW BOOKING',
@@ -171,7 +171,7 @@ export default function BookingStepByStep() {
           </Card>
         </Col>
         <Col lg={20} sm={24} xs={24}>
-          <Card>
+          <Card style={{ height: 500 }}>
             <div hidden={selectStep !== 0}>
               <div className="text-amber-600 font-bold">SELECT ClASS</div>
               <ProgramsCarousel

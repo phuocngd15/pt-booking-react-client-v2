@@ -10,6 +10,7 @@ const PTManagement = memo(() => {
     (async () => {
       const res = await getTrainers();
       if (res.code === 1) {
+        res.data.forEach((e: any, i: number) => (e['key'] = (i + 1).toString()));
         setData(res.data);
       }
     })();
@@ -23,6 +24,7 @@ const PTManagement = memo(() => {
         refreshData={async () => {
           const res = await getTrainers();
           if (res.code === 1) {
+            res.data.forEach((e: any, i: number) => (e['key'] = (i + 1).toString()));
             setData(res.data);
           }
         }}

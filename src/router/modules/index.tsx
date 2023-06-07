@@ -47,7 +47,7 @@ const defaultRoute: RouteList[] = [
     path: '/calendar',
     id: 'CusCalendar',
     element: <CusCalendar />,
-    meta: { label: 'Calendar', icon: <CalendarOutlined /> },
+    meta: { label: FormattedMessage({ id: 'layout.memu.Calendar' }), icon: <CalendarOutlined /> },
   },
   {
     path: '/calendar',

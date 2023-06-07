@@ -40,9 +40,7 @@ export default function PhysicalActivity() {
           >
             <List.Item.Meta
               avatar={<Avatar src={`https://freesvg.org/img/Squats.png`} />}
-              title={
-                <a href="https://ant.design">{item?.activityInfo?.activityName.toUpperCase()}</a>
-              }
+              title={<a href="">{item?.activityInfo?.activityName.toUpperCase()}</a>}
               description={
                 <div>
                   <div>{item?.activityInfo?.activityDes}</div>

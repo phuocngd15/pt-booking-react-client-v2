@@ -1,8 +1,8 @@
 import React from 'react';
 import type { ColumnsType } from 'antd/es/table';
+import { Button, Table } from 'antd';
 import { CustomTable } from '@/components/TableAnt';
 import type { Account } from '@/api/accounts';
-import { Button } from 'antd';
 
 export default function AccountsTable({ dataSource, onClickBlockCallback, onClickActiveCallback }) {
   const columns: ColumnsType<Account> = [
@@ -60,5 +60,27 @@ export default function AccountsTable({ dataSource, onClickBlockCallback, onClic
       },
     },
   ];
-  return <CustomTable columns={columns} dataSource={dataSource} />;
+  return (
+    <Table
+      pagination={false}
+      columns={columns}
+      dataSource={dataSource}
+      scroll={{ y: 240 }}
+      onChange={() => {}}
+      expandable={{
+        expandedRowRender: (record) => {
+          console.log('record', record);
+          return (
+            <div className="space-y-2">
+              <div>Name: {record?.profile?.fullName}</div>
+              <div>Birthday: {record?.profile?.fullName}</div>
+              <div>Introduction Time: {record?.profile?.introduction}</div>
+              <div>Phone: {record?.profile?.phone}</div>
+            </div>
+          );
+        },
+        rowExpandable: (record) => record?.profile?.fullName,
+      }}
+    />
+  );
 }
